@@ -26,7 +26,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static files
+// Serve static files (with fresh cache-control for HTML and Service Worker)
+app.use((req, res, next) => {
+  if (req.path === '/' || req.path.endsWith('.html') || req.path === '/sw.js') {
+    res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+  }
+  next();
+});
 app.use('/uploads', express.static(UPLOADS_DIR));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
