@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Festa di Laurea di Iacuzzo Chiara</title>
+  <title>Festa di Laurea di Chiara</title>
   
   <!-- PWA & Mobile Meta -->
   <link rel="manifest" href="/manifest.json">
@@ -36,7 +36,7 @@
         <div class="event-brand" id="header-brand-click">
           <div class="laurel-badge">🎓</div>
           <div class="event-info">
-            <h1 id="header-event-title" class="event-title">Laurea Iacuzzo Chiara</h1>
+            <h1 id="header-event-title" class="event-title">Festa di Laurea di Chiara</h1>
             <div class="event-meta">
               <span class="live-dot-pulse"></span>
               <span id="header-photo-count" class="meta-badge">0 Ricordi</span>
@@ -89,7 +89,7 @@
           <!-- HOME EVENT HERO BANNER -->
           <div class="home-event-hero">
             <div class="hero-laurel-badge">🌿 🎓 🌿</div>
-            <h1 class="hero-event-title" id="home-event-title">Festa di Laurea di Iacuzzo Chiara 🎓</h1>
+            <h1 class="hero-event-title" id="home-event-title">Festa di Laurea di Chiara</h1>
             <p class="hero-event-subtitle" id="home-event-subtitle">Dottoressa in Ingegneria Informatica 💻</p>
             <div class="hero-hashtag-pill" id="home-event-hashtag">#LaureaChiara2026</div>
           </div>
@@ -377,13 +377,13 @@
   </div>
 
   <!-- JavaScript Modules -->
-  <script src="/js/api.js?v=3"></script>
-  <script src="/js/gallery.js?v=3"></script>
-  <script src="/js/dedications.js?v=3"></script>
-  <script src="/js/camera.js?v=3"></script>
-  <script src="/js/lightbox.js?v=3"></script>
-  <script src="/js/qrCards.js?v=3"></script>
-  <script src="/js/app.js?v=3"></script>
+  <script src="/js/api.js?v=4"></script>
+  <script src="/js/gallery.js?v=4"></script>
+  <script src="/js/dedications.js?v=4"></script>
+  <script src="/js/camera.js?v=4"></script>
+  <script src="/js/lightbox.js?v=4"></script>
+  <script src="/js/qrCards.js?v=4"></script>
+  <script src="/js/app.js?v=4"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -392,7 +392,7 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=3')
+        navigator.serviceWorker.register('/sw.js?v=4')
           .then(reg => reg.update())
           .catch(err => console.log('SW error:', err));
       });

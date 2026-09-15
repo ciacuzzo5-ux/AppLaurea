@@ -111,7 +111,7 @@ const upload = multer({
 // Event Persistence
 function getEvent() {
   const defaultEvent = {
-    title: "Festa di Laurea di Iacuzzo Chiara 🎓",
+    title: "Festa di Laurea di Chiara",
     subtitle: "Ingegneria Informatica",
     date: new Date().toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' }),
     hashtag: "#LaureaChiara2026",
@@ -514,7 +514,7 @@ setInterval(() => {
 const localIp = getLocalIpAddress();
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`\n🎓 ========================================================`);
-  console.log(`🎓 SERVER FESTA DI LAUREA DI IACUZZO CHIARA AVVIATO!`);
+  console.log(`🎓 SERVER FESTA DI LAUREA DI CHIARA AVVIATO!`);
   console.log(`💻 Dal Computer Locale:   http://localhost:${PORT}`);
   console.log(`📱 Su Rete Wi-Fi:        http://${localIp}:${PORT}`);
   console.log(`🎓 ========================================================`);

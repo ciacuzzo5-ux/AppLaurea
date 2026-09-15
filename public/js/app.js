@@ -245,10 +245,10 @@ const App = {
   applyEventData(event) {
     if (!event) return;
     const headerTitle = document.getElementById('header-event-title');
-    if (headerTitle) headerTitle.innerText = event.title || 'Festa di Laurea di Iacuzzo Chiara 🎓';
+    if (headerTitle) headerTitle.innerText = event.title || 'Festa di Laurea di Chiara';
 
     const heroTitle = document.getElementById('home-event-title');
-    if (heroTitle) heroTitle.innerText = event.title || 'Festa di Laurea di Iacuzzo Chiara 🎓';
+    if (heroTitle) heroTitle.innerText = event.title || 'Festa di Laurea di Chiara';
 
     const heroSubtitle = document.getElementById('home-event-subtitle');
     if (heroSubtitle) heroSubtitle.innerText = event.subtitle || 'Dottoressa in Ingegneria Informatica 💻';

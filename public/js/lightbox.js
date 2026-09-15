@@ -204,7 +204,7 @@ const Lightbox = {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'Festa di Laurea di Iacuzzo Chiara',
+          title: 'Festa di Laurea di Chiara',
           text: item.caption || 'Guarda questo ricordo dalla festa di laurea! 🎓',
           url: window.location.origin + item.url
         });
