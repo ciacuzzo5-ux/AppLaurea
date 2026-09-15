@@ -230,15 +230,6 @@ const App = {
       document.getElementById('settings-subtitle').value = this.eventData.subtitle || '';
       document.getElementById('settings-hashtag').value = this.eventData.hashtag || '';
 
-      try {
-        const res = await fetch('/api/tunnel-config');
-        const cfg = await res.json();
-        const domEl = document.getElementById('settings-ngrok-domain');
-        const tokEl = document.getElementById('settings-ngrok-token');
-        if (domEl) domEl.value = cfg.ngrokDomain || '';
-        if (tokEl) tokEl.value = cfg.ngrokToken || '';
-      } catch (e) {}
-
       if (modal) modal.classList.remove('hidden');
     };
 
@@ -254,32 +245,13 @@ const App = {
           hashtag: document.getElementById('settings-hashtag').value.trim()
         };
 
-        const ngrokDomain = (document.getElementById('settings-ngrok-domain')?.value || '').trim();
-        const ngrokToken = (document.getElementById('settings-ngrok-token')?.value || '').trim();
-
         try {
           const res = await API.updateEvent(updated);
           this.eventData = res;
           this.applyEventData(res);
 
-          // Save tunnel config
-          const tunnelRes = await fetch('/api/tunnel-config', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              provider: ngrokDomain ? 'ngrok' : 'cloudflare',
-              ngrokDomain,
-              ngrokToken
-            })
-          });
-          const tunnelData = await tunnelRes.json();
-
           modal.classList.add('hidden');
-          if (ngrokDomain) {
-            this.showToast('✨ Link permanente Ngrok attivato!');
-          } else {
-            this.showToast('✨ Dettagli festa salvati!');
-          }
+          this.showToast('✨ Dettagli festa salvati!');
         } catch (e) {
           this.showToast('❌ Impossibile aggiornare i dettagli.');
         }

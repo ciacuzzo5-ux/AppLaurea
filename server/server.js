@@ -17,26 +17,9 @@ const PHOTOS_FILE = path.join(DATA_DIR, 'photos.json');
 const DEDICATIONS_FILE = path.join(DATA_DIR, 'dedications.json');
 const EVENT_FILE = path.join(DATA_DIR, 'event.json');
 const CLOUDFLARED_BIN = path.join(__dirname, '..', 'cloudflared.exe');
-const NGROK_BIN = path.join(__dirname, '..', 'ngrok.exe');
-const TUNNEL_CONFIG_FILE = path.join(DATA_DIR, 'tunnel.json');
 
 if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true });
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-
-function getTunnelConfig() {
-  if (!fs.existsSync(TUNNEL_CONFIG_FILE)) {
-    return { provider: 'cloudflare', ngrokToken: '', ngrokDomain: '' };
-  }
-  try {
-    return JSON.parse(fs.readFileSync(TUNNEL_CONFIG_FILE, 'utf8'));
-  } catch (e) {
-    return { provider: 'cloudflare', ngrokToken: '', ngrokDomain: '' };
-  }
-}
-
-function saveTunnelConfig(config) {
-  fs.writeFileSync(TUNNEL_CONFIG_FILE, JSON.stringify(config, null, 2), 'utf8');
-}
 
 // Middleware
 app.use(cors());
@@ -498,71 +481,28 @@ function startCloudflareTunnel(port) {
   });
 }
 
-// Function to start Ngrok Tunnel with a Free Permanent Static Domain
-let currentTunnelProcess = null;
+// Keep-Alive / Health Endpoint (for Cron Polling & Anti-Sleep)
+app.get(['/ping', '/healthz'], (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    uptime: Math.round(process.uptime()),
+    timestamp: new Date().toISOString()
+  });
+});
 
-function startNgrokTunnel(port, token, domain) {
-  const exePath = fs.existsSync(NGROK_BIN) ? NGROK_BIN : 'ngrok';
-
-  if (token) {
+// Auto-Keepalive: Ping itself every 9 minutes so Render free tier never sleeps
+setInterval(() => {
+  const urlToPing = currentPublicUrl || process.env.RENDER_EXTERNAL_URL;
+  if (urlToPing && urlToPing.startsWith('http')) {
     try {
-      const { execSync } = require('child_process');
-      execSync(`"${exePath}" config add-authtoken ${token}`, { stdio: 'ignore' });
+      const pingUrl = `${urlToPing.replace(/\/$/, '')}/ping`;
+      const client = pingUrl.startsWith('https') ? require('https') : require('http');
+      client.get(pingUrl, (res) => {
+        // keep-alive ping succeeded
+      }).on('error', () => {});
     } catch (e) {}
   }
-
-  const cleanDomain = domain ? domain.replace(/^https?:\/\//, '').replace(/\/$/, '') : '';
-  const args = ['http', port.toString()];
-  if (cleanDomain) {
-    args.push(`--domain=${cleanDomain}`);
-  }
-
-  console.log(`Avvio Ngrok Tunnel permanente (${cleanDomain || 'automatico'})...`);
-  currentTunnelProcess = spawn(exePath, args);
-
-  if (cleanDomain) {
-    currentPublicUrl = `https://${cleanDomain}`;
-    console.log(`\n🌐 ========================================================`);
-    console.log(`🌐 LINK FISSO PERMANENTE NGROK (NON SCADE MAI):`);
-    console.log(`👉 ${currentPublicUrl}`);
-    console.log(`🌐 ========================================================\n`);
-    broadcastSSE('event_updated', getEvent());
-  }
-
-  currentTunnelProcess.on('close', (code) => {
-    console.warn(`Ngrok terminato (codice ${code}). Riconnessione automatica tra 3s...`);
-    setTimeout(() => {
-      startNgrokTunnel(port, token, domain);
-    }, 3000);
-  });
-}
-
-// Tunnel Configuration Endpoints
-app.get('/api/tunnel-config', (req, res) => {
-  res.json(getTunnelConfig());
-});
-
-app.post('/api/tunnel-config', (req, res) => {
-  const { provider, ngrokToken, ngrokDomain } = req.body;
-  const cfg = {
-    provider: provider || 'cloudflare',
-    ngrokToken: (ngrokToken || '').trim(),
-    ngrokDomain: (ngrokDomain || '').trim()
-  };
-  saveTunnelConfig(cfg);
-
-  if (currentTunnelProcess) {
-    try { currentTunnelProcess.kill(); } catch (e) {}
-  }
-
-  if (cfg.provider === 'ngrok' && cfg.ngrokDomain) {
-    startNgrokTunnel(PORT, cfg.ngrokToken, cfg.ngrokDomain);
-  } else {
-    startCloudflareTunnel(PORT);
-  }
-
-  res.json({ success: true, config: cfg, mobileUrl: currentPublicUrl });
-});
+}, 9 * 60 * 1000);
 
 // Start Server
 const localIp = getLocalIpAddress();
@@ -578,14 +518,9 @@ app.listen(PORT, '0.0.0.0', () => {
   if (isCloudEnv) {
     console.log(`\n☁️ ========================================================`);
     console.log(`☁️ SERVER ATTIVO ONLINE 24/7 SUL CLOUD (RENDER)!`);
-    console.log(`👉 ${currentPublicUrl || 'https://laurea-chiara.onrender.com'}`);
+    console.log(`👉 ${currentPublicUrl || 'https://app-laurea-chiara.onrender.com'}`);
     console.log(`☁️ ========================================================\n`);
   } else {
-    const tunnelCfg = getTunnelConfig();
-    if (tunnelCfg.provider === 'ngrok' && tunnelCfg.ngrokDomain) {
-      startNgrokTunnel(PORT, tunnelCfg.ngrokToken, tunnelCfg.ngrokDomain);
-    } else {
-      startCloudflareTunnel(PORT);
-    }
+    startCloudflareTunnel(PORT);
   }
 });
