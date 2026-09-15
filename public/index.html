@@ -56,10 +56,6 @@
             <i data-lucide="download"></i>
             <span class="btn-text">ZIP</span>
           </a>
-          <!-- Settings Button -->
-          <button class="icon-btn" id="header-settings-btn" title="Impostazioni">
-            <i data-lucide="sliders"></i>
-          </button>
         </div>
       </div>
 
@@ -89,6 +85,15 @@
       <!-- VIEW 1: GALLERIA FOTO & VIDEO -->
       <section id="view-gallery" class="app-view active">
         <div class="photos-container">
+
+          <!-- HOME EVENT HERO BANNER -->
+          <div class="home-event-hero">
+            <div class="hero-laurel-badge">🌿 🎓 🌿</div>
+            <h1 class="hero-event-title" id="home-event-title">Festa di Laurea di Iacuzzo Chiara 🎓</h1>
+            <p class="hero-event-subtitle" id="home-event-subtitle">Dottoressa in Ingegneria Informatica 💻</p>
+            <div class="hero-hashtag-pill" id="home-event-hashtag">#LaureaChiara2026</div>
+          </div>
+
           <!-- Empty State -->
           <div id="gallery-empty-state" class="empty-state hidden">
             <div class="empty-icon">📷</div>
@@ -362,36 +367,6 @@
             </button>
           </div>
           <p id="qr-modal-real-url" style="font-size: 0.72rem; color: var(--color-text-muted); text-align: center; margin-top: 10px; word-break: break-all; opacity: 0.8;"></p>
-        </div>
-      </div>
-    </div>
-
-    <!-- SETTINGS MODAL -->
-    <div class="modal-overlay hidden" id="event-settings-modal">
-      <div class="modal-dialog">
-        <div class="modal-header">
-          <h3>Impostazioni Festa 🎓</h3>
-          <button class="close-modal-btn" id="close-settings-modal-btn"><i data-lucide="x"></i></button>
-        </div>
-        <div class="modal-body">
-          <form id="event-settings-form">
-            <div class="input-group">
-              <label for="settings-title">Titolo Evento</label>
-              <input type="text" id="settings-title" class="form-input" value="Festa di Laurea di Chiara 🎓" required>
-            </div>
-            <div class="input-group">
-              <label for="settings-subtitle">Sottotitolo</label>
-              <input type="text" id="settings-subtitle" class="form-input" value="Ingegneria Informatica">
-            </div>
-            <div class="input-group">
-              <label for="settings-hashtag">Hashtag</label>
-              <input type="text" id="settings-hashtag" class="form-input" value="#LaureaChiara2026">
-            </div>
-
-            <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top: 14px;">
-              <i data-lucide="check"></i> Salva Modifiche
-            </button>
-          </form>
         </div>
       </div>
     </div>

@@ -341,6 +341,68 @@ input, textarea, select, button {
   padding: 8px 6px 30px 6px;
 }
 
+/* Home Event Hero Banner */
+.home-event-hero {
+  background: linear-gradient(135deg, rgba(14, 27, 61, 0.95), rgba(8, 16, 38, 0.95));
+  border: 1px solid var(--color-navy-border);
+  border-top: 2px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+  padding: 18px 16px;
+  text-align: center;
+  margin: 4px 2px 14px 2px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.home-event-hero::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 90px;
+  background: radial-gradient(circle, var(--color-gold-glow) 0%, transparent 70%);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.hero-laurel-badge {
+  font-size: 1.25rem;
+  margin-bottom: 2px;
+}
+
+.hero-event-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 2px;
+  letter-spacing: -0.2px;
+}
+
+.hero-event-subtitle {
+  font-size: 0.84rem;
+  color: var(--color-gold-light);
+  font-weight: 600;
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+
+.hero-hashtag-pill {
+  display: inline-block;
+  background: rgba(139, 21, 40, 0.3);
+  border: 1px solid rgba(255, 202, 40, 0.4);
+  color: var(--color-gold);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 14px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
 .photos-grid {
   display: grid;
   gap: 4px;

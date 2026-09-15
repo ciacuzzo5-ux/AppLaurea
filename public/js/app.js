@@ -18,7 +18,6 @@ const App = {
     this.setupOnboarding();
     this.setupNavigation();
     this.setupPhotoUploadForm();
-    this.setupEventSettings();
 
     // 3. Load initial data
     await this.loadInitialData();
@@ -218,47 +217,6 @@ const App = {
     }
   },
 
-  setupEventSettings() {
-    const openBtn = document.getElementById('header-settings-btn');
-    const modal = document.getElementById('event-settings-modal');
-    const closeBtn = document.getElementById('close-settings-modal-btn');
-    const form = document.getElementById('event-settings-form');
-
-    const openSettings = async () => {
-      if (!this.eventData) return;
-      document.getElementById('settings-title').value = this.eventData.title || '';
-      document.getElementById('settings-subtitle').value = this.eventData.subtitle || '';
-      document.getElementById('settings-hashtag').value = this.eventData.hashtag || '';
-
-      if (modal) modal.classList.remove('hidden');
-    };
-
-    if (openBtn) openBtn.addEventListener('click', openSettings);
-    if (closeBtn) closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
-
-    if (form) {
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const updated = {
-          title: document.getElementById('settings-title').value.trim(),
-          subtitle: document.getElementById('settings-subtitle').value.trim(),
-          hashtag: document.getElementById('settings-hashtag').value.trim()
-        };
-
-        try {
-          const res = await API.updateEvent(updated);
-          this.eventData = res;
-          this.applyEventData(res);
-
-          modal.classList.add('hidden');
-          this.showToast('✨ Dettagli festa salvati!');
-        } catch (e) {
-          this.showToast('❌ Impossibile aggiornare i dettagli.');
-        }
-      });
-    }
-  },
-
   async loadInitialData() {
     try {
       const [event, photos, dedications] = await Promise.all([
@@ -287,7 +245,20 @@ const App = {
   applyEventData(event) {
     if (!event) return;
     const headerTitle = document.getElementById('header-event-title');
-    if (headerTitle) headerTitle.innerText = event.title || 'Festa di Laurea';
+    if (headerTitle) headerTitle.innerText = event.title || 'Festa di Laurea di Iacuzzo Chiara 🎓';
+
+    const heroTitle = document.getElementById('home-event-title');
+    if (heroTitle) heroTitle.innerText = event.title || 'Festa di Laurea di Iacuzzo Chiara 🎓';
+
+    const heroSubtitle = document.getElementById('home-event-subtitle');
+    if (heroSubtitle) heroSubtitle.innerText = event.subtitle || 'Dottoressa in Ingegneria Informatica 💻';
+
+    const heroHashtag = document.getElementById('home-event-hashtag');
+    if (heroHashtag) heroHashtag.innerText = event.hashtag || '#LaureaChiara2026';
+
+    const onboardingName = document.getElementById('onboarding-party-name');
+    if (onboardingName) onboardingName.innerText = 'Iacuzzo Chiara';
+
     QrCards.updateEventInfo(event);
   },
 
