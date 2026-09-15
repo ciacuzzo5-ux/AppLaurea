@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#040814"/>
+      <stop offset="50%" stop-color="#0c1834"/>
+      <stop offset="85%" stop-color="#2d050f"/>
+      <stop offset="100%" stop-color="#0a0205"/>
+    </linearGradient>
+    <linearGradient id="goldGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FF9100"/>
+    </linearGradient>
+    <linearGradient id="bordeauxBadge3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9e1b32"/>
+      <stop offset="100%" stop-color="#540816"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="1000" fill="url(#bgGrad3)"/>
+
+  <!-- Disco Lights in Navy and Bordeaux Glow -->
+  <circle cx="200" cy="200" r="150" fill="#00e5ff" opacity="0.15"/>
+  <circle cx="600" cy="250" r="160" fill="#ff0055" opacity="0.14"/>
+  <circle cx="400" cy="500" r="220" fill="#ffd700" opacity="0.1"/>
+
+  <!-- Cheering & Music -->
+  <g transform="translate(400, 420)">
+    <!-- Laurel Wreath Glow Behind -->
+    <circle cx="0" cy="-40" r="140" fill="none" stroke="url(#goldGrad3)" stroke-width="3" stroke-dasharray="10 8" opacity="0.7"/>
+    
+    <text x="-160" y="-120" font-size="40" fill="#00E5FF" opacity="0.85">🎵</text>
+    <text x="140" y="-150" font-size="50" fill="#FF4081" opacity="0.85">🎶</text>
+    <text x="-90" y="-220" font-size="34" fill="#FFD700" opacity="0.9">✨</text>
+    <text x="180" y="-60" font-size="44" fill="#00E5FF" opacity="0.85">🎉</text>
+
+    <!-- Center Graduation Hat -->
+    <g transform="translate(0, -140) rotate(-15) scale(0.95)">
+      <polygon points="0,-40 100,-10 0,20 -100,-10" fill="#FFFFFF" opacity="0.95"/>
+      <path d="M-60,5 L-60,35 C-60,55 60,55 60,35 L60,5" fill="#FFFFFF" opacity="0.85"/>
+      <circle cx="0" cy="-10" r="6" fill="#FFD700"/>
+      <path d="M0,-10 C25,-5 50,15 60,45" fill="none" stroke="#FFD700" stroke-width="3.5"/>
+    </g>
+
+    <!-- Crowd / Party Emojis -->
+    <text x="0" y="55" font-size="80" text-anchor="middle">💃🕺🪩</text>
+  </g>
+
+  <!-- Text Badge -->
+  <g transform="translate(400, 680)">
+    <rect x="-260" y="-45" width="520" height="90" rx="45" fill="url(#bordeauxBadge3)" stroke="url(#goldGrad3)" stroke-width="2.5"/>
+    <text x="0" y="12" font-family="'Segoe UI', -apple-system, Roboto, sans-serif" font-weight="800" font-size="32" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">FESTA & DJ SET! 🪩✨</text>
+  </g>
+
+  <g transform="translate(400, 785)">
+    <text x="0" y="0" font-family="'Segoe UI', -apple-system, Roboto, sans-serif" font-weight="700" font-size="22" fill="#00E5FF" text-anchor="middle" letter-spacing="3">SERATA INDIMENTICABILE</text>
+    <text x="0" y="36" font-family="'Segoe UI', -apple-system, Roboto, sans-serif" font-weight="400" font-size="19" fill="#B0C4DE" text-anchor="middle">Balli e brindisi per Iacuzzo Chiara</text>
+  </g>
+
+  <rect x="25" y="25" width="750" height="950" rx="24" fill="none" stroke="url(#goldGrad3)" stroke-width="2" opacity="0.3"/>
+</svg>

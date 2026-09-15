@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Festa di Laurea di Iacuzzo Chiara</title>
+  
+  <!-- PWA & Mobile Meta -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#081026">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Laurea Chiara">
+  <link rel="icon" type="image/svg+xml" href="/assets/icon.svg">
+  <link rel="apple-touch-icon" href="/assets/icon.svg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons & Libraries -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+
+  <!-- App Stylesheet -->
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="theme-dark">
+  <div id="app" class="app-container">
+
+    <!-- TOP HEADER -->
+    <header class="top-header">
+      <div class="header-content">
+        <div class="event-brand" id="header-brand-click">
+          <div class="laurel-badge">🎓</div>
+          <div class="event-info">
+            <h1 id="header-event-title" class="event-title">Laurea Iacuzzo Chiara</h1>
+            <div class="event-meta">
+              <span class="live-dot-pulse"></span>
+              <span id="header-photo-count" class="meta-badge">0 Ricordi</span>
+              <span class="meta-dot">•</span>
+              <span id="header-guest-name" class="guest-pill" title="Tocca per cambiare nome">Ospite</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <!-- QR Code Modal Button for Chiara -->
+          <button class="icon-btn" id="header-qr-btn" title="Visualizza e Stampa QR Code">
+            <i data-lucide="qr-code"></i>
+          </button>
+          <!-- Download ZIP Button -->
+          <a href="/api/download-all" class="icon-btn zip-download-btn" title="Scarica tutto (foto, video e dediche) in formato ZIP" download id="download-zip-btn">
+            <i data-lucide="download"></i>
+            <span class="btn-text">ZIP</span>
+          </a>
+          <!-- Settings Button -->
+          <button class="icon-btn" id="header-settings-btn" title="Impostazioni">
+            <i data-lucide="sliders"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Filter Pills Bar (For Gallery View) -->
+      <nav class="gallery-subnav" id="gallery-subnav">
+        <div class="subnav-scroll">
+          <button class="filter-chip active" data-filter="all">
+            <i data-lucide="images"></i> Tutti (<span id="count-filter-all">0</span>)
+          </button>
+          <button class="filter-chip" data-filter="my">
+            <i data-lucide="user"></i> I Miei (<span id="count-filter-my">0</span>)
+          </button>
+          <button class="filter-chip" data-filter="videos">
+            <i data-lucide="video"></i> Solo Video (<span id="count-filter-videos">0</span>)
+          </button>
+        </div>
+        <!-- Grid layout zoom switch (3 vs 2 vs 1 columns) -->
+        <div class="grid-layout-toggle" id="grid-toggle-btn" title="Cambia visualizzazione">
+          <i data-lucide="grid-3x3" id="grid-icon"></i>
+        </div>
+      </nav>
+    </header>
+
+    <!-- MAIN VIEWPORT CONTAINER -->
+    <main class="main-viewport">
+
+      <!-- VIEW 1: GALLERIA FOTO & VIDEO -->
+      <section id="view-gallery" class="app-view active">
+        <div class="photos-container">
+          <!-- Empty State -->
+          <div id="gallery-empty-state" class="empty-state hidden">
+            <div class="empty-icon">📷</div>
+            <h3>Nessun ricordo ancora!</h3>
+            <p>Scatta una foto o registra un video per la festa di Chiara!</p>
+            <button class="btn btn-primary" id="empty-capture-btn">
+              <i data-lucide="camera"></i> Apri Fotocamera
+            </button>
+          </div>
+
+          <!-- The Real Photo & Video Grid -->
+          <div id="photos-grid" class="photos-grid grid-3-cols">
+            <!-- Dynamically populated media tiles -->
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: LIBRO DELLE DEDICHE -->
+      <section id="view-dedications" class="app-view">
+        <div class="dedications-view-container">
+          <!-- Top Card for Dedications -->
+          <div class="dedications-header-card">
+            <h2>Libro delle Dediche 💌</h2>
+            <p>Lascia un augurio o un messaggio speciale per la laurea di Chiara!</p>
+            <button class="btn btn-primary btn-lg" id="open-dedication-modal-btn">
+              <i data-lucide="pen-tool"></i> Scrivi una Dedica ✍️
+            </button>
+          </div>
+
+          <!-- Empty State -->
+          <div id="dedications-empty-state" class="empty-state hidden">
+            <div class="empty-icon">💌</div>
+            <h3>Nessuna dedica ancora!</h3>
+            <p>Sii il primo a scrivere un messaggio o un augurio per Chiara!</p>
+          </div>
+
+          <!-- Dedications Cards List -->
+          <div id="dedications-list" class="dedications-list">
+            <!-- Dynamically populated dedication cards -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- HIDDEN NATIVE CAMERA & FILE INPUTS (Full Resolution, No Downsampling) -->
+    <input type="file" id="camera-photo-input" accept="image/*" class="hidden">
+    <input type="file" id="camera-video-input" accept="video/*" class="hidden">
+    <input type="file" id="native-file-input" accept="image/*,video/*" multiple class="hidden">
+
+    <!-- BOTTOM TAB NAVIGATION (3 TABS: Galleria, Scatta/Carica, Dediche) -->
+    <nav class="bottom-tab-bar">
+      <!-- 1. Galleria -->
+      <button class="tab-nav-item active" data-target="view-gallery" id="tab-btn-gallery">
+        <i data-lucide="layout-grid"></i>
+        <span>Galleria</span>
+      </button>
+
+      <!-- 2. Central Shutter Button (Photo / Video) -->
+      <button class="tab-nav-item tab-camera-center" id="open-camera-menu-btn" title="Scatta o Registra">
+        <div class="camera-fab-glow">
+          <i data-lucide="camera"></i>
+        </div>
+        <span>Scatta</span>
+      </button>
+
+      <!-- 3. Dediche (Guestbook) -->
+      <button class="tab-nav-item" data-target="view-dedications" id="tab-btn-dedications">
+        <i data-lucide="message-square-heart"></i>
+        <span>Dediche</span>
+        <span class="tab-badge" id="tab-dedications-badge" style="display: none;">0</span>
+      </button>
+    </nav>
+
+    <!-- CAMERA ACTION SHEET MODAL (Photo vs Video vs Gallery) -->
+    <div class="modal-overlay hidden" id="camera-sheet-modal">
+      <div class="action-sheet-dialog">
+        <h4 style="color: var(--color-gold-light); font-size: 1.05rem; margin-bottom: 4px;">Aggiungi un Ricordo 🎓</h4>
+        <p style="font-size: 0.8rem; color: var(--color-text-secondary);">Scatta con la fotocamera o carica foto e video in massima qualità</p>
+        <div class="action-sheet-options">
+          <button class="sheet-option-btn" id="sheet-btn-photo">
+            <i data-lucide="camera" style="color: #ffca28;"></i>
+            <span>Scatta una Foto (Alta Qualità) 📸</span>
+          </button>
+          <button class="sheet-option-btn" id="sheet-btn-video">
+            <i data-lucide="video" style="color: #00e5ff;"></i>
+            <span>Registra un Video (HD / 4K) 🎥</span>
+          </button>
+          <button class="sheet-option-btn" id="sheet-btn-gallery">
+            <i data-lucide="image" style="color: #ff80ab;"></i>
+            <span>Carica dal Rullino (100% Qualità Originale) 🖼️</span>
+          </button>
+          <button class="btn btn-outline btn-block" id="close-sheet-btn" style="margin-top: 6px;">
+            Annulla
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- WRITE DEDICATION MODAL -->
+    <div class="modal-overlay hidden" id="dedication-modal">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <h3>Scrivi una Dedica per Chiara 💌</h3>
+          <button class="close-modal-btn" id="close-dedication-modal-btn"><i data-lucide="x"></i></button>
+        </div>
+        <div class="modal-body">
+          <form id="dedication-form">
+            <div class="input-group">
+              <label for="dedication-author-input"><i data-lucide="user"></i> Nome</label>
+              <input type="text" id="dedication-author-input" class="form-input" required placeholder="Es. Marco, Giulia, Matteo, Elena...">
+            </div>
+
+            <div class="input-group">
+              <label for="dedication-message-input"><i data-lucide="message-square-heart"></i> Il tuo Messaggio o Augurio</label>
+              <textarea id="dedication-message-input" class="form-input form-textarea" rows="4" required placeholder="Scrivi una dedica o un pensiero speciale per Chiara..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-lg" id="submit-dedication-btn">
+              <i data-lucide="send"></i> Invia Dedica 💌
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHOTO & VIDEO PREVIEW / UPLOAD MODAL -->
+    <div class="modal-overlay hidden" id="photo-upload-modal">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <h3 id="upload-modal-title">Condividi il Ricordo 🎓</h3>
+          <button class="close-modal-btn" id="close-upload-modal-btn"><i data-lucide="x"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="upload-preview-wrapper" id="upload-preview-container">
+            <!-- Dynamic img or video tag -->
+          </div>
+
+          <form id="photo-details-form" class="photo-form">
+            <div class="input-group">
+              <label for="author-input"><i data-lucide="user"></i> Nome</label>
+              <input type="text" id="author-input" class="form-input" required placeholder="Es. Marco, Giulia, Matteo, Elena...">
+            </div>
+
+            <div class="input-group">
+              <label for="caption-input"><i data-lucide="message-square-heart"></i> Didascalia (Opzionale)</label>
+              <textarea id="caption-input" class="form-input form-textarea" rows="2" placeholder="Aggiungi una didascalia..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-lg" id="submit-upload-btn">
+              <i data-lucide="send"></i> Pubblica nella Galleria!
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- FULLSCREEN LIGHTBOX (Photos & Videos) -->
+    <div class="lightbox-overlay hidden" id="lightbox-modal">
+      <div class="lightbox-top-bar">
+        <button class="lightbox-btn" id="lightbox-close-btn" title="Chiudi"><i data-lucide="x"></i></button>
+        <div class="lightbox-counter" id="lightbox-counter">1 di 12</div>
+        <div class="lightbox-right-tools">
+          <a class="lightbox-btn" id="lightbox-download-single-btn" title="Scarica Originale" download><i data-lucide="download"></i></a>
+          <button class="lightbox-btn" id="lightbox-share-btn" title="Condividi"><i data-lucide="share-2"></i></button>
+          <button class="lightbox-btn delete-btn" id="lightbox-delete-btn" title="Elimina"><i data-lucide="trash-2"></i></button>
+        </div>
+      </div>
+
+      <!-- Main Stage -->
+      <div class="lightbox-photo-stage" id="lightbox-stage">
+        <button class="nav-arrow nav-prev" id="lightbox-prev-btn"><i data-lucide="chevron-left"></i></button>
+        <div class="lightbox-image-container" id="lightbox-media-container">
+          <!-- Dynamically populated <img> or <video> -->
+        </div>
+        <button class="nav-arrow nav-next" id="lightbox-next-btn"><i data-lucide="chevron-right"></i></button>
+      </div>
+
+      <!-- Lightbox Bottom Info & Reactions -->
+      <div class="lightbox-bottom-sheet">
+        <div class="author-row">
+          <div class="author-avatar" id="lightbox-author-avatar">🎓</div>
+          <div class="author-details">
+            <h4 id="lightbox-author-name">Nome</h4>
+            <span id="lightbox-photo-time" class="time-stamp">Adesso</span>
+          </div>
+        </div>
+
+        <p class="lightbox-caption" id="lightbox-caption-text">Didascalia del ricordo</p>
+
+        <!-- Reactions -->
+        <div class="reaction-bar" id="lightbox-reaction-bar">
+          <button class="react-btn" data-emoji="❤️">
+            <span class="emoji">❤️</span> <span class="count" id="react-count-heart">0</span>
+          </button>
+          <button class="react-btn" data-emoji="🎓">
+            <span class="emoji">🎓</span> <span class="count" id="react-count-grad">0</span>
+          </button>
+          <button class="react-btn" data-emoji="🥂">
+            <span class="emoji">🥂</span> <span class="count" id="react-count-toast">0</span>
+          </button>
+          <button class="react-btn" data-emoji="🎉">
+            <span class="emoji">🎉</span> <span class="count" id="react-count-party">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIMPLE ONBOARDING MODAL -->
+    <div class="modal-overlay hidden" id="onboarding-modal">
+      <div class="modal-dialog welcome-modal">
+        <div class="welcome-header">
+          <div class="welcome-badge">🎓</div>
+          <h2>Festa di Laurea</h2>
+          <p id="onboarding-party-name">Iacuzzo Chiara</p>
+        </div>
+        <div class="modal-body">
+          <form id="onboarding-form">
+            <div class="input-group">
+              <label for="guest-name-input">Nome</label>
+              <input type="text" id="guest-name-input" class="form-input form-input-lg" placeholder="Es. Marco, Giulia, Matteo, Elena..." required autofocus>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg">
+              Entra nella Galleria! 🥂
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRINTABLE QR CODE MODAL FOR CHIARA -->
+    <div class="modal-overlay hidden" id="qr-print-modal">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <h3>QR Code per i Tavoli 🎫</h3>
+          <button class="close-modal-btn" id="close-qr-modal-btn"><i data-lucide="x"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="table-card-preview" id="printable-table-card">
+            <div class="card-inner-border">
+              <div class="card-top-laurel">🌿 🎓 🌿</div>
+              <h3 class="card-party-title">Festa di Laurea</h3>
+              <h2 class="card-grad-name" style="font-family: var(--font-serif); font-size: 1.35rem; color: #8b1528; margin: 2px 0 1px 0; font-weight: 700;">Iacuzzo Chiara</h2>
+              <p class="card-party-subtitle" style="font-size: 0.8rem; color: #081026; font-weight: 600; margin-bottom: 12px;">Ingegneria Informatica</p>
+              
+              <div class="qr-canvas-wrapper">
+                <div id="qrcode-target"></div>
+                <div class="qr-center-logo">🎓</div>
+              </div>
+
+              <p class="card-instruction-text" style="font-size: 0.8rem; line-height: 1.35; margin-bottom: 6px; color: #333;">Inquadra con la fotocamera del tuo telefono per scattare foto e video o lasciare una dedica!</p>
+              <div class="card-url-badge" id="qr-direct-url-text" style="background: rgba(139, 21, 40, 0.08); border: 1px solid rgba(139, 21, 40, 0.25); border-radius: 20px; padding: 4px 12px; display: inline-block; font-size: 0.72rem; color: #8b1528; font-weight: 700;">📸 Inquadra per Foto, Video & Dediche</div>
+              <p style="font-size: 0.72rem; color: #1e3a8a; margin-top: 6px; font-weight: 600;">📶 Accesso istantaneo: Wi-Fi, 4G e 5G</p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-primary btn-block" id="print-qr-btn">
+              <i data-lucide="printer"></i> Stampa Segnaposto
+            </button>
+            <button class="btn btn-outline btn-block" id="copy-qr-link-btn">
+              <i data-lucide="link"></i> Copia Link
+            </button>
+          </div>
+          <p id="qr-modal-real-url" style="font-size: 0.72rem; color: var(--color-text-muted); text-align: center; margin-top: 10px; word-break: break-all; opacity: 0.8;"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS MODAL -->
+    <div class="modal-overlay hidden" id="event-settings-modal">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <h3>Impostazioni Festa 🎓</h3>
+          <button class="close-modal-btn" id="close-settings-modal-btn"><i data-lucide="x"></i></button>
+        </div>
+        <div class="modal-body">
+          <form id="event-settings-form">
+            <div class="input-group">
+              <label for="settings-title">Titolo Evento</label>
+              <input type="text" id="settings-title" class="form-input" value="Festa di Laurea di Iacuzzo Chiara 🎓" required>
+            </div>
+            <div class="input-group">
+              <label for="settings-subtitle">Sottotitolo</label>
+              <input type="text" id="settings-subtitle" class="form-input" value="Ingegneria Informatica">
+            </div>
+            <div class="input-group">
+              <label for="settings-hashtag">Hashtag</label>
+              <input type="text" id="settings-hashtag" class="form-input" value="#LaureaChiara2026">
+            </div>
+
+            <hr style="border: none; border-top: 1px solid var(--color-navy-border); margin: 18px 0 14px 0;">
+            <div style="margin-bottom: 12px;">
+              <h4 style="color: var(--color-gold-light); font-size: 0.95rem; display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                <i data-lucide="shield-check" style="width: 16px; height: 16px; color: #ffca28;"></i>
+                Link Fisso Permanente (Ngrok Gratuito)
+              </h4>
+              <p style="font-size: 0.76rem; color: var(--color-text-secondary); line-height: 1.35;">
+                Inserisci il tuo dominio gratuito di Ngrok (es. <code>chiara-laurea.ngrok-free.app</code>) per avere un link e un QR Code che non cambiano mai!
+              </p>
+            </div>
+
+            <div class="input-group">
+              <label for="settings-ngrok-domain">Dominio Statico Gratuito</label>
+              <input type="text" id="settings-ngrok-domain" class="form-input" placeholder="Es. nome-scelto.ngrok-free.app">
+            </div>
+
+            <div class="input-group">
+              <label for="settings-ngrok-token">Authtoken Ngrok (da dashboard.ngrok.com)</label>
+              <input type="password" id="settings-ngrok-token" class="form-input" placeholder="Incolla il token gratuito">
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top: 10px;">
+              <i data-lucide="check"></i> Salva e Applica
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+  </div>
+
+  <!-- JavaScript Modules -->
+  <script src="/js/api.js"></script>
+  <script src="/js/gallery.js"></script>
+  <script src="/js/dedications.js"></script>
+  <script src="/js/camera.js"></script>
+  <script src="/js/lightbox.js"></script>
+  <script src="/js/qrCards.js"></script>
+  <script src="/js/app.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+    });
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW error:', err));
+      });
+    }
+  </script>
+</body>
+</html>
