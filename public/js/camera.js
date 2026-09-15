@@ -67,13 +67,12 @@ const Camera = {
       this.closeSheetBtn.addEventListener('click', () => this.closeActionSheet());
     }
 
-    // File Input Listeners
+    // File Input Listeners (Never clear input.value prematurely on Safari!)
     if (this.photoInput) {
       this.photoInput.addEventListener('change', (e) => {
         if (e.target.files && e.target.files.length > 0) {
           this.handleSingleMedia(e.target.files[0], 'image');
         }
-        e.target.value = '';
       });
     }
 
@@ -82,7 +81,6 @@ const Camera = {
         if (e.target.files && e.target.files.length > 0) {
           this.handleSingleMedia(e.target.files[0], 'video');
         }
-        e.target.value = '';
       });
     }
 
@@ -97,7 +95,6 @@ const Camera = {
             this.uploadMultipleFiles(e.target.files);
           }
         }
-        e.target.value = '';
       });
     }
   },
@@ -122,9 +119,20 @@ const Camera = {
     const container = document.getElementById('upload-preview-container');
     const authorInput = document.getElementById('author-input');
     const titleEl = document.getElementById('upload-modal-title');
+    const videoHint = document.getElementById('upload-video-hint');
+    const progressContainer = document.getElementById('upload-progress-container');
 
     if (titleEl) {
       titleEl.innerText = type === 'video' ? 'Condividi il Video 🎥' : 'Condividi la Foto 📸';
+    }
+
+    if (videoHint) {
+      if (type === 'video') videoHint.classList.remove('hidden');
+      else videoHint.classList.add('hidden');
+    }
+
+    if (progressContainer) {
+      progressContainer.classList.add('hidden');
     }
 
     if (container) {
@@ -134,7 +142,11 @@ const Camera = {
         video.src = mediaUrl;
         video.controls = true;
         video.playsInline = true;
+        video.setAttribute('playsinline', '');
+        video.setAttribute('webkit-playsinline', '');
         video.autoplay = true;
+        video.muted = true; // Crucial for Safari mobile inline preview
+        video.loop = true;
         container.appendChild(video);
       } else {
         const img = document.createElement('img');
@@ -148,10 +160,17 @@ const Camera = {
     if (modal) modal.classList.remove('hidden');
   },
 
+  resetInputs() {
+    if (this.photoInput) this.photoInput.value = '';
+    if (this.videoInput) this.videoInput.value = '';
+    if (this.galleryInput) this.galleryInput.value = '';
+    this.capturedFile = null;
+  },
+
   closeUploadModal() {
     const modal = document.getElementById('photo-upload-modal');
     if (modal) modal.classList.add('hidden');
-    this.capturedFile = null;
+    this.resetInputs();
   },
 
   async uploadMultipleFiles(files) {
@@ -160,14 +179,26 @@ const Camera = {
     formData.append('author', author);
     formData.append('caption', '');
 
+    let totalBytes = 0;
+    const MAX_SINGLE_SIZE = 95 * 1024 * 1024;
+
     for (let i = 0; i < files.length; i++) {
+      if (files[i].size > MAX_SINGLE_SIZE) {
+        const mb = (files[i].size / (1024 * 1024)).toFixed(0);
+        App.showToast(`⚠️ Il file "${files[i].name}" è troppo grande (${mb}MB, max 95MB).`);
+        this.resetInputs();
+        return;
+      }
+      totalBytes += files[i].size;
       formData.append('photos', files[i], files[i].name || `media-${i}.jpg`);
     }
 
-    App.showToast(`⏳ Caricamento di ${files.length} file in alta qualità...`);
+    App.showToast(`⏳ Caricamento di ${files.length} ricordi in corso...`);
 
     try {
-      const res = await API.uploadPhoto(formData);
+      const res = await API.uploadPhoto(formData, (percent) => {
+        App.showToast(`⏳ Caricamento: ${percent}%...`);
+      });
       App.showToast(`✨ ${files.length} ricordi pubblicati con successo!`);
       if (res.photos) {
         Gallery.addPhotos(res.photos);
@@ -183,6 +214,8 @@ const Camera = {
     } catch (e) {
       console.error('Multiple upload error:', e);
       App.showToast(`❌ ${e.message || 'Errore durante il caricamento'}`);
+    } finally {
+      this.resetInputs();
     }
   }
 };

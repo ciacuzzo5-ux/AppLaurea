@@ -45,23 +45,55 @@ const API = {
     }
   },
 
-  // Upload Photo / Video (FormData)
-  async uploadPhoto(formData) {
-    try {
-      const res = await fetch('/api/photos', {
-        method: 'POST',
-        body: formData
-      });
-      const data = await res.json().catch(() => null);
-      if (!res.ok || (data && data.success === false)) {
-        const errorMsg = (data && data.error) ? data.error : `Errore caricamento (Status ${res.status})`;
-        throw new Error(errorMsg);
+  // Upload Photo / Video (FormData with real-time XHR progress)
+  uploadPhoto(formData, onProgress) {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', '/api/photos', true);
+      xhr.timeout = 180000; // 3 minutes timeout for videos
+
+      if (xhr.upload && typeof onProgress === 'function') {
+        xhr.upload.onprogress = (e) => {
+          if (e.lengthComputable && e.total > 0) {
+            const percent = Math.min(99, Math.round((e.loaded / e.total) * 100));
+            onProgress(percent, e.loaded, e.total);
+          }
+        };
       }
-      return data;
-    } catch (e) {
-      console.error('Upload error:', e);
-      throw e;
-    }
+
+      xhr.onload = () => {
+        let data = null;
+        try {
+          data = JSON.parse(xhr.responseText);
+        } catch (e) {
+          // If HTML response or non-JSON
+        }
+
+        if (xhr.status >= 200 && xhr.status < 300 && (!data || data.success !== false)) {
+          if (typeof onProgress === 'function') onProgress(100);
+          resolve(data || { success: true });
+        } else {
+          const msg = (data && data.error) 
+            ? data.error 
+            : `Errore caricamento (${xhr.status}: ${xhr.statusText || 'Riprova'})`;
+          reject(new Error(msg));
+        }
+      };
+
+      xhr.onerror = () => {
+        reject(new Error('Connessione interrotta durante il caricamento. Controlla la rete e riprova!'));
+      };
+
+      xhr.ontimeout = () => {
+        reject(new Error('Tempo di caricamento scaduto. Il file potrebbe essere troppo pesante per la connessione.'));
+      };
+
+      xhr.onabort = () => {
+        reject(new Error('Caricamento annullato.'));
+      };
+
+      xhr.send(formData);
+    });
   },
 
   // Add reaction to a photo/video

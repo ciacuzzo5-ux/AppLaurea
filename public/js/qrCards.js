@@ -31,9 +31,6 @@ const QrCards = {
   updateEventInfo(event) {
     if (!event) return;
     this.mobileUrl = event.mobileUrl || window.location.origin;
-    if (this.urlBadge) {
-      this.urlBadge.innerText = '📸 Inquadra per Foto, Video & Dediche';
-    }
     const realUrlEl = document.getElementById('qr-modal-real-url');
     if (realUrlEl) {
       realUrlEl.innerText = `Link attivo: ${this.mobileUrl}`;
@@ -48,16 +45,18 @@ const QrCards = {
     const targetUrl = url || this.mobileUrl || window.location.origin;
 
     if (window.QRCode) {
-      QRCode.toCanvas(this.qrTarget, targetUrl, {
-        width: 170,
-        margin: 1,
-        color: {
-          dark: '#a81028', // Red graduation color
-          light: '#ffffff'
-        }
-      }, (error) => {
-        if (error) console.error('QR code error:', error);
-      });
+      try {
+        new QRCode(this.qrTarget, {
+          text: targetUrl,
+          width: 170,
+          height: 170,
+          colorDark: "#081026",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel ? QRCode.CorrectLevel.H : 2
+        });
+      } catch (err) {
+        console.error('QR code generation error:', err);
+      }
     }
   }
 };

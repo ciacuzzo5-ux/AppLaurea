@@ -22,7 +22,7 @@
   <!-- Lucide Icons & Libraries -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <script src="/js/qrcode.min.js"></script>
 
   <!-- App Stylesheet -->
   <link rel="stylesheet" href="/css/style.css">
@@ -167,19 +167,19 @@
     <div class="modal-overlay hidden" id="camera-sheet-modal">
       <div class="action-sheet-dialog">
         <h4 style="color: var(--color-gold-light); font-size: 1.05rem; margin-bottom: 4px;">Aggiungi un Ricordo 🎓</h4>
-        <p style="font-size: 0.8rem; color: var(--color-text-secondary);">Scatta con la fotocamera o carica foto e video in massima qualità</p>
+        <p style="font-size: 0.8rem; color: var(--color-text-secondary); margin-bottom: 12px;">Scegli come partecipare</p>
         <div class="action-sheet-options">
           <button class="sheet-option-btn" id="sheet-btn-photo">
-            <i data-lucide="camera" style="color: #ffca28;"></i>
-            <span>Scatta una Foto (Alta Qualità) 📸</span>
+            <i data-lucide="camera" style="color: #ffca28; width: 22px; height: 22px;"></i>
+            <span>Scatta una Foto 📸</span>
           </button>
           <button class="sheet-option-btn" id="sheet-btn-video">
-            <i data-lucide="video" style="color: #00e5ff;"></i>
-            <span>Registra un Video (HD / 4K) 🎥</span>
+            <i data-lucide="video" style="color: #00e5ff; width: 22px; height: 22px;"></i>
+            <span>Registra un Video 🎥</span>
           </button>
           <button class="sheet-option-btn" id="sheet-btn-gallery">
-            <i data-lucide="image" style="color: #ff80ab;"></i>
-            <span>Carica dal Rullino (100% Qualità Originale) 🖼️</span>
+            <i data-lucide="image" style="color: #ff80ab; width: 22px; height: 22px;"></i>
+            <span>Carica dal Rullino 🖼️</span>
           </button>
           <button class="btn btn-outline btn-block" id="close-sheet-btn" style="margin-top: 6px;">
             Annulla
@@ -192,7 +192,7 @@
     <div class="modal-overlay hidden" id="dedication-modal">
       <div class="modal-dialog">
         <div class="modal-header">
-          <h3>Scrivi una Dedica per Chiara 💌</h3>
+          <h3>Scrivi una Dedica 💌</h3>
           <button class="close-modal-btn" id="close-dedication-modal-btn"><i data-lucide="x"></i></button>
         </div>
         <div class="modal-body">
@@ -236,6 +236,16 @@
             <div class="input-group">
               <label for="caption-input"><i data-lucide="message-square-heart"></i> Didascalia (Opzionale)</label>
               <textarea id="caption-input" class="form-input form-textarea" rows="2" placeholder="Aggiungi una didascalia..."></textarea>
+            </div>
+
+            <div id="upload-progress-container" class="upload-progress-container hidden">
+              <div class="upload-progress-info">
+                <span id="upload-progress-label">Caricamento in corso...</span>
+                <span id="upload-progress-percent">0%</span>
+              </div>
+              <div class="upload-progress-track">
+                <div id="upload-progress-bar" class="upload-progress-fill" style="width: 0%;"></div>
+              </div>
             </div>
 
             <button type="submit" class="btn btn-primary btn-block btn-lg" id="submit-upload-btn">
@@ -339,9 +349,7 @@
                 <div class="qr-center-logo">🎓</div>
               </div>
 
-              <p class="card-instruction-text" style="font-size: 0.8rem; line-height: 1.35; margin-bottom: 6px; color: #333;">Inquadra con la fotocamera del tuo telefono per scattare foto e video o lasciare una dedica!</p>
-              <div class="card-url-badge" id="qr-direct-url-text" style="background: rgba(139, 21, 40, 0.08); border: 1px solid rgba(139, 21, 40, 0.25); border-radius: 20px; padding: 4px 12px; display: inline-block; font-size: 0.72rem; color: #8b1528; font-weight: 700;">📸 Inquadra per Foto, Video & Dediche</div>
-              <p style="font-size: 0.72rem; color: #1e3a8a; margin-top: 6px; font-weight: 600;">📶 Accesso istantaneo: Wi-Fi, 4G e 5G</p>
+              <p class="card-instruction-text" style="font-size: 0.85rem; line-height: 1.4; color: #222; margin-top: 6px; font-weight: 500;">Inquadra per scattare foto, video o lasciare una dedica!</p>
             </div>
           </div>
 
@@ -369,7 +377,7 @@
           <form id="event-settings-form">
             <div class="input-group">
               <label for="settings-title">Titolo Evento</label>
-              <input type="text" id="settings-title" class="form-input" value="Festa di Laurea di Iacuzzo Chiara 🎓" required>
+              <input type="text" id="settings-title" class="form-input" value="Festa di Laurea di Chiara 🎓" required>
             </div>
             <div class="input-group">
               <label for="settings-subtitle">Sottotitolo</label>

@@ -207,11 +207,18 @@ app.post('/api/photos', (req, res) => {
   upload.array('photos', 25)(req, res, (err) => {
     if (err) {
       console.error('Multer upload error:', err);
+      let errorMsg = 'Errore durante la ricezione del file. Riprova.';
+      if (err.code === 'LIMIT_FILE_SIZE') {
+        errorMsg = 'Il file supera la dimensione massima consentita (100MB).';
+      } else if (err.message && err.message.toLowerCase().includes('unexpected end of form')) {
+        errorMsg = 'Caricamento interrotto dal dispositivo o dalla rete. Riprova!';
+      } else if (err.message) {
+        errorMsg = err.message;
+      }
+
       return res.status(400).json({
         success: false,
-        error: err.code === 'LIMIT_FILE_SIZE'
-          ? 'Il file supera la dimensione massima consentita (300MB).'
-          : (err.message || 'Errore durante la ricezione del file. Riprova.')
+        error: errorMsg
       });
     }
 

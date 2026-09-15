@@ -151,21 +151,42 @@ const App = {
           return;
         }
 
+        const file = Camera.capturedFile;
+        // Limit check for Render cloud reverse proxy (95MB safe margin)
+        const MAX_SIZE = 95 * 1024 * 1024;
+        if (file.size > MAX_SIZE) {
+          const mb = (file.size / (1024 * 1024)).toFixed(0);
+          this.showToast(`⚠️ Il file è troppo pesante (${mb}MB, max 95MB). Prova a tagliare il video o caricalo in 1080p!`);
+          return;
+        }
+
+        const progressContainer = document.getElementById('upload-progress-container');
+        const progressBar = document.getElementById('upload-progress-bar');
+        const progressPercent = document.getElementById('upload-progress-percent');
+        const progressLabel = document.getElementById('upload-progress-label');
+
+        if (progressContainer) progressContainer.classList.remove('hidden');
+        if (progressBar) progressBar.style.width = '0%';
+        if (progressPercent) progressPercent.innerText = '0%';
+        if (progressLabel) progressLabel.innerText = Camera.capturedType === 'video' ? 'Invio video in corso...' : 'Invio foto in corso...';
+
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i data-lucide="loader"></i> Pubblicazione in alta qualità...';
+        submitBtn.innerHTML = '<i data-lucide="loader"></i> Pubblicazione...';
         lucide.createIcons();
 
         try {
-          const file = Camera.capturedFile;
           const origName = file.name || (Camera.capturedType === 'video' ? 'video.mp4' : 'foto.jpg');
 
           const formData = new FormData();
-          // Important: text fields first for busboy streaming safety
           formData.append('author', author);
           formData.append('caption', caption);
           formData.append('photos', file, origName);
 
-          const res = await API.uploadPhoto(formData);
+          const res = await API.uploadPhoto(formData, (percent) => {
+            if (progressBar) progressBar.style.width = `${percent}%`;
+            if (progressPercent) progressPercent.innerText = `${percent}%`;
+            submitBtn.innerHTML = `<i data-lucide="loader"></i> Caricamento: ${percent}%`;
+          });
 
           Camera.closeUploadModal();
 
@@ -188,6 +209,7 @@ const App = {
           console.error('Upload error:', err);
           this.showToast(`❌ ${err.message || 'Errore durante la pubblicazione'}`);
         } finally {
+          if (progressContainer) progressContainer.classList.add('hidden');
           submitBtn.disabled = false;
           submitBtn.innerHTML = '<i data-lucide="send"></i> Pubblica nella Galleria!';
           lucide.createIcons();
