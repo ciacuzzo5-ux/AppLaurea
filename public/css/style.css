@@ -1414,11 +1414,10 @@ input, textarea, select, button {
 
 .card-pinyon-title {
   font-family: 'Pinyon Script', cursive, serif;
-  font-size: 1.85rem;
+  font-size: 2rem;
   line-height: 1.15;
   color: #7a1b28;
-  font-weight: 700;
-  -webkit-text-stroke: 0.4px #7a1b28;
+  font-weight: 400;
   margin: 4px 0 6px 0;
   letter-spacing: 0.5px;
 }

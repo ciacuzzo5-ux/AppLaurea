@@ -122,10 +122,10 @@ const QrCards = {
     }
     .card-pinyon-title {
       font-family: 'Pinyon Script', cursive, serif;
-      font-size: 1.95rem;
+      font-size: 2.1rem;
       line-height: 1.15;
       color: #7a1b28;
-      font-weight: 700;
+      font-weight: 400;
       margin: 4px 0 6px 0;
       letter-spacing: 0.5px;
     }
@@ -245,8 +245,8 @@ const QrCards = {
     ctx.fillStyle = '#7a1b28';
     ctx.fillText('• 🎓 •', width / 2, 95);
 
-    // 5. Title in Pinyon Script (Bold)
-    ctx.font = 'bold 64px "Pinyon Script", cursive, serif';
+    // 5. Title in Pinyon Script (Normal, non-bold)
+    ctx.font = '68px "Pinyon Script", cursive, serif';
     ctx.fillStyle = '#7a1b28';
     ctx.fillText('Chiara Iacuzzo’s', width / 2, 175);
     ctx.fillText('Graduation Party', width / 2, 245);
