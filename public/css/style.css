@@ -388,12 +388,13 @@ input, textarea, select, button {
 .hero-event-title {
   font-family: 'Pinyon Script', cursive, serif;
   font-size: 2.55rem;
-  font-weight: 500;
+  font-weight: 700;
+  -webkit-text-stroke: 0.35px #7a1b28;
   line-height: 1.12;
-  color: #ffffff;
+  color: #7a1b28;
   margin: 4px 0 6px 0;
   letter-spacing: 0.5px;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.12), 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .hero-event-subtitle {
@@ -1382,10 +1383,11 @@ input, textarea, select, button {
 
 .card-pinyon-title {
   font-family: 'Pinyon Script', cursive, serif;
-  font-size: 2.45rem;
-  line-height: 1.12;
+  font-size: 1.85rem;
+  line-height: 1.15;
   color: #7a1b28;
-  font-weight: 500;
+  font-weight: 700;
+  -webkit-text-stroke: 0.4px #7a1b28;
   margin: 4px 0 6px 0;
   letter-spacing: 0.5px;
 }
