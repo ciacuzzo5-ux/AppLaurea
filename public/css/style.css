@@ -1471,39 +1471,21 @@ input, textarea, select, button {
   overflow: hidden;
 }
 
-.card-inner-border::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #8B1A2E, #C5A059, #8B1A2E);
-}
-
 .card-top-laurel {
   font-size: 1.25rem;
   letter-spacing: 6px;
   color: #8B1A2E;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
-.card-pinyon-title {
-  font-family: 'Pinyon Script', cursive, serif;
-  font-size: 2.4rem;
-  line-height: 1.1;
-  color: var(--color-text-main);
-  font-weight: 400;
-  margin: 4px 0 2px 0;
-  letter-spacing: 0.5px;
-}
-
-.card-party-title {
-  font-family: var(--font-serif);
-  font-size: 0.9rem;
+.card-event-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
   font-weight: 700;
-  color: #8B1A2E;
-  margin-bottom: 2px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  color: var(--color-text-main);
+  margin: 4px 0 2px 0;
+  letter-spacing: -0.2px;
+  line-height: 1.25;
 }
 
 .card-party-subtitle {

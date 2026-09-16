@@ -339,8 +339,7 @@
           <div class="table-card-preview" id="printable-table-card">
             <div class="card-inner-border">
               <div class="card-top-laurel">• 🎓 •</div>
-              <h2 class="card-pinyon-title">Chiara Iacuzzo</h2>
-              <p class="card-party-title">Graduation Party</p>
+              <h2 class="card-event-title">Chiara Iacuzzo's Graduation Party</h2>
               <p class="card-party-subtitle">16 Settembre 2026</p>
 
               <div class="qr-canvas-wrapper">
@@ -374,13 +373,13 @@
   </div>
 
   <!-- JavaScript Modules -->
-  <script src="/js/api.js?v=20"></script>
-  <script src="/js/gallery.js?v=20"></script>
-  <script src="/js/dedications.js?v=20"></script>
-  <script src="/js/camera.js?v=20"></script>
-  <script src="/js/lightbox.js?v=20"></script>
-  <script src="/js/qrCards.js?v=20"></script>
-  <script src="/js/app.js?v=20"></script>
+  <script src="/js/api.js?v=21"></script>
+  <script src="/js/gallery.js?v=21"></script>
+  <script src="/js/dedications.js?v=21"></script>
+  <script src="/js/camera.js?v=21"></script>
+  <script src="/js/lightbox.js?v=21"></script>
+  <script src="/js/qrCards.js?v=21"></script>
+  <script src="/js/app.js?v=21"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -389,7 +388,7 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=20')
+        navigator.serviceWorker.register('/sw.js?v=21')
           .then(reg => reg.update())
           .catch(err => console.log('SW error:', err));
       });

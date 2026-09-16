@@ -85,7 +85,7 @@ const QrCards = {
   <meta charset="UTF-8">
   <title>Stampa Segnaposto - Chiara Iacuzzo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Outfit:wght@500;600;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -117,35 +117,20 @@ const QrCards = {
       background: radial-gradient(ellipse at 50% 0%, #fff9f2 0%, #ffffff 60%);
       overflow: hidden;
     }
-    .card-inner-border::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #8B1A2E, #C5A059, #8B1A2E);
-    }
     .card-top-laurel {
       font-size: 1.25rem;
       letter-spacing: 4px;
       color: #8B1A2E;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
-    .card-pinyon-title {
-      font-family: 'Pinyon Script', cursive, serif;
-      font-size: 2.4rem;
-      line-height: 1.1;
-      color: #1C0B10;
-      font-weight: 400;
-      margin: 4px 0 2px 0;
-      letter-spacing: 0.5px;
-    }
-    .card-party-title {
-      font-size: 0.9rem;
+    .card-event-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
       font-weight: 700;
-      color: #8B1A2E;
-      margin-bottom: 2px;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
+      color: #1C0B10;
+      margin: 4px 0 2px 0;
+      letter-spacing: -0.2px;
+      line-height: 1.25;
     }
     .card-party-subtitle {
       font-size: 0.72rem;
@@ -236,8 +221,8 @@ const QrCards = {
     if (document.fonts) {
       try {
         await Promise.all([
-          document.fonts.load('140px "Pinyon Script"'),
-          document.fonts.load('bold 46px "Outfit"'),
+          document.fonts.load('bold 50px "Outfit"'),
+          document.fonts.load('500 32px "Outfit"'),
           document.fonts.load('italic 38px "Playfair Display"'),
           document.fonts.ready
         ]);
@@ -248,9 +233,9 @@ const QrCards = {
 
     const targetUrl = this.mobileUrl || window.location.origin;
 
-    // Dimensioni canvas HD (1200 x 1800 — rapporto 2:3 ideale per stampa e smartphone)
+    // Dimensioni canvas HD vertical flyer (1200 x 1480 — proporzioni armoniose ed eleganti)
     const W = 1200;
-    const H = 1800;
+    const H = 1480;
     const canvas = document.createElement('canvas');
     canvas.width = W;
     canvas.height = H;
@@ -264,7 +249,7 @@ const QrCards = {
     const COLOR_BORDEAUX  = '#8B1A2E'; // Bordeaux nobile
     const COLOR_BORD_DARK = '#640D1F'; // Bordeaux profondo
     const COLOR_GOLD      = '#C5A059'; // Oro champagne
-    const COLOR_TEXT_MAIN = '#1C0B10'; // Scuro caldo elegante
+    const COLOR_TEXT_MAIN = '#1C0B10'; // Scuro caldo elegante (stesso colore del titolo principale)
     const COLOR_TEXT_MED  = '#5C3340'; // Bordeaux medio secondario
     const COLOR_TEXT_MUTE = '#9A7A82'; // Grigio-rosato per la data
 
@@ -291,8 +276,8 @@ const QrCards = {
     const cardX = 64;
     const cardY = 64;
     const cardW = W - 128; // 1072
-    const cardH = H - 128; // 1672
-    const cardRadius = 40;
+    const cardH = H - 128; // 1352
+    const cardRadius = 36;
 
     // Ombra calda bordeaux
     ctx.shadowColor = 'rgba(80, 20, 35, 0.12)';
@@ -319,7 +304,7 @@ const QrCards = {
     const inY = cardY + inPad;
     const inW = cardW - (inPad * 2);
     const inH = cardH - (inPad * 2);
-    const inRadius = 24;
+    const inRadius = 22;
 
     // Sfondo radiale avorio sfumato interno
     const inGrad = ctx.createRadialGradient(W / 2, inY + 50, 40, W / 2, inY + 300, inW * 0.75);
@@ -330,54 +315,43 @@ const QrCards = {
     ctx.fillStyle = inGrad;
     ctx.fill();
 
-    // Bordo bordeaux nobile
+    // Bordo bordeaux nobile (senza linea multi-colore!)
     drawRoundRect(inX, inY, inW, inH, inRadius);
     ctx.strokeStyle = COLOR_BORDEAUX;
-    ctx.lineWidth = 3.5;
+    ctx.lineWidth = 3;
     ctx.stroke();
 
-    /* ── 4. NASTRO ACCENTO SUPERIORE (Bordeaux - Oro - Bordeaux) ── */
-    ctx.save();
-    // Clip per seguire la curva superiore della cornice interna
-    drawRoundRect(inX, inY, inW, inH, inRadius);
-    ctx.clip();
-    const stripeGrad = ctx.createLinearGradient(inX, 0, inX + inW, 0);
-    stripeGrad.addColorStop(0,   COLOR_BORDEAUX);
-    stripeGrad.addColorStop(0.5, COLOR_GOLD);
-    stripeGrad.addColorStop(1,   COLOR_BORDEAUX);
-    ctx.fillStyle = stripeGrad;
-    ctx.fillRect(inX, inY, inW, 9);
-    ctx.restore();
-
-    /* ── 5. DECORAZIONE SUPERIORE: • 🎓 • ── */
+    /* ── 4. DECORAZIONE SUPERIORE: • 🎓 • ── */
     ctx.textAlign = 'center';
     ctx.textBaseline = 'alphabetic';
     ctx.font = '44px sans-serif';
     ctx.fillStyle = COLOR_BORDEAUX;
-    ctx.fillText('• 🎓 •', W / 2, inY + 110);
+    ctx.fillText('• 🎓 •', W / 2, inY + 112);
 
-    /* ── 6. NOME: "Chiara Iacuzzo" in Pinyon Script ── */
-    ctx.font = '148px "Pinyon Script", cursive, serif';
+    /* ── 5. TITOLO: "Chiara Iacuzzo's Graduation Party" (stesso font e colore della pagina principale) ── */
+    const titleText = "Chiara Iacuzzo's Graduation Party";
+    let titleSize = 48;
+    ctx.font = `bold ${titleSize}px "Outfit", sans-serif`;
+    const maxTitleWidth = inW - 80;
+    while (ctx.measureText(titleText).width > maxTitleWidth && titleSize > 32) {
+      titleSize -= 2;
+      ctx.font = `bold ${titleSize}px "Outfit", sans-serif`;
+    }
     ctx.fillStyle = COLOR_TEXT_MAIN;
-    ctx.fillText('Chiara Iacuzzo', W / 2, inY + 265);
+    ctx.fillText(titleText, W / 2, inY + 195);
 
-    /* ── 7. TITOLO: "GRADUATION PARTY" ── */
-    ctx.font = 'bold 44px "Outfit", sans-serif';
-    ctx.fillStyle = COLOR_BORDEAUX;
-    ctx.fillText('GRADUATION PARTY', W / 2, inY + 345);
-
-    /* ── 8. DATA: "16 Settembre 2026" ── */
+    /* ── 6. DATA: "16 Settembre 2026" ── */
     ctx.font = '500 32px "Outfit", sans-serif';
     ctx.fillStyle = COLOR_TEXT_MUTE;
-    ctx.fillText('16 Settembre 2026', W / 2, inY + 404);
+    ctx.fillText('16 Settembre 2026', W / 2, inY + 252);
 
-    /* ── 9. RIQUADRO QR CODE (.qr-canvas-wrapper) ── */
-    const qrSize = 640;
+    /* ── 7. RIQUADRO QR CODE (.qr-canvas-wrapper) ── */
+    const qrSize = 620;
     const qrPad = 26;
     const qrBoxW = qrSize + (qrPad * 2);
     const qrBoxH = qrSize + (qrPad * 2);
     const qrBoxX = (W - qrBoxW) / 2;
-    const qrBoxY = inY + 448;
+    const qrBoxY = inY + 295;
     const qrX = qrBoxX + qrPad;
     const qrY = qrBoxY + qrPad;
 
@@ -408,7 +382,7 @@ const QrCards = {
       }
 
       // Badge circolare centrale sul QR (🎓)
-      const logoRadius = 54;
+      const logoRadius = 52;
       const logoCenterX = W / 2;
       const logoCenterY = qrY + (qrSize / 2);
 
@@ -421,7 +395,7 @@ const QrCards = {
       ctx.stroke();
 
       // Emoji tocco di laurea al centro
-      ctx.font = '52px sans-serif';
+      ctx.font = '50px sans-serif';
       ctx.fillStyle = COLOR_GOLD;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
