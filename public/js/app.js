@@ -281,7 +281,7 @@ const App = {
 
     const heroTitle = document.getElementById('home-event-title');
     if (heroTitle) {
-      heroTitle.innerHTML = "<b>Chiara Iacuzzo’s<br>Graduation Party</b>";
+      heroTitle.innerHTML = "Chiara Iacuzzo’s<br>Graduation Party";
     }
 
     const heroSubtitle = document.getElementById('home-event-subtitle');

@@ -126,14 +126,8 @@ const QrCards = {
       line-height: 1.15;
       color: #7a1b28;
       font-weight: 400;
-      margin: 4px 0 6px 0;
+      margin: 4px 0 16px 0;
       letter-spacing: 0.5px;
-    }
-    .card-party-subtitle {
-      font-size: 0.8rem;
-      color: #081026;
-      font-weight: 700;
-      margin-bottom: 12px;
     }
     .qr-canvas-wrapper {
       position: relative;
@@ -243,23 +237,18 @@ const QrCards = {
     ctx.textAlign = 'center';
     ctx.font = '36px sans-serif';
     ctx.fillStyle = '#7a1b28';
-    ctx.fillText('• 🎓 •', width / 2, 95);
+    ctx.fillText('• 🎓 •', width / 2, 105);
 
     // 5. Title in Pinyon Script (Normal, non-bold)
-    ctx.font = '68px "Pinyon Script", cursive, serif';
+    ctx.font = '72px "Pinyon Script", cursive, serif';
     ctx.fillStyle = '#7a1b28';
-    ctx.fillText('Chiara Iacuzzo’s', width / 2, 175);
-    ctx.fillText('Graduation Party', width / 2, 245);
+    ctx.fillText('Chiara Iacuzzo’s', width / 2, 185);
+    ctx.fillText('Graduation Party', width / 2, 258);
 
-    // 6. Subtitle
-    ctx.font = 'bold 26px "Outfit", sans-serif';
-    ctx.fillStyle = '#081026';
-    ctx.fillText('Ingegneria Informatica 💻', width / 2, 305);
-
-    // 7. QR Code Wrapper Background
+    // 6. QR Code Wrapper Background
     const qrSize = 360;
     const qrX = (width - qrSize) / 2;
-    const qrY = 345;
+    const qrY = 325;
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(qrX - 16, qrY - 16, qrSize + 32, qrSize + 32);
     ctx.strokeStyle = 'rgba(0,0,0,0.1)';
