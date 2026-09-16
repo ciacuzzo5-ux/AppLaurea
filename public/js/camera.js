@@ -1,5 +1,5 @@
 /**
- * Camera Module: Direct phone camera for Photos & Videos (iOS Safari & Android Chrome)
+ * Camera Module: Direct phone camera for Photos & Gallery upload for Photos and Videos
  */
 
 const Camera = {
@@ -8,7 +8,6 @@ const Camera = {
 
   init() {
     this.photoInput = document.getElementById('camera-photo-input');
-    this.videoInput = document.getElementById('camera-video-input');
     this.galleryInput = document.getElementById('native-file-input');
 
     this.openCamBtn = document.getElementById('open-camera-menu-btn');
@@ -18,7 +17,6 @@ const Camera = {
     // Action Sheet Modal
     this.sheetModal = document.getElementById('camera-sheet-modal');
     this.sheetBtnPhoto = document.getElementById('sheet-btn-photo');
-    this.sheetBtnVideo = document.getElementById('sheet-btn-video');
     this.sheetBtnGallery = document.getElementById('sheet-btn-gallery');
     this.closeSheetBtn = document.getElementById('close-sheet-btn');
 
@@ -49,13 +47,6 @@ const Camera = {
       });
     }
 
-    if (this.sheetBtnVideo) {
-      this.sheetBtnVideo.addEventListener('click', () => {
-        this.closeActionSheet();
-        if (this.videoInput) this.videoInput.click();
-      });
-    }
-
     if (this.sheetBtnGallery) {
       this.sheetBtnGallery.addEventListener('click', () => {
         this.closeActionSheet();
@@ -67,19 +58,11 @@ const Camera = {
       this.closeSheetBtn.addEventListener('click', () => this.closeActionSheet());
     }
 
-    // File Input Listeners (Never clear input.value prematurely on Safari!)
+    // File Input Listeners
     if (this.photoInput) {
       this.photoInput.addEventListener('change', (e) => {
         if (e.target.files && e.target.files.length > 0) {
           this.handleSingleMedia(e.target.files[0], 'image');
-        }
-      });
-    }
-
-    if (this.videoInput) {
-      this.videoInput.addEventListener('change', (e) => {
-        if (e.target.files && e.target.files.length > 0) {
-          this.handleSingleMedia(e.target.files[0], 'video');
         }
       });
     }
@@ -89,7 +72,7 @@ const Camera = {
         if (e.target.files && e.target.files.length > 0) {
           if (e.target.files.length === 1) {
             const file = e.target.files[0];
-            const isVid = file.type.startsWith('video/') || /\.(mp4|mov|webm|3gp|m4v)$/i.test(file.name);
+            const isVid = (file.type && file.type.startsWith('video/')) || /\.(mp4|mov|webm|3gp|m4v)$/i.test(file.name);
             this.handleSingleMedia(file, isVid ? 'video' : 'image');
           } else {
             this.uploadMultipleFiles(e.target.files);
@@ -162,7 +145,6 @@ const Camera = {
 
   resetInputs() {
     if (this.photoInput) this.photoInput.value = '';
-    if (this.videoInput) this.videoInput.value = '';
     if (this.galleryInput) this.galleryInput.value = '';
     this.capturedFile = null;
   },
@@ -173,24 +155,92 @@ const Camera = {
     this.resetInputs();
   },
 
+  // High-performance client-side image compression for mobile uploads
+  async compressImage(file, maxDimension = 2048, quality = 0.85) {
+    if (!file || !file.type || !file.type.startsWith('image/') || file.type === 'image/gif') {
+      return file;
+    }
+    return new Promise((resolve) => {
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        let { width, height } = img;
+        if (!width || !height) {
+          resolve(file);
+          return;
+        }
+
+        // Scale down if larger than maxDimension
+        if (width > maxDimension || height > maxDimension) {
+          if (width > height) {
+            height = Math.round((height * maxDimension) / width);
+            width = maxDimension;
+          } else {
+            width = Math.round((width * maxDimension) / height);
+            height = maxDimension;
+          }
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          resolve(file);
+          return;
+        }
+
+        ctx.drawImage(img, 0, 0, width, height);
+        canvas.toBlob((blob) => {
+          if (!blob || blob.size >= file.size) {
+            resolve(file);
+          } else {
+            const baseName = file.name ? file.name.replace(/\.[^.]+$/, '') : 'foto';
+            const compressedFile = new File([blob], `${baseName}.jpg`, { type: 'image/jpeg' });
+            resolve(compressedFile);
+          }
+        }, 'image/jpeg', quality);
+      };
+
+      img.onerror = () => {
+        URL.revokeObjectURL(url);
+        resolve(file);
+      };
+
+      img.src = url;
+    });
+  },
+
   async uploadMultipleFiles(files) {
     const author = App.getGuestName() || 'Invitato';
     const formData = new FormData();
     formData.append('author', author);
     formData.append('caption', '');
 
-    let totalBytes = 0;
     const MAX_SINGLE_SIZE = 95 * 1024 * 1024;
 
+    App.showToast(`⏳ Ottimizzazione di ${files.length} ricordi...`);
+
     for (let i = 0; i < files.length; i++) {
-      if (files[i].size > MAX_SINGLE_SIZE) {
-        const mb = (files[i].size / (1024 * 1024)).toFixed(0);
-        App.showToast(`⚠️ Il file "${files[i].name}" è troppo grande (${mb}MB, max 95MB).`);
+      let f = files[i];
+      if (f.size > MAX_SINGLE_SIZE) {
+        const mb = (f.size / (1024 * 1024)).toFixed(0);
+        App.showToast(`⚠️ Il file "${f.name}" è troppo grande (${mb}MB, max 95MB).`);
         this.resetInputs();
         return;
       }
-      totalBytes += files[i].size;
-      formData.append('photos', files[i], files[i].name || `media-${i}.jpg`);
+
+      // Compress if it's an image
+      if (f.type && f.type.startsWith('image/')) {
+        try {
+          f = await this.compressImage(f);
+        } catch (e) {
+          console.warn('Compression skipped for file', f.name, e);
+        }
+      }
+
+      formData.append('photos', f, f.name || `media-${i}.jpg`);
     }
 
     App.showToast(`⏳ Caricamento di ${files.length} ricordi in corso...`);

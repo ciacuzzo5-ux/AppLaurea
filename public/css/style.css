@@ -1,5 +1,5 @@
 /* ==========================================================================
-   🎓 FESTA DI LAUREA: IACUZZO CHIARA (INGEGNERIA INFORMATICA)
+   🎓 FESTA DI LAUREA DI CHIARA (INGEGNERIA INFORMATICA)
    PALETTE: BLU NAVY PROFONDO + ROSSO BORDEAUX LAUREA + FINITURE ORO
    STILE: MINIMALISTA, MODERNO E PULITO (STILE APPLE / GOOGLE PHOTOS)
    ========================================================================== */
@@ -149,18 +149,28 @@ input, textarea, select, button {
 
 .event-title {
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: #fff;
   letter-spacing: -0.2px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 190px;
+  max-width: calc(100vw - 160px);
 }
 
-@media (min-width: 400px) {
-  .event-title { max-width: 250px; }
+@media (min-width: 380px) {
+  .event-title { 
+    font-size: 1rem;
+    max-width: calc(100vw - 170px); 
+  }
+}
+
+@media (min-width: 480px) {
+  .event-title { 
+    font-size: 1.05rem;
+    max-width: 320px; 
+  }
 }
 
 .event-meta {

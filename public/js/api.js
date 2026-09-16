@@ -45,8 +45,27 @@ const API = {
     }
   },
 
-  // Upload Photo / Video (FormData with real-time XHR progress)
-  uploadPhoto(formData, onProgress) {
+  // Upload Photo / Video (FormData with real-time XHR progress & automatic retry)
+  async uploadPhoto(formData, onProgress) {
+    try {
+      return await this._sendUpload(formData, onProgress);
+    } catch (err) {
+      // Automatic 1-time retry for mobile network fluctuations or transient stream breaks
+      const isRetryable = err && err.message && (
+        err.message.toLowerCase().includes('interrotto') || 
+        err.message.toLowerCase().includes('connessione') ||
+        err.message.toLowerCase().includes('riprova')
+      );
+      if (isRetryable) {
+        console.warn('Upload interrupted, retrying automatically in 600ms...', err);
+        await new Promise(res => setTimeout(res, 600));
+        return await this._sendUpload(formData, onProgress);
+      }
+      throw err;
+    }
+  },
+
+  _sendUpload(formData, onProgress) {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open('POST', '/api/photos', true);

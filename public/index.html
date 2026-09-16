@@ -68,8 +68,8 @@
           <button class="filter-chip" data-filter="my">
             <i data-lucide="user"></i> I Miei (<span id="count-filter-my">0</span>)
           </button>
-          <button class="filter-chip" data-filter="videos">
-            <i data-lucide="video"></i> Solo Video (<span id="count-filter-videos">0</span>)
+          <button class="filter-chip" data-filter="dedications" id="home-filter-dedications">
+            <i data-lucide="message-square-heart"></i> Dediche (<span id="count-filter-dedications">0</span>)
           </button>
         </div>
         <!-- Grid layout zoom switch (3 vs 2 vs 1 columns) -->
@@ -91,16 +91,15 @@
             <div class="hero-laurel-badge">🌿 🎓 🌿</div>
             <h1 class="hero-event-title" id="home-event-title">Festa di Laurea di Chiara</h1>
             <p class="hero-event-subtitle" id="home-event-subtitle">Dottoressa in Ingegneria Informatica 💻</p>
-            <div class="hero-hashtag-pill" id="home-event-hashtag">#LaureaChiara2026</div>
           </div>
 
           <!-- Empty State -->
           <div id="gallery-empty-state" class="empty-state hidden">
             <div class="empty-icon">📷</div>
             <h3>Nessun ricordo ancora!</h3>
-            <p>Scatta una foto o registra un video per la festa di Chiara!</p>
+            <p>Scatta una foto o carica ricordi dalla galleria per la festa di Chiara!</p>
             <button class="btn btn-primary" id="empty-capture-btn">
-              <i data-lucide="camera"></i> Apri Fotocamera
+              <i data-lucide="camera"></i> Aggiungi Foto o Video
             </button>
           </div>
 
@@ -139,9 +138,8 @@
 
     </main>
 
-    <!-- HIDDEN NATIVE CAMERA & FILE INPUTS (Full Resolution, No Downsampling) -->
+    <!-- HIDDEN NATIVE CAMERA & FILE INPUTS -->
     <input type="file" id="camera-photo-input" accept="image/*" class="hidden">
-    <input type="file" id="camera-video-input" accept="video/*" class="hidden">
     <input type="file" id="native-file-input" accept="image/*,video/*" multiple class="hidden">
 
     <!-- BOTTOM TAB NAVIGATION (3 TABS: Galleria, Scatta/Carica, Dediche) -->
@@ -152,8 +150,8 @@
         <span>Galleria</span>
       </button>
 
-      <!-- 2. Central Shutter Button (Photo / Video) -->
-      <button class="tab-nav-item tab-camera-center" id="open-camera-menu-btn" title="Scatta o Registra">
+      <!-- 2. Central Shutter Button (Photo / Gallery) -->
+      <button class="tab-nav-item tab-camera-center" id="open-camera-menu-btn" title="Scatta o Carica">
         <div class="camera-fab-glow">
           <i data-lucide="camera"></i>
         </div>
@@ -168,7 +166,7 @@
       </button>
     </nav>
 
-    <!-- CAMERA ACTION SHEET MODAL (Photo vs Video vs Gallery) -->
+    <!-- CAMERA ACTION SHEET MODAL (Photo vs Gallery) -->
     <div class="modal-overlay hidden" id="camera-sheet-modal">
       <div class="action-sheet-dialog">
         <h4 style="color: var(--color-gold-light); font-size: 1.05rem; margin-bottom: 4px;">Aggiungi un Ricordo 🎓</h4>
@@ -178,13 +176,9 @@
             <i data-lucide="camera" style="color: #ffca28; width: 22px; height: 22px;"></i>
             <span>Scatta una Foto 📸</span>
           </button>
-          <button class="sheet-option-btn" id="sheet-btn-video">
-            <i data-lucide="video" style="color: #00e5ff; width: 22px; height: 22px;"></i>
-            <span>Registra un Video 🎥</span>
-          </button>
           <button class="sheet-option-btn" id="sheet-btn-gallery">
-            <i data-lucide="image" style="color: #ff80ab; width: 22px; height: 22px;"></i>
-            <span>Carica dal Rullino 🖼️</span>
+            <i data-lucide="images" style="color: #00e5ff; width: 22px; height: 22px;"></i>
+            <span>Carica dalla Galleria (Foto e Video) 🖼️</span>
           </button>
           <button class="btn btn-outline btn-block" id="close-sheet-btn" style="margin-top: 6px;">
             Annulla
@@ -317,8 +311,8 @@
       <div class="modal-dialog welcome-modal">
         <div class="welcome-header">
           <div class="welcome-badge">🎓</div>
-          <h2>Festa di Laurea</h2>
-          <p id="onboarding-party-name">Iacuzzo Chiara</p>
+          <h2>Festa di Laurea di Chiara</h2>
+          <p id="onboarding-party-name">Ingegneria Informatica 💻</p>
         </div>
         <div class="modal-body">
           <form id="onboarding-form">
@@ -345,16 +339,16 @@
           <div class="table-card-preview" id="printable-table-card">
             <div class="card-inner-border">
               <div class="card-top-laurel">🌿 🎓 🌿</div>
-              <h3 class="card-party-title">Festa di Laurea</h3>
-              <h2 class="card-grad-name" style="font-family: var(--font-serif); font-size: 1.35rem; color: #8b1528; margin: 2px 0 1px 0; font-weight: 700;">Iacuzzo Chiara</h2>
-              <p class="card-party-subtitle" style="font-size: 0.8rem; color: #081026; font-weight: 600; margin-bottom: 12px;">Ingegneria Informatica</p>
+              <h3 class="card-party-title">Festa di Laurea di</h3>
+              <h2 class="card-grad-name" style="font-family: var(--font-serif); font-size: 1.5rem; color: #8b1528; margin: 2px 0 1px 0; font-weight: 700;">Chiara</h2>
+              <p class="card-party-subtitle" style="font-size: 0.8rem; color: #081026; font-weight: 600; margin-bottom: 12px;">Ingegneria Informatica 💻</p>
               
               <div class="qr-canvas-wrapper">
                 <div id="qrcode-target"></div>
                 <div class="qr-center-logo">🎓</div>
               </div>
 
-              <p class="card-instruction-text" style="font-size: 0.85rem; line-height: 1.4; color: #222; margin-top: 6px; font-weight: 500;">Inquadra per scattare foto, video o lasciare una dedica!</p>
+              <p class="card-instruction-text" style="font-size: 0.85rem; line-height: 1.4; color: #222; margin-top: 6px; font-weight: 500;">Inquadra per caricare foto, video o lasciare una dedica!</p>
             </div>
           </div>
 
@@ -377,13 +371,13 @@
   </div>
 
   <!-- JavaScript Modules -->
-  <script src="/js/api.js?v=4"></script>
-  <script src="/js/gallery.js?v=4"></script>
-  <script src="/js/dedications.js?v=4"></script>
-  <script src="/js/camera.js?v=4"></script>
-  <script src="/js/lightbox.js?v=4"></script>
-  <script src="/js/qrCards.js?v=4"></script>
-  <script src="/js/app.js?v=4"></script>
+  <script src="/js/api.js?v=5"></script>
+  <script src="/js/gallery.js?v=5"></script>
+  <script src="/js/dedications.js?v=5"></script>
+  <script src="/js/camera.js?v=5"></script>
+  <script src="/js/lightbox.js?v=5"></script>
+  <script src="/js/qrCards.js?v=5"></script>
+  <script src="/js/app.js?v=5"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -392,7 +386,7 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=4')
+        navigator.serviceWorker.register('/sw.js?v=5')
           .then(reg => reg.update())
           .catch(err => console.log('SW error:', err));
       });

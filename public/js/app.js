@@ -1,5 +1,5 @@
 /**
- * Main App Orchestrator for Graduation Party: Iacuzzo Chiara
+ * Main App Orchestrator for Graduation Party: Festa di Laurea di Chiara
  */
 
 const App = {
@@ -49,31 +49,36 @@ const App = {
     }
   },
 
-  setupNavigation() {
+  switchTab(targetId) {
+    if (!targetId) return;
     const tabBtns = document.querySelectorAll('.bottom-tab-bar .tab-nav-item[data-target]');
     const views = document.querySelectorAll('.main-viewport .app-view');
     const subnav = document.getElementById('gallery-subnav');
 
+    tabBtns.forEach(b => {
+      if (b.dataset.target === targetId) b.classList.add('active');
+      else b.classList.remove('active');
+    });
+
+    views.forEach(view => {
+      if (view.id === targetId) {
+        view.classList.add('active');
+      } else {
+        view.classList.remove('active');
+      }
+    });
+
+    // Show gallery subnav chips only on gallery view
+    if (subnav) {
+      subnav.style.display = targetId === 'view-gallery' ? 'flex' : 'none';
+    }
+  },
+
+  setupNavigation() {
+    const tabBtns = document.querySelectorAll('.bottom-tab-bar .tab-nav-item[data-target]');
     tabBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        const targetId = btn.dataset.target;
-        if (!targetId) return;
-
-        tabBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        views.forEach(view => {
-          if (view.id === targetId) {
-            view.classList.add('active');
-          } else {
-            view.classList.remove('active');
-          }
-        });
-
-        // Hide gallery subnav chips when viewing Dediche
-        if (subnav) {
-          subnav.style.display = targetId === 'view-gallery' ? 'flex' : 'none';
-        }
+        this.switchTab(btn.dataset.target);
       });
     });
   },
@@ -167,19 +172,32 @@ const App = {
         if (progressContainer) progressContainer.classList.remove('hidden');
         if (progressBar) progressBar.style.width = '0%';
         if (progressPercent) progressPercent.innerText = '0%';
-        if (progressLabel) progressLabel.innerText = Camera.capturedType === 'video' ? 'Invio video in corso...' : 'Invio foto in corso...';
+        if (progressLabel) progressLabel.innerText = Camera.capturedType === 'video' ? 'Invio video in corso...' : 'Preparazione foto...';
 
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i data-lucide="loader"></i> Pubblicazione...';
+        submitBtn.innerHTML = '<i data-lucide="loader"></i> Elaborazione...';
         lucide.createIcons();
 
         try {
-          const origName = file.name || (Camera.capturedType === 'video' ? 'video.mp4' : 'foto.jpg');
+          let fileToUpload = file;
+          // Optimize photo client-side to prevent network drops and "Unexpected end of form" on mobile
+          if (Camera.capturedType !== 'video' && fileToUpload.type && fileToUpload.type.startsWith('image/')) {
+            try {
+              if (progressLabel) progressLabel.innerText = 'Ottimizzazione foto...';
+              fileToUpload = await Camera.compressImage(fileToUpload);
+            } catch (compErr) {
+              console.warn('Compression fallback:', compErr);
+            }
+          }
+
+          if (progressLabel) progressLabel.innerText = Camera.capturedType === 'video' ? 'Invio video in corso...' : 'Invio foto in corso...';
+
+          const origName = fileToUpload.name || (Camera.capturedType === 'video' ? 'video.mp4' : 'foto.jpg');
 
           const formData = new FormData();
           formData.append('author', author);
           formData.append('caption', caption);
-          formData.append('photos', file, origName);
+          formData.append('photos', fileToUpload, origName);
 
           const res = await API.uploadPhoto(formData, (percent) => {
             if (progressBar) progressBar.style.width = `${percent}%`;
@@ -253,11 +271,8 @@ const App = {
     const heroSubtitle = document.getElementById('home-event-subtitle');
     if (heroSubtitle) heroSubtitle.innerText = event.subtitle || 'Dottoressa in Ingegneria Informatica 💻';
 
-    const heroHashtag = document.getElementById('home-event-hashtag');
-    if (heroHashtag) heroHashtag.innerText = event.hashtag || '#LaureaChiara2026';
-
     const onboardingName = document.getElementById('onboarding-party-name');
-    if (onboardingName) onboardingName.innerText = 'Iacuzzo Chiara';
+    if (onboardingName) onboardingName.innerText = 'Ingegneria Informatica 💻';
 
     QrCards.updateEventInfo(event);
   },

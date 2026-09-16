@@ -17,6 +17,10 @@ const Gallery = {
     // Attach Filter Listeners
     this.subnavFilters.forEach(chip => {
       chip.addEventListener('click', () => {
+        if (chip.dataset.filter === 'dedications') {
+          App.switchTab('view-dedications');
+          return;
+        }
         this.subnavFilters.forEach(c => c.classList.remove('active'));
         chip.classList.add('active');
         this.activeFilter = chip.dataset.filter;
@@ -81,10 +85,6 @@ const Gallery = {
     switch (this.activeFilter) {
       case 'my':
         return this.photos.filter(p => p.author && p.author.toLowerCase() === currentUserName.toLowerCase());
-      case 'dedications':
-        return this.photos.filter(p => p.caption && p.caption.trim().length > 0);
-      case 'videos':
-        return this.photos.filter(p => p.type === 'video');
       case 'all':
       default:
         return this.photos;
@@ -95,19 +95,16 @@ const Gallery = {
     const currentUserName = App.getGuestName();
     const allCount = this.photos.length;
     const myCount = this.photos.filter(p => p.author && p.author.toLowerCase() === currentUserName.toLowerCase()).length;
-    const dedicationsCount = this.photos.filter(p => p.caption && p.caption.trim().length > 0).length;
-    const videosCount = this.photos.filter(p => p.type === 'video').length;
+    const dedCount = (window.Dedications && Array.isArray(window.Dedications.items)) ? window.Dedications.items.length : 0;
 
     const countAllEl = document.getElementById('count-filter-all');
     const countMyEl = document.getElementById('count-filter-my');
     const countDedEl = document.getElementById('count-filter-dedications');
-    const countVidEl = document.getElementById('count-filter-videos');
     const headerCountEl = document.getElementById('header-photo-count');
 
     if (countAllEl) countAllEl.innerText = allCount;
     if (countMyEl) countMyEl.innerText = myCount;
-    if (countDedEl) countDedEl.innerText = dedicationsCount;
-    if (countVidEl) countVidEl.innerText = videosCount;
+    if (countDedEl) countDedEl.innerText = dedCount;
     if (headerCountEl) headerCountEl.innerText = `${allCount} Ricordi`;
   },
 

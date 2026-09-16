@@ -100,6 +100,8 @@ const upload = multer({
   storage: storage,
   limits: { 
     fileSize: 300 * 1024 * 1024, // 300MB max for HD/4K videos and raw photos
+    fieldSize: 50 * 1024 * 1024,  // 50MB for fields
+    fields: 50,
     files: 25 
   },
   fileFilter: (req, file, cb) => {
@@ -114,8 +116,6 @@ function getEvent() {
     title: "Festa di Laurea di Chiara",
     subtitle: "Ingegneria Informatica",
     date: new Date().toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' }),
-    hashtag: "#LaureaChiara2026",
-    code: "CHIARA2026",
     localIp: getLocalIpAddress(),
     mobileUrl: currentPublicUrl || `http://${getLocalIpAddress()}:${PORT}`
   };
@@ -193,6 +193,10 @@ app.get('/api/photos', (req, res) => {
 
 // 4. Upload Photos & Videos (Wrapped in safe callback)
 app.post('/api/photos', (req, res) => {
+  // Prevent socket timeouts on Render and mobile networks
+  if (req.setTimeout) req.setTimeout(300000);
+  if (res.setTimeout) res.setTimeout(300000);
+
   upload.array('photos', 25)(req, res, (err) => {
     if (err) {
       console.error('Multer upload error:', err);
@@ -512,7 +516,7 @@ setInterval(() => {
 
 // Start Server
 const localIp = getLocalIpAddress();
-app.listen(PORT, '0.0.0.0', () => {
+const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`\n🎓 ========================================================`);
   console.log(`🎓 SERVER FESTA DI LAUREA DI CHIARA AVVIATO!`);
   console.log(`💻 Dal Computer Locale:   http://localhost:${PORT}`);
@@ -530,3 +534,8 @@ app.listen(PORT, '0.0.0.0', () => {
     startCloudflareTunnel(PORT);
   }
 });
+
+// Keep-Alive & timeout settings essential for Cloud reverse proxies (Render / Cloudflare)
+server.keepAliveTimeout = 120000;
+server.headersTimeout = 125000;
+server.requestTimeout = 300000;

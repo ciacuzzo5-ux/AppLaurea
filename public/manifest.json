@@ -1,7 +1,7 @@
 {
-  "name": "Festa di Laurea - Galleria Condivisa",
-  "short_name": "Foto Laurea",
-  "description": "Galleria fotografica condivisa per gli ospiti della festa di laurea",
+  "name": "Festa di Laurea di Chiara",
+  "short_name": "Laurea Chiara",
+  "description": "Galleria fotografica e dediche per la festa di laurea di Chiara",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0d0a10",
