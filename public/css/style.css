@@ -984,6 +984,41 @@ input, textarea, select, button {
   to { opacity: 1; transform: scale(1); }
 }
 
+/* Welcome Onboarding Modal */
+.welcome-modal {
+  text-align: center;
+}
+
+.welcome-header {
+  padding: 24px 20px 8px 20px;
+  text-align: center;
+}
+
+.welcome-badge {
+  font-size: 1.25rem;
+  letter-spacing: 4px;
+  color: var(--color-gold);
+  margin-bottom: 2px;
+}
+
+.welcome-title {
+  font-family: 'Pinyon Script', cursive, serif;
+  font-size: 2.45rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #ffffff;
+  margin: 4px 0 6px 0;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
+}
+
+#onboarding-party-name {
+  font-size: 0.86rem;
+  color: var(--color-gold-light);
+  font-weight: 600;
+  margin-top: 3px;
+}
+
 .modal-header {
   display: flex;
   align-items: center;

@@ -287,6 +287,11 @@ const App = {
     const heroSubtitle = document.getElementById('home-event-subtitle');
     if (heroSubtitle) heroSubtitle.innerText = event.subtitle || 'Dottoressa in Ingegneria Informatica 💻';
 
+    const onboardingTitle = document.getElementById('onboarding-event-title');
+    if (onboardingTitle) {
+      onboardingTitle.innerHTML = "<b>Chiara Iacuzzo’s<br>Graduation Party</b>";
+    }
+
     const onboardingName = document.getElementById('onboarding-party-name');
     if (onboardingName) onboardingName.innerText = 'Ingegneria Informatica 💻';
 
