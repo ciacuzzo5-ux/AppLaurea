@@ -55,8 +55,8 @@ const QrCards = {
       try {
         new QRCode(this.qrTarget, {
           text: targetUrl,
-          width: 170,
-          height: 170,
+          width: 240,
+          height: 240,
           colorDark: "#081026",
           colorLight: "#ffffff",
           correctLevel: QRCode.CorrectLevel ? QRCode.CorrectLevel.H : 2
@@ -199,23 +199,35 @@ const QrCards = {
     window.print();
   },
 
-  downloadCardImage() {
+  async downloadCardImage() {
     const cardEl = document.getElementById('printable-table-card');
-    const qrCanvas = this.qrTarget ? this.qrTarget.querySelector('canvas') : null;
-    const qrImg = this.qrTarget ? this.qrTarget.querySelector('img') : null;
-
     if (!cardEl) return;
 
-    App.showToast('⏳ Creazione immagine segnaposto...');
+    App.showToast('⏳ Creazione immagine in alta definizione...');
 
+    // Assicura che i font personalizzati siano pronti prima del rendering su canvas
+    if (document.fonts && document.fonts.ready) {
+      try {
+        await document.fonts.ready;
+      } catch (e) {
+        console.warn('Font loading check:', e);
+      }
+    }
+
+    const targetUrl = this.mobileUrl || window.location.origin;
+
+    // Dimensioni alta definizione (HD - 1600x2200 px - ideale per stampa fotografica nitidissima)
+    const width = 1600;
+    const height = 2200;
     const canvas = document.createElement('canvas');
-    const width = 800;
-    const height = 1100;
     canvas.width = width;
     canvas.height = height;
     const ctx = canvas.getContext('2d');
 
-    // 1. Background
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+
+    // 1. Sfondo elegante con gradiente perla/avorio
     const bgGrad = ctx.createLinearGradient(0, 0, width, height);
     bgGrad.addColorStop(0, '#ffffff');
     bgGrad.addColorStop(0.5, '#fbf8f2');
@@ -223,72 +235,72 @@ const QrCards = {
     ctx.fillStyle = bgGrad;
     ctx.fillRect(0, 0, width, height);
 
-    // 2. Outer Gold Border
+    // 2. Bordo esterno Oro
     ctx.strokeStyle = '#d4af37';
-    ctx.lineWidth = 6;
-    ctx.strokeRect(24, 24, width - 48, height - 48);
+    ctx.lineWidth = 10;
+    ctx.strokeRect(44, 44, width - 88, height - 88);
 
-    // 3. Inner Bordeaux Border
+    // 3. Bordo interno Bordeaux Laurea
     ctx.strokeStyle = '#7a1b28';
-    ctx.lineWidth = 2;
-    ctx.strokeRect(36, 36, width - 72, height - 72);
+    ctx.lineWidth = 3.5;
+    ctx.strokeRect(66, 66, width - 132, height - 132);
 
-    // 4. Laurel dots & Cap
+    // 4. Laurel dots & Tocco (• 🎓 •)
     ctx.textAlign = 'center';
-    ctx.font = '36px sans-serif';
+    ctx.font = '64px sans-serif';
     ctx.fillStyle = '#7a1b28';
-    ctx.fillText('• 🎓 •', width / 2, 105);
+    ctx.fillText('• 🎓 •', width / 2, 210);
 
-    // 5. Title in Pinyon Script (Normal, non-bold)
-    ctx.font = '72px "Pinyon Script", cursive, serif';
+    // 5. Titolo in Pinyon Script (peso naturale, non grassetto, spaziatura curata)
+    ctx.font = '120px "Pinyon Script", cursive, serif';
     ctx.fillStyle = '#7a1b28';
-    ctx.fillText('Chiara Iacuzzo’s', width / 2, 185);
-    ctx.fillText('Graduation Party', width / 2, 258);
+    ctx.fillText('Chiara Iacuzzo’s', width / 2, 355);
+    ctx.fillText('Graduation Party', width / 2, 495);
 
-    // 6. QR Code Wrapper Background
-    const qrSize = 360;
+    // 6. Riquadro QR Code ad alta risoluzione
+    const qrSize = 740;
     const qrX = (width - qrSize) / 2;
-    const qrY = 325;
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(qrX - 16, qrY - 16, qrSize + 32, qrSize + 32);
-    ctx.strokeStyle = 'rgba(0,0,0,0.1)';
-    ctx.lineWidth = 1;
-    ctx.strokeRect(qrX - 16, qrY - 16, qrSize + 32, qrSize + 32);
+    const qrY = 630;
+    const pad = 30;
 
-    // Draw QR Code
-    const finishExport = () => {
-      // Center cap logo on QR
-      const logoSize = 64;
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(qrX - pad, qrY - pad, qrSize + (pad * 2), qrSize + (pad * 2));
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.08)';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(qrX - pad, qrY - pad, qrSize + (pad * 2), qrSize + (pad * 2));
+
+    const renderAndExport = (qrSource) => {
+      if (qrSource) {
+        ctx.drawImage(qrSource, qrX, qrY, qrSize, qrSize);
+      }
+
+      // Logo centrale con tocco di laurea sul QR Code
+      const logoSize = 130;
       const logoX = width / 2;
-      const logoY = qrY + qrSize / 2;
+      const logoY = qrY + (qrSize / 2);
+
       ctx.beginPath();
       ctx.arc(logoX, logoY, logoSize / 2, 0, Math.PI * 2);
       ctx.fillStyle = '#081026';
       ctx.fill();
-      ctx.lineWidth = 4;
+      ctx.lineWidth = 7;
       ctx.strokeStyle = '#ffffff';
       ctx.stroke();
 
-      ctx.font = '32px sans-serif';
+      ctx.font = '64px sans-serif';
       ctx.fillStyle = '#ffd700';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText('🎓', logoX, logoY + 2);
+      ctx.fillText('🎓', logoX, logoY + 4);
 
-      // 8. Bottom Instructions
+      // 7. Istruzioni in basso (NESSUN link stampato)
       ctx.textBaseline = 'alphabetic';
-      ctx.font = 'bold 28px "Outfit", sans-serif';
+      ctx.font = 'bold 50px "Outfit", -apple-system, sans-serif';
       ctx.fillStyle = '#1a1a1a';
-      ctx.fillText('Inquadra per caricare foto, video', width / 2, 790);
-      ctx.fillText('o lasciare una dedica!', width / 2, 830);
+      ctx.fillText('Inquadra per caricare foto, video', width / 2, 1610);
+      ctx.fillText('o lasciare una dedica!', width / 2, 1690);
 
-      // 9. Website URL footer
-      ctx.font = '19px "Outfit", sans-serif';
-      ctx.fillStyle = '#7a1b28';
-      const realUrl = this.mobileUrl || window.location.origin;
-      ctx.fillText(realUrl, width / 2, 885);
-
-      // Download trigger
+      // 8. Download PNG ad altissima fedeltà
       canvas.toBlob((blob) => {
         if (!blob) {
           App.showToast('Errore durante la creazione dell\'immagine');
@@ -302,23 +314,39 @@ const QrCards = {
         a.click();
         document.body.removeChild(a);
         setTimeout(() => URL.revokeObjectURL(fileUrl), 2500);
-        App.showToast('✨ Immagine segnaposto salvata!');
+        App.showToast('✨ Immagine segnaposto in alta qualità salvata!');
       }, 'image/png');
     };
 
-    if (qrCanvas) {
-      ctx.drawImage(qrCanvas, qrX, qrY, qrSize, qrSize);
-      finishExport();
-    } else if (qrImg && qrImg.complete && qrImg.naturalWidth > 0) {
-      ctx.drawImage(qrImg, qrX, qrY, qrSize, qrSize);
-      finishExport();
-    } else if (qrImg) {
-      qrImg.onload = () => {
-        ctx.drawImage(qrImg, qrX, qrY, qrSize, qrSize);
-        finishExport();
-      };
-    } else {
-      finishExport();
+    // Generazione del QR Code nativo ad alta risoluzione (740x740 pixel) in un elemento virtuale
+    try {
+      const tempDiv = document.createElement('div');
+      new QRCode(tempDiv, {
+        text: targetUrl,
+        width: qrSize,
+        height: qrSize,
+        colorDark: "#081026",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel ? QRCode.CorrectLevel.H : 2
+      });
+
+      const highResCanvas = tempDiv.querySelector('canvas');
+      const highResImg = tempDiv.querySelector('img');
+
+      if (highResCanvas) {
+        renderAndExport(highResCanvas);
+      } else if (highResImg && highResImg.complete && highResImg.naturalWidth > 0) {
+        renderAndExport(highResImg);
+      } else if (highResImg) {
+        highResImg.onload = () => renderAndExport(highResImg);
+      } else {
+        const fallbackCanvas = this.qrTarget ? this.qrTarget.querySelector('canvas') : null;
+        renderAndExport(fallbackCanvas);
+      }
+    } catch (err) {
+      console.warn('Fallback al canvas a schermo:', err);
+      const fallbackCanvas = this.qrTarget ? this.qrTarget.querySelector('canvas') : null;
+      renderAndExport(fallbackCanvas);
     }
   }
 };
