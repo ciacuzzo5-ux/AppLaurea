@@ -13,18 +13,18 @@
   --color-blue-border: rgba(255, 255, 255, 0.15);
   --color-blue-glass: rgba(7, 36, 99, 0.92);
 
-  /* Italian Graduation Red (Rosso Laurea / Bordeaux d'Onore) */
-  --color-red-laurea: #E8425A;
-  --color-red-light: #F05570;
-  --color-red-dark: #C42E44;
-  --color-red-glow: rgba(232, 66, 90, 0.35);
-  --color-red-surface: rgba(232, 66, 90, 0.12);
+  /* Italian Graduation Red (Bordeaux d'Onore) */
+  --color-red-laurea: #8B1A2E;
+  --color-red-light: #A82240;
+  --color-red-dark: #640D1F;
+  --color-red-glow: rgba(139, 26, 46, 0.5);
+  --color-red-surface: rgba(139, 26, 46, 0.15);
 
   /* Backward Compatibility Aliases */
-  --color-bordeaux: #E8425A;
-  --color-bordeaux-light: #F05570;
-  --color-bordeaux-dark: #C42E44;
-  --color-bordeaux-glow: rgba(232, 66, 90, 0.35);
+  --color-bordeaux: #8B1A2E;
+  --color-bordeaux-light: #A82240;
+  --color-bordeaux-dark: #640D1F;
+  --color-bordeaux-glow: rgba(139, 26, 46, 0.5);
   --color-navy-deep: rgba(255, 255, 255, 0.9);
   --color-navy-dark: #4A90D9;
   --color-navy-surface: rgba(7, 36, 99, 0.95);
@@ -39,8 +39,8 @@
   --color-gold-glow: rgba(223, 191, 133, 0.4);
 
   /* Festive Accent */
-  --color-cyan: #E8425A;
-  --color-cyan-glow: rgba(232, 66, 90, 0.3);
+  --color-cyan: #8B1A2E;
+  --color-cyan-glow: rgba(139, 26, 46, 0.4);
 
   /* Backgrounds & Canvas: Tema Blu Navy Profondo */
   --color-bg-page: #042b80;
