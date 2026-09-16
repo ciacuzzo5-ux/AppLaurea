@@ -242,9 +242,9 @@ const QrCards = {
 
     const targetUrl = this.mobileUrl || window.location.origin;
 
-    // Dimensioni alta definizione (HD - 1600x2200 px - ideale per stampa fotografica nitidissima)
-    const width = 1600;
-    const height = 2200;
+    // Dimensioni HD — proporzioni carta da visita/segnaposto (verticale)
+    const width = 1200;
+    const height = 1700;
     const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
@@ -253,80 +253,133 @@ const QrCards = {
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = 'high';
 
-    // 1. Sfondo elegante con gradiente perla/avorio
-    const bgGrad = ctx.createLinearGradient(0, 0, width, height);
-    bgGrad.addColorStop(0, '#ffffff');
-    bgGrad.addColorStop(0.5, '#fbf8f2');
-    bgGrad.addColorStop(1, '#f4eee2');
-    ctx.fillStyle = bgGrad;
+    // Helper per rettangoli arrotondati
+    const roundRect = (x, y, w, h, r) => {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    };
+
+    // 1. Sfondo pagina bianco puro
+    ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, width, height);
 
-    // 2. Bordo esterno Oro
-    ctx.strokeStyle = '#d4af37';
-    ctx.lineWidth = 10;
-    ctx.strokeRect(44, 44, width - 88, height - 88);
+    // 2. Card principale — sfondo bianco con sfumatura calda in alto
+    const cardX = 60, cardY = 60;
+    const cardW = width - 120, cardH = height - 120;
+    const cardR = 40;
 
-    // 3. Bordo interno Bordeaux Laurea
-    ctx.strokeStyle = '#7a1b28';
-    ctx.lineWidth = 3.5;
-    ctx.strokeRect(66, 66, width - 132, height - 132);
+    const cardGrad = ctx.createRadialGradient(width / 2, cardY + 200, 50, width / 2, cardY + 300, cardH);
+    cardGrad.addColorStop(0, '#fff8f0');
+    cardGrad.addColorStop(0.5, '#ffffff');
+    cardGrad.addColorStop(1, '#ffffff');
+    roundRect(cardX, cardY, cardW, cardH, cardR);
+    ctx.fillStyle = cardGrad;
+    ctx.fill();
 
-    // 4. Laurel dots & Tocco (• 🎓 •)
+    // 3. Bordo card navy scuro
+    roundRect(cardX, cardY, cardW, cardH, cardR);
+    ctx.strokeStyle = '#081026';
+    ctx.lineWidth = 5;
+    ctx.stroke();
+
+    // 4. Banda colorata in cima (bordeaux → oro → bordeaux)
+    const topBarGrad = ctx.createLinearGradient(cardX, 0, cardX + cardW, 0);
+    topBarGrad.addColorStop(0, '#8B1A2E');
+    topBarGrad.addColorStop(0.5, '#C5A059');
+    topBarGrad.addColorStop(1, '#8B1A2E');
+    roundRect(cardX, cardY, cardW, 12, cardR);
+    ctx.fillStyle = topBarGrad;
+    ctx.fill();
+
+    // 5. Decorazione • 🎓 •
     ctx.textAlign = 'center';
-    ctx.font = '64px sans-serif';
-    ctx.fillStyle = '#7a1b28';
-    ctx.fillText('• 🎓 •', width / 2, 210);
+    ctx.font = '48px sans-serif';
+    ctx.fillStyle = '#8B1A2E';
+    ctx.fillText('• 🎓 •', width / 2, cardY + 120);
 
-    // 5. Titolo in Pinyon Script (peso naturale, non grassetto, spaziatura curata)
-    ctx.font = '120px "Pinyon Script", cursive, serif';
-    ctx.fillStyle = '#7a1b28';
-    ctx.fillText('Chiara Iacuzzo’s', width / 2, 355);
-    ctx.fillText('Graduation Party', width / 2, 495);
+    // 6. Nome "Chiara Iacuzzo" in Pinyon Script — colore nero/navy
+    ctx.font = '148px "Pinyon Script", cursive, serif';
+    ctx.fillStyle = '#081026';
+    ctx.fillText('Chiara Iacuzzo', width / 2, cardY + 290);
 
-    // 6. Riquadro QR Code ad alta risoluzione
-    const qrSize = 740;
+    // 7. "GRADUATION PARTY" — bordeaux uppercase
+    ctx.font = 'bold 52px "Outfit", "Plus Jakarta Sans", sans-serif';
+    ctx.fillStyle = '#8B1A2E';
+    ctx.letterSpacing = '6px';
+    ctx.fillText('GRADUATION PARTY', width / 2, cardY + 380);
+
+    // 8. Data — grigio sottile
+    ctx.font = '38px "Outfit", sans-serif';
+    ctx.fillStyle = '#777777';
+    ctx.fillText('16 Settembre 2026', width / 2, cardY + 448);
+
+    // 9. Riquadro QR — bianco con anello bordeaux sottile
+    const qrSize = 700;
     const qrX = (width - qrSize) / 2;
-    const qrY = 630;
-    const pad = 30;
+    const qrY = cardY + 510;
+    const qrBoxW = qrSize + 56;
+    const qrBoxH = qrSize + 56;
+    const qrBoxX = qrX - 28;
+    const qrBoxY = qrY - 28;
 
+    // Ombra sottile
+    ctx.shadowColor = 'rgba(0,0,0,0.10)';
+    ctx.shadowBlur = 30;
+    ctx.shadowOffsetY = 8;
+    roundRect(qrBoxX, qrBoxY, qrBoxW, qrBoxH, 28);
     ctx.fillStyle = '#ffffff';
-    ctx.fillRect(qrX - pad, qrY - pad, qrSize + (pad * 2), qrSize + (pad * 2));
-    ctx.strokeStyle = 'rgba(0, 0, 0, 0.08)';
-    ctx.lineWidth = 2;
-    ctx.strokeRect(qrX - pad, qrY - pad, qrSize + (pad * 2), qrSize + (pad * 2));
+    ctx.fill();
+    ctx.shadowColor = 'transparent';
+    ctx.shadowBlur = 0;
+    ctx.shadowOffsetY = 0;
+
+    // Anello bordeaux
+    roundRect(qrBoxX, qrBoxY, qrBoxW, qrBoxH, 28);
+    ctx.strokeStyle = 'rgba(139, 26, 46, 0.25)';
+    ctx.lineWidth = 3;
+    ctx.stroke();
 
     const renderAndExport = (qrSource) => {
       if (qrSource) {
         ctx.drawImage(qrSource, qrX, qrY, qrSize, qrSize);
       }
 
-      // Logo centrale con tocco di laurea sul QR Code
-      const logoSize = 130;
+      // Logo 🎓 centrale sul QR
+      const logoR = 58;
       const logoX = width / 2;
-      const logoY = qrY + (qrSize / 2);
-
+      const logoY = qrY + qrSize / 2;
       ctx.beginPath();
-      ctx.arc(logoX, logoY, logoSize / 2, 0, Math.PI * 2);
+      ctx.arc(logoX, logoY, logoR, 0, Math.PI * 2);
       ctx.fillStyle = '#081026';
       ctx.fill();
-      ctx.lineWidth = 7;
+      ctx.lineWidth = 6;
       ctx.strokeStyle = '#ffffff';
       ctx.stroke();
 
-      ctx.font = '64px sans-serif';
+      ctx.font = '56px sans-serif';
       ctx.fillStyle = '#ffd700';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText('🎓', logoX, logoY + 4);
+      ctx.fillText('🎓', logoX, logoY + 3);
 
-      // 7. Istruzioni eleganti in basso
+      // 10. Istruzione in corsivo serif sotto il QR
       ctx.textBaseline = 'alphabetic';
-      ctx.font = 'italic 54px "Playfair Display", Georgia, serif';
+      ctx.font = 'italic 42px "Playfair Display", Georgia, serif';
       ctx.fillStyle = '#333333';
-      ctx.fillText('Inquadra il codice per condividere', width / 2, 1610);
-      ctx.fillText('foto, video e dediche speciali', width / 2, 1690);
+      const instrY = qrBoxY + qrBoxH + 80;
+      ctx.fillText('Inquadra il codice per condividere', width / 2, instrY);
+      ctx.fillText('foto, video e dediche speciali', width / 2, instrY + 62);
 
-      // 8. Download PNG
+      // 11. Salva PNG
       canvas.toBlob((blob) => {
         if (!blob) {
           App.showToast('Errore durante la creazione dell\'immagine');
@@ -344,7 +397,7 @@ const QrCards = {
       }, 'image/png');
     };
 
-    // Generazione del QR Code nativo ad alta risoluzione (740x740 pixel) in un elemento virtuale
+    // Generazione del QR Code nativo ad alta risoluzione in un elemento virtuale
     try {
       const tempDiv = document.createElement('div');
       new QRCode(tempDiv, {
