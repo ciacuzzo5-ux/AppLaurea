@@ -280,7 +280,9 @@ const App = {
     if (headerTitle) headerTitle.innerText = event.title || 'Festa di Laurea di Chiara';
 
     const heroTitle = document.getElementById('home-event-title');
-    if (heroTitle) heroTitle.innerText = event.title || 'Festa di Laurea di Chiara';
+    if (heroTitle) {
+      heroTitle.innerHTML = "Chiara Iacuzzo’s<br>Graduation Party";
+    }
 
     const heroSubtitle = document.getElementById('home-event-subtitle');
     if (heroSubtitle) heroSubtitle.innerText = event.subtitle || 'Dottoressa in Ingegneria Informatica 💻';

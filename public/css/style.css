@@ -379,17 +379,21 @@ input, textarea, select, button {
 }
 
 .hero-laurel-badge {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
+  letter-spacing: 4px;
+  color: var(--color-gold);
   margin-bottom: 2px;
 }
 
 .hero-event-title {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 2px;
-  letter-spacing: -0.2px;
+  font-family: 'Pinyon Script', cursive, serif;
+  font-size: 2.55rem;
+  font-weight: 500;
+  line-height: 1.12;
+  color: #ffffff;
+  margin: 4px 0 6px 0;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
 }
 
 .hero-event-subtitle {
