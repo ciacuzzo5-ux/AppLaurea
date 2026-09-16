@@ -1,39 +1,59 @@
 /* ==========================================================================
-   🎓 FESTA DI LAUREA DI CHIARA (INGEGNERIA INFORMATICA)
-   PALETTE: BLU NAVY PROFONDO + ROSSO BORDEAUX LAUREA + FINITURE ORO
-   STILE: MINIMALISTA, MODERNO E PULITO (STILE APPLE / GOOGLE PHOTOS)
+   🎓 FESTA DI LAUREA DI CHIARA
+   PALETTE: BLU REALE (VESTITO DI CHIARA) + ROSSO LAUREA + ORO CHAMPAGNE
+   TEMA: LUMINOSO, ELEGANTE, SOLARE E FESTOSO (LIGHT MODE DI LUSSO)
    ========================================================================== */
 
 :root {
-  /* Navy Blue Palette (Sleek Modern Luxury) */
-  --color-navy-deep: #040814;
-  --color-navy-dark: #081026;
-  --color-navy-surface: #0e1b3d;
-  --color-navy-card: rgba(14, 27, 61, 0.85);
-  --color-navy-glass: rgba(8, 16, 38, 0.92);
-  --color-navy-border: rgba(64, 114, 196, 0.28);
+  /* Chiara's Royal Blue Palette (Ispirato al vestito blu di Chiara) */
+  --color-blue-deep: #0C1E42;
+  --color-blue-royal: #16366F;
+  --color-blue-soft: #254F96;
+  --color-blue-surface: #EEF3FA;
+  --color-blue-border: rgba(22, 54, 111, 0.15);
+  --color-blue-glass: rgba(255, 255, 255, 0.94);
 
-  /* Italian Graduation Bordeaux Palette */
-  --color-bordeaux: #8b1528;
-  --color-bordeaux-light: #a81c34;
-  --color-bordeaux-dark: #580a17;
-  --color-bordeaux-glow: rgba(139, 21, 40, 0.45);
+  /* Italian Graduation Red (Rosso Laurea / Bordeaux d'Onore) */
+  --color-red-laurea: #8B1528;
+  --color-red-light: #A81C34;
+  --color-red-dark: #630C1B;
+  --color-red-glow: rgba(139, 21, 40, 0.28);
+  --color-red-surface: #FDF2F4;
 
-  /* Gold & Metallic Accents */
-  --color-gold: #ffca28;
-  --color-gold-light: #ffe082;
-  --color-gold-dark: #ff9800;
-  --color-gold-glow: rgba(255, 202, 40, 0.35);
+  /* Backward Compatibility Aliases */
+  --color-bordeaux: #8B1528;
+  --color-bordeaux-light: #A81C34;
+  --color-bordeaux-dark: #630C1B;
+  --color-bordeaux-glow: rgba(139, 21, 40, 0.28);
+  --color-navy-deep: #F6F8FD;
+  --color-navy-dark: #16366F;
+  --color-navy-surface: #FFFFFF;
+  --color-navy-card: #FFFFFF;
+  --color-navy-glass: rgba(255, 255, 255, 0.94);
+  --color-navy-border: rgba(22, 54, 111, 0.14);
 
-  /* Tech Cyan Accent */
-  --color-cyan: #00e5ff;
-  --color-cyan-glow: rgba(0, 229, 255, 0.3);
+  /* Gold & Champagne Metallic Accents */
+  --color-gold: #C5A059;
+  --color-gold-light: #DFBF85;
+  --color-gold-dark: #A3803D;
+  --color-gold-glow: rgba(197, 160, 89, 0.3);
 
-  /* Typography Colors */
-  --color-text-main: #ffffff;
-  --color-text-secondary: #c5d4ed;
-  --color-text-muted: #7e91b3;
-  --color-border-subtle: rgba(255, 255, 255, 0.09);
+  /* Festive Accent */
+  --color-cyan: #8B1528;
+  --color-cyan-glow: rgba(139, 21, 40, 0.25);
+
+  /* Backgrounds & Canvas (Luminosi, caldi e ariosi) */
+  --color-bg-page: #F6F8FD;
+  --color-bg-container: linear-gradient(180deg, #FFFFFF 0%, #F5F8FD 40%, #FAF8F5 100%);
+  --color-card-bg: #FFFFFF;
+  --color-card-border: rgba(22, 54, 111, 0.1);
+  --color-card-shadow: 0 4px 20px rgba(22, 54, 111, 0.07), 0 1px 3px rgba(0, 0, 0, 0.04);
+
+  /* Typography Colors (Massima leggibilità e contrasto) */
+  --color-text-main: #0F172A;
+  --color-text-secondary: #334155;
+  --color-text-muted: #64748B;
+  --color-border-subtle: rgba(22, 54, 111, 0.08);
 
   /* Dimensions */
   --header-height: 96px;
@@ -65,7 +85,7 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: var(--color-navy-deep);
+  background-color: var(--color-bg-page);
   color: var(--color-text-main);
   font-family: var(--font-main);
   font-size: 15px;
@@ -88,8 +108,8 @@ input, textarea, select, button {
   max-width: 600px;
   margin: 0 auto;
   position: relative;
-  background: radial-gradient(circle at 50% 0%, #0d1b3d 0%, #040814 75%);
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.85);
+  background: var(--color-bg-container);
+  box-shadow: 0 10px 40px rgba(22, 54, 111, 0.12);
   overflow: hidden;
 }
 
@@ -108,10 +128,11 @@ input, textarea, select, button {
   left: 0;
   right: 0;
   z-index: 40;
-  background: var(--color-navy-glass);
+  background: var(--color-blue-glass);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  border-bottom: 1px solid var(--color-navy-border);
+  border-bottom: 1px solid var(--color-blue-border);
+  box-shadow: 0 2px 14px rgba(22, 54, 111, 0.05);
   padding-top: max(env(safe-area-inset-top, 0px), 8px);
 }
 
@@ -133,13 +154,13 @@ input, textarea, select, button {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-bordeaux), var(--color-navy-dark));
+  background: linear-gradient(135deg, var(--color-red-laurea), var(--color-blue-royal));
   border: 1.5px solid var(--color-gold);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 19px;
-  box-shadow: 0 3px 12px var(--color-bordeaux-glow);
+  box-shadow: 0 3px 12px var(--color-red-glow);
 }
 
 .event-info {
@@ -151,7 +172,7 @@ input, textarea, select, button {
   font-family: var(--font-display);
   font-size: 0.95rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-blue-deep);
   letter-spacing: -0.2px;
   white-space: nowrap;
   overflow: hidden;
@@ -185,8 +206,8 @@ input, textarea, select, button {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background-color: var(--color-cyan);
-  box-shadow: 0 0 8px var(--color-cyan);
+  background-color: var(--color-red-laurea);
+  box-shadow: 0 0 8px var(--color-red-glow);
   animation: pulseDot 1.8s infinite;
 }
 
@@ -196,9 +217,9 @@ input, textarea, select, button {
 }
 
 .guest-pill {
-  color: var(--color-gold-light);
+  color: var(--color-blue-royal);
   font-weight: 600;
-  background: rgba(255, 202, 40, 0.14);
+  background: rgba(22, 54, 111, 0.08);
   padding: 1px 7px;
   border-radius: 4px;
 }
@@ -210,9 +231,9 @@ input, textarea, select, button {
 }
 
 .icon-btn {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid var(--color-border-subtle);
-  color: var(--color-text-main);
+  background: rgba(22, 54, 111, 0.06);
+  border: 1px solid var(--color-blue-border);
+  color: var(--color-blue-royal);
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -226,7 +247,7 @@ input, textarea, select, button {
 
 .icon-btn:active {
   transform: scale(0.92);
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(22, 54, 111, 0.12);
 }
 
 .icon-btn svg {
@@ -239,12 +260,12 @@ input, textarea, select, button {
   border-radius: var(--radius-full);
   padding: 0 11px;
   gap: 5px;
-  background: linear-gradient(135deg, var(--color-bordeaux), #580a17);
+  background: linear-gradient(135deg, var(--color-red-laurea), var(--color-red-dark));
   border: 1px solid var(--color-gold);
   font-weight: 700;
   font-size: 0.75rem;
-  color: var(--color-gold-light);
-  box-shadow: 0 2px 10px var(--color-bordeaux-glow);
+  color: #ffffff;
+  box-shadow: 0 2px 10px var(--color-red-glow);
 }
 
 /* Subnav Filter Chips */
@@ -276,14 +297,15 @@ input, textarea, select, button {
   gap: 5px;
   padding: 5px 12px;
   border-radius: var(--radius-full);
-  background: rgba(14, 27, 61, 0.6);
-  border: 1px solid var(--color-navy-border);
+  background: #FFFFFF;
+  border: 1px solid var(--color-blue-border);
   color: var(--color-text-secondary);
   font-size: 0.76rem;
-  font-weight: 500;
+  font-weight: 600;
   white-space: nowrap;
   cursor: pointer;
   transition: all var(--transition-fast);
+  box-shadow: 0 1px 4px rgba(22, 54, 111, 0.05);
 }
 
 .filter-chip svg {
@@ -292,30 +314,31 @@ input, textarea, select, button {
 }
 
 .filter-chip.active {
-  background: linear-gradient(135deg, var(--color-bordeaux), var(--color-bordeaux-light));
-  border-color: var(--color-gold);
+  background: linear-gradient(135deg, var(--color-blue-royal), var(--color-blue-soft));
+  border-color: var(--color-blue-royal);
   color: #fff;
   font-weight: 600;
-  box-shadow: 0 2px 10px var(--color-bordeaux-glow);
+  box-shadow: 0 3px 12px rgba(22, 54, 111, 0.25);
 }
 
 .grid-layout-toggle {
   width: 32px;
   height: 32px;
   border-radius: var(--radius-sm);
-  background: rgba(14, 27, 61, 0.8);
-  border: 1px solid var(--color-navy-border);
+  background: #FFFFFF;
+  border: 1px solid var(--color-blue-border);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   flex-shrink: 0;
+  box-shadow: 0 1px 4px rgba(22, 54, 111, 0.05);
 }
 
 .grid-layout-toggle svg {
   width: 16px;
   height: 16px;
-  color: var(--color-text-secondary);
+  color: var(--color-blue-royal);
 }
 
 /* ==========================================================================
@@ -438,9 +461,10 @@ input, textarea, select, button {
   aspect-ratio: 1 / 1;
   border-radius: var(--radius-sm);
   overflow: hidden;
-  background: #081026;
+  background: #EEF3FA;
   cursor: pointer;
-  transition: transform var(--transition-fast), filter var(--transition-fast);
+  transition: transform var(--transition-fast), filter var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(22, 54, 111, 0.08);
 }
 
 .grid-2-cols .photo-tile {
@@ -471,7 +495,7 @@ input, textarea, select, button {
   position: absolute;
   top: 6px;
   left: 6px;
-  background: rgba(4, 8, 20, 0.75);
+  background: rgba(12, 30, 66, 0.78);
   backdrop-filter: blur(8px);
   border-radius: var(--radius-full);
   padding: 2px 7px;
@@ -488,7 +512,7 @@ input, textarea, select, button {
   position: absolute;
   bottom: 6px;
   left: 6px;
-  background: rgba(4, 8, 20, 0.75);
+  background: rgba(12, 30, 66, 0.78);
   backdrop-filter: blur(8px);
   border-radius: var(--radius-full);
   padding: 2px 8px;
@@ -501,24 +525,25 @@ input, textarea, select, button {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .tile-reactions-pill {
   position: absolute;
   top: 6px;
   right: 6px;
-  background: rgba(4, 8, 20, 0.75);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(8px);
   border-radius: var(--radius-full);
   padding: 2px 7px;
   font-size: 0.65rem;
-  color: var(--color-gold-light);
-  font-weight: 600;
+  color: var(--color-red-laurea);
+  font-weight: 700;
   display: flex;
   align-items: center;
   gap: 3px;
-  border: 1px solid rgba(255, 202, 40, 0.3);
+  border: 1px solid rgba(139, 21, 40, 0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .tile-author-tag {
@@ -526,22 +551,24 @@ input, textarea, select, button {
   bottom: 6px;
   right: 6px;
   font-size: 0.65rem;
-  background: rgba(139, 21, 40, 0.9);
+  background: var(--color-blue-royal);
   color: #fff;
   padding: 1px 7px;
   border-radius: 4px;
   font-weight: 600;
-  border: 1px solid rgba(255, 215, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 1px 4px rgba(22, 54, 111, 0.2);
 }
 
 /* Empty State */
 .empty-state {
   text-align: center;
   padding: 60px 20px;
-  background: var(--color-navy-card);
+  background: #FFFFFF;
   border-radius: var(--radius-lg);
-  border: 1px dashed var(--color-navy-border);
+  border: 1.5px dashed var(--color-blue-border);
   margin: 20px 10px;
+  box-shadow: 0 4px 20px rgba(22, 54, 111, 0.05);
 }
 
 .empty-icon {
@@ -552,7 +579,8 @@ input, textarea, select, button {
 .empty-state h3 {
   font-size: 1.15rem;
   margin-bottom: 6px;
-  color: var(--color-gold-light);
+  color: var(--color-blue-royal);
+  font-weight: 700;
 }
 
 .empty-state p {
@@ -570,20 +598,20 @@ input, textarea, select, button {
 }
 
 .dedications-header-card {
-  background: linear-gradient(135deg, rgba(14, 27, 61, 0.95), rgba(8, 16, 38, 0.95));
-  border: 1px solid var(--color-navy-border);
-  border-top: 1.5px solid var(--color-gold);
+  background: linear-gradient(135deg, #FFFFFF 0%, #F5F8FC 100%);
+  border: 1px solid var(--color-blue-border);
+  border-top: 3.5px solid var(--color-red-laurea);
   border-radius: var(--radius-lg);
   padding: 18px 16px;
   text-align: center;
   margin-bottom: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 20px rgba(22, 54, 111, 0.08);
 }
 
 .dedications-header-card h2 {
   font-family: var(--font-serif);
   font-size: 1.35rem;
-  color: #fff;
+  color: var(--color-blue-deep);
   margin-bottom: 4px;
 }
 
@@ -601,13 +629,13 @@ input, textarea, select, button {
 
 /* Dedication Card */
 .dedication-card {
-  background: linear-gradient(145deg, rgba(14, 27, 61, 0.9), rgba(8, 16, 38, 0.85));
-  border: 1px solid var(--color-navy-border);
+  background: #FFFFFF;
+  border: 1px solid var(--color-blue-border);
   border-radius: var(--radius-md);
   padding: 16px;
   position: relative;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
-  transition: transform var(--transition-fast);
+  box-shadow: 0 4px 16px rgba(22, 54, 111, 0.06);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .dedication-card-header {
@@ -621,18 +649,18 @@ input, textarea, select, button {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-bordeaux), var(--color-navy-dark));
+  background: linear-gradient(135deg, var(--color-red-laurea), var(--color-blue-royal));
   border: 1.5px solid var(--color-gold);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 17px;
-  box-shadow: 0 2px 8px var(--color-bordeaux-glow);
+  box-shadow: 0 2px 8px var(--color-red-glow);
 }
 
 .dedication-author-info h4 {
   font-size: 0.92rem;
-  color: #fff;
+  color: var(--color-blue-royal);
   font-weight: 700;
 }
 
@@ -694,7 +722,7 @@ input, textarea, select, button {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgba(22, 54, 111, 0.08);
   padding-top: 8px;
 }
 
@@ -704,9 +732,9 @@ input, textarea, select, button {
 }
 
 .dedication-react-btn {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background: #F4F7FB;
+  border: 1px solid var(--color-blue-border);
+  color: var(--color-blue-royal);
   padding: 4px 10px;
   border-radius: var(--radius-full);
   font-size: 0.75rem;
@@ -719,8 +747,9 @@ input, textarea, select, button {
 
 .dedication-react-btn:active {
   transform: scale(0.92);
-  background: rgba(255, 202, 40, 0.2);
-  border-color: var(--color-gold);
+  background: rgba(139, 21, 40, 0.12);
+  border-color: var(--color-red-laurea);
+  color: var(--color-red-laurea);
 }
 
 .d-count {
@@ -737,10 +766,11 @@ input, textarea, select, button {
   left: 0;
   right: 0;
   height: var(--bottom-bar-height);
-  background: var(--color-navy-glass);
+  background: var(--color-blue-glass);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  border-top: 1px solid var(--color-navy-border);
+  border-top: 1px solid var(--color-blue-border);
+  box-shadow: 0 -3px 18px rgba(22, 54, 111, 0.08);
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -777,21 +807,21 @@ input, textarea, select, button {
 }
 
 .tab-nav-item.active {
-  color: var(--color-gold-light);
+  color: var(--color-blue-royal);
   font-weight: 700;
 }
 
 .tab-nav-item.active svg {
-  color: var(--color-gold);
-  filter: drop-shadow(0 0 6px var(--color-gold-glow));
+  color: var(--color-blue-royal);
+  filter: drop-shadow(0 2px 4px rgba(22, 54, 111, 0.25));
 }
 
 .tab-badge {
   position: absolute;
   top: 3px;
   right: calc(50% - 18px);
-  background: var(--color-bordeaux);
-  border: 1px solid var(--color-gold);
+  background: var(--color-red-laurea);
+  border: 1px solid #ffffff;
   color: #fff;
   font-size: 0.6rem;
   font-weight: 700;
@@ -809,12 +839,12 @@ input, textarea, select, button {
   width: 54px;
   height: 54px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-bordeaux-light), var(--color-bordeaux));
-  border: 2px solid var(--color-gold);
+  background: linear-gradient(135deg, var(--color-red-light), var(--color-red-laurea));
+  border: 2.5px solid #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 6px 20px var(--color-bordeaux-glow), 0 0 14px var(--color-gold-glow);
+  box-shadow: 0 6px 20px var(--color-red-glow), 0 2px 8px rgba(0, 0, 0, 0.15);
   color: #fff;
   transition: transform var(--transition-fast);
 }
@@ -831,12 +861,13 @@ input, textarea, select, button {
 
 /* Action Sheet Picker (Photo vs Video) */
 .action-sheet-dialog {
-  background: var(--color-navy-surface);
-  border: 1px solid var(--color-navy-border);
+  background: #FFFFFF;
+  border: 1px solid var(--color-blue-border);
   border-radius: var(--radius-lg);
   padding: 16px;
   max-width: 320px;
   text-align: center;
+  box-shadow: 0 16px 45px rgba(22, 54, 111, 0.2);
 }
 
 .action-sheet-options {
@@ -853,24 +884,24 @@ input, textarea, select, button {
   width: 100%;
   padding: 12px 14px;
   border-radius: var(--radius-md);
-  background: rgba(8, 16, 38, 0.85);
-  border: 1px solid var(--color-navy-border);
-  color: #fff;
+  background: #F8FAFD;
+  border: 1px solid var(--color-blue-border);
+  color: var(--color-text-main);
   cursor: pointer;
   text-align: left;
   transition: all var(--transition-fast);
 }
 
 .sheet-option-btn:active {
-  background: var(--color-bordeaux);
-  border-color: var(--color-gold);
+  background: var(--color-blue-surface);
+  border-color: var(--color-blue-royal);
   transform: scale(0.98);
 }
 
 .sheet-option-featured {
   border: 1.5px solid var(--color-gold);
-  background: linear-gradient(135deg, rgba(139, 21, 40, 0.35), rgba(14, 27, 61, 0.95));
-  box-shadow: 0 4px 15px rgba(255, 202, 40, 0.15);
+  background: linear-gradient(135deg, #FFF9ED 0%, #FFFFFF 100%);
+  box-shadow: 0 4px 15px rgba(197, 160, 89, 0.15);
 }
 
 .sheet-btn-text {
@@ -881,7 +912,7 @@ input, textarea, select, button {
 
 .sheet-btn-text strong {
   font-size: 0.86rem;
-  color: #fff;
+  color: var(--color-blue-royal);
   font-weight: 700;
 }
 
@@ -891,8 +922,8 @@ input, textarea, select, button {
 }
 
 .sheet-quality-tip {
-  background: rgba(0, 229, 255, 0.08);
-  border: 1px dashed rgba(0, 229, 255, 0.3);
+  background: rgba(22, 54, 111, 0.06);
+  border: 1px dashed rgba(22, 54, 111, 0.25);
   border-radius: var(--radius-sm);
   padding: 8px 10px;
   font-size: 0.73rem;
@@ -929,16 +960,21 @@ input, textarea, select, button {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--color-bordeaux-light), var(--color-bordeaux));
+  background: linear-gradient(135deg, var(--color-red-light), var(--color-red-laurea));
   color: #ffffff;
-  border: 1px solid var(--color-gold);
-  box-shadow: 0 4px 15px var(--color-bordeaux-glow);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 15px var(--color-red-glow);
 }
 
 .btn-outline {
-  background: rgba(14, 27, 61, 0.7);
-  border: 1px solid var(--color-navy-border);
-  color: var(--color-text-main);
+  background: #FFFFFF;
+  border: 1.5px solid var(--color-blue-royal);
+  color: var(--color-blue-royal);
+  font-weight: 600;
+}
+
+.btn-outline:active {
+  background: #F0F4FA;
 }
 
 .btn-block {
@@ -954,7 +990,7 @@ input, textarea, select, button {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(3, 6, 16, 0.85);
+  background: rgba(12, 30, 66, 0.55);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   z-index: 150;
@@ -966,15 +1002,15 @@ input, textarea, select, button {
 }
 
 .modal-dialog {
-  background: linear-gradient(145deg, rgba(14, 27, 61, 0.98), rgba(6, 12, 28, 0.99));
-  border: 1px solid var(--color-navy-border);
-  border-top: 1px solid var(--color-gold);
+  background: #FFFFFF;
+  border: 1px solid var(--color-blue-border);
+  border-top: 3.5px solid var(--color-red-laurea);
   border-radius: var(--radius-lg);
   width: 100%;
   max-width: 420px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 20px 60px rgba(12, 30, 66, 0.25);
   animation: scaleUpModal 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1005,15 +1041,15 @@ input, textarea, select, button {
   font-size: 2.45rem;
   font-weight: 700;
   line-height: 1.15;
-  color: #ffffff;
+  color: var(--color-blue-royal);
   margin: 4px 0 6px 0;
   letter-spacing: 0.5px;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
+  text-shadow: none;
 }
 
 #onboarding-party-name {
   font-size: 0.86rem;
-  color: var(--color-gold-light);
+  color: var(--color-red-laurea);
   font-weight: 600;
   margin-top: 3px;
 }
@@ -1023,19 +1059,20 @@ input, textarea, select, button {
   align-items: center;
   justify-content: space-between;
   padding: 16px 20px;
-  border-bottom: 1px solid var(--color-border-subtle);
+  border-bottom: 1px solid rgba(22, 54, 111, 0.08);
 }
 
 .modal-header h3 {
   font-family: var(--font-display);
   font-size: 1.15rem;
-  color: var(--color-gold-light);
+  color: var(--color-blue-royal);
+  font-weight: 700;
 }
 
 .close-modal-btn {
-  background: rgba(255, 255, 255, 0.08);
+  background: #F0F4FA;
   border: none;
-  color: #fff;
+  color: var(--color-blue-royal);
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -1043,6 +1080,11 @@ input, textarea, select, button {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.close-modal-btn:hover {
+  background: #E2EBF8;
 }
 
 .modal-body {
@@ -1057,9 +1099,9 @@ input, textarea, select, button {
   max-height: 360px;
   border-radius: var(--radius-md);
   overflow: hidden;
-  background: #000;
+  background: #F0F4FA;
   margin-bottom: 14px;
-  border: 1px solid var(--color-navy-border);
+  border: 1px solid var(--color-blue-border);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1077,12 +1119,12 @@ input, textarea, select, button {
 }
 
 .upload-hint-box {
-  background: rgba(255, 202, 40, 0.08);
-  border: 1px solid rgba(255, 202, 40, 0.25);
+  background: #FFF9ED;
+  border: 1px solid rgba(197, 160, 89, 0.35);
   border-radius: var(--radius-sm);
   padding: 8px 12px;
   font-size: 0.74rem;
-  color: var(--color-gold-light);
+  color: #8A6D3B;
   line-height: 1.35;
   margin-bottom: 14px;
   text-align: left;
@@ -1090,8 +1132,8 @@ input, textarea, select, button {
 
 .upload-progress-container {
   margin-bottom: 14px;
-  background: rgba(8, 16, 38, 0.85);
-  border: 1px solid var(--color-navy-border);
+  background: #F8FAFD;
+  border: 1px solid var(--color-blue-border);
   border-radius: var(--radius-sm);
   padding: 10px 12px;
 }
@@ -1108,14 +1150,14 @@ input, textarea, select, button {
 .upload-progress-track {
   width: 100%;
   height: 8px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(22, 54, 111, 0.1);
   border-radius: var(--radius-full);
   overflow: hidden;
 }
 
 .upload-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--color-bordeaux), var(--color-gold));
+  background: linear-gradient(90deg, var(--color-red-laurea), var(--color-gold));
   border-radius: var(--radius-full);
   transition: width 0.15s ease;
 }
@@ -1143,20 +1185,20 @@ input, textarea, select, button {
 
 .form-input {
   width: 100%;
-  background: rgba(8, 16, 38, 0.85);
-  border: 1px solid var(--color-navy-border);
+  background: #F8FAFD;
+  border: 1px solid #CBD8ED;
   border-radius: var(--radius-sm);
   padding: 11px 14px;
-  color: #fff;
+  color: #0F172A;
   font-size: 0.88rem;
   transition: all var(--transition-fast);
 }
 
 .form-input:focus {
   outline: none;
-  border-color: var(--color-gold);
-  background: rgba(14, 27, 61, 0.95);
-  box-shadow: 0 0 10px var(--color-gold-glow);
+  border-color: var(--color-blue-royal);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(22, 54, 111, 0.14);
 }
 
 .form-input-lg {
@@ -1355,9 +1397,9 @@ input, textarea, select, button {
 }
 
 .react-btn {
-  background: rgba(14, 27, 61, 0.85);
-  border: 1px solid var(--color-navy-border);
-  color: #fff;
+  background: #F4F7FB;
+  border: 1px solid var(--color-blue-border);
+  color: var(--color-blue-royal);
   padding: 6px 14px;
   border-radius: var(--radius-full);
   display: flex;
@@ -1369,8 +1411,9 @@ input, textarea, select, button {
 
 .react-btn:active {
   transform: scale(0.9);
-  background: rgba(255, 202, 40, 0.25);
-  border-color: var(--color-gold);
+  background: rgba(139, 21, 40, 0.14);
+  border-color: var(--color-red-laurea);
+  color: var(--color-red-laurea);
 }
 
 .react-btn .emoji {
@@ -1390,7 +1433,7 @@ input, textarea, select, button {
   color: #081026;
   border-radius: 18px;
   padding: 14px;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 12px 35px rgba(22, 54, 111, 0.15);
   margin: 0 auto 16px auto;
   max-width: 300px;
 }
@@ -1504,17 +1547,18 @@ input, textarea, select, button {
 }
 
 .toast {
-  background: rgba(14, 27, 61, 0.96);
-  border: 1px solid var(--color-gold);
-  color: #fff;
-  padding: 10px 16px;
-  border-radius: var(--radius-full);
-  font-size: 0.82rem;
+  background: #FFFFFF;
+  border: 1px solid var(--color-blue-border);
+  border-left: 4.5px solid var(--color-red-laurea);
+  color: var(--color-blue-deep);
+  padding: 11px 18px;
+  border-radius: var(--radius-md);
+  font-size: 0.84rem;
   font-weight: 600;
   display: flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 10px 30px rgba(12, 30, 66, 0.16);
   animation: toastSlideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1), toastFadeOut 0.4s ease 2.6s forwards;
 }
 
