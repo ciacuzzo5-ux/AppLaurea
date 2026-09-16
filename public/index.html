@@ -17,15 +17,15 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
 
   <!-- Lucide Icons & Libraries -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-  <script src="/js/qrcode.min.js?v=7"></script>
+  <script src="/js/qrcode.min.js?v=8"></script>
 
   <!-- App Stylesheet -->
-  <link rel="stylesheet" href="/css/style.css?v=7">
+  <link rel="stylesheet" href="/css/style.css?v=8">
 </head>
 <body class="theme-dark">
   <div id="app" class="app-container">
@@ -338,10 +338,9 @@
         <div class="modal-body">
           <div class="table-card-preview" id="printable-table-card">
             <div class="card-inner-border">
-              <div class="card-top-laurel">🌿 🎓 🌿</div>
-              <h3 class="card-party-title">Festa di Laurea di</h3>
-              <h2 class="card-grad-name" style="font-family: var(--font-serif); font-size: 1.5rem; color: #8b1528; margin: 2px 0 1px 0; font-weight: 700;">Chiara</h2>
-              <p class="card-party-subtitle" style="font-size: 0.8rem; color: #081026; font-weight: 600; margin-bottom: 12px;">Ingegneria Informatica 💻</p>
+              <div class="card-top-laurel">• 🎓 •</div>
+              <h2 class="card-pinyon-title">Chiara Iacuzzo’s<br>Graduation Party</h2>
+              <p class="card-party-subtitle">Ingegneria Informatica 💻</p>
               
               <div class="qr-canvas-wrapper">
                 <div id="qrcode-target"></div>
@@ -371,13 +370,13 @@
   </div>
 
   <!-- JavaScript Modules -->
-  <script src="/js/api.js?v=7"></script>
-  <script src="/js/gallery.js?v=7"></script>
-  <script src="/js/dedications.js?v=7"></script>
-  <script src="/js/camera.js?v=7"></script>
-  <script src="/js/lightbox.js?v=7"></script>
-  <script src="/js/qrCards.js?v=7"></script>
-  <script src="/js/app.js?v=7"></script>
+  <script src="/js/api.js?v=8"></script>
+  <script src="/js/gallery.js?v=8"></script>
+  <script src="/js/dedications.js?v=8"></script>
+  <script src="/js/camera.js?v=8"></script>
+  <script src="/js/lightbox.js?v=8"></script>
+  <script src="/js/qrCards.js?v=8"></script>
+  <script src="/js/app.js?v=8"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -386,7 +385,7 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=7')
+        navigator.serviceWorker.register('/sw.js?v=8')
           .then(reg => reg.update())
           .catch(err => console.log('SW error:', err));
       });

@@ -1370,8 +1370,20 @@ input, textarea, select, button {
 }
 
 .card-top-laurel {
-  font-size: 1.4rem;
-  margin-bottom: 4px;
+  font-size: 1.15rem;
+  letter-spacing: 4px;
+  color: #7a1b28;
+  margin-bottom: 2px;
+}
+
+.card-pinyon-title {
+  font-family: 'Pinyon Script', cursive, serif;
+  font-size: 2.45rem;
+  line-height: 1.12;
+  color: #7a1b28;
+  font-weight: 500;
+  margin: 4px 0 6px 0;
+  letter-spacing: 0.5px;
 }
 
 .card-party-title {
@@ -1383,10 +1395,11 @@ input, textarea, select, button {
 }
 
 .card-party-subtitle {
-  font-size: 0.75rem;
-  color: #8b1528;
-  font-weight: 700;
+  font-size: 0.78rem;
+  color: #081026;
+  font-weight: 600;
   margin-bottom: 12px;
+  letter-spacing: 0.3px;
 }
 
 .qr-canvas-wrapper {
@@ -1489,10 +1502,14 @@ input, textarea, select, button {
   }
   #printable-table-card {
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    max-width: 100%;
+    left: 50%;
+    top: 40px;
+    transform: translateX(-50%);
+    width: 320px;
+    max-width: 90%;
     box-shadow: none;
+    border: 1.5px solid #081026;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }
