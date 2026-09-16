@@ -22,10 +22,10 @@
   <!-- Lucide Icons & Libraries -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-  <script src="/js/qrcode.min.js?v=11"></script>
+  <script src="/js/qrcode.min.js?v=12"></script>
 
   <!-- App Stylesheet -->
-  <link rel="stylesheet" href="/css/style.css?v=11">
+  <link rel="stylesheet" href="/css/style.css?v=12">
 </head>
 <body class="theme-dark">
   <div id="app" class="app-container">
@@ -351,14 +351,17 @@
             </div>
           </div>
 
-          <div style="display: flex; gap: 8px;">
+          <div style="display: flex; gap: 8px; margin-bottom: 8px;">
             <button class="btn btn-primary btn-block" id="print-qr-btn">
-              <i data-lucide="printer"></i> Stampa Segnaposto
+              <i data-lucide="printer"></i> Stampa
             </button>
-            <button class="btn btn-outline btn-block" id="copy-qr-link-btn">
-              <i data-lucide="link"></i> Copia Link
+            <button class="btn btn-primary btn-block" id="download-card-img-btn" style="background: linear-gradient(135deg, #7a1b28, #a81028); border-color: var(--color-gold);">
+              <i data-lucide="image"></i> Salva Immagine
             </button>
           </div>
+          <button class="btn btn-outline btn-block" id="copy-qr-link-btn" style="padding: 9px; font-size: 0.82rem;">
+            <i data-lucide="link"></i> Copia Link per Smartphone
+          </button>
           <p id="qr-modal-real-url" style="font-size: 0.72rem; color: var(--color-text-muted); text-align: center; margin-top: 10px; word-break: break-all; opacity: 0.8;"></p>
         </div>
       </div>
@@ -370,13 +373,13 @@
   </div>
 
   <!-- JavaScript Modules -->
-  <script src="/js/api.js?v=11"></script>
-  <script src="/js/gallery.js?v=11"></script>
-  <script src="/js/dedications.js?v=11"></script>
-  <script src="/js/camera.js?v=11"></script>
-  <script src="/js/lightbox.js?v=11"></script>
-  <script src="/js/qrCards.js?v=11"></script>
-  <script src="/js/app.js?v=11"></script>
+  <script src="/js/api.js?v=12"></script>
+  <script src="/js/gallery.js?v=12"></script>
+  <script src="/js/dedications.js?v=12"></script>
+  <script src="/js/camera.js?v=12"></script>
+  <script src="/js/lightbox.js?v=12"></script>
+  <script src="/js/qrCards.js?v=12"></script>
+  <script src="/js/app.js?v=12"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -385,7 +388,7 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=11')
+        navigator.serviceWorker.register('/sw.js?v=12')
           .then(reg => reg.update())
           .catch(err => console.log('SW error:', err));
       });
