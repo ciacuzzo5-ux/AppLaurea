@@ -22,10 +22,10 @@
   <!-- Lucide Icons & Libraries -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-  <script src="/js/qrcode.min.js?v=17"></script>
+  <script src="/js/qrcode.min.js?v=18"></script>
 
   <!-- App Stylesheet -->
-  <link rel="stylesheet" href="/css/style.css?v=17">
+  <link rel="stylesheet" href="/css/style.css?v=18">
 </head>
 <body class="theme-light">
   <div id="app" class="app-container">
@@ -372,13 +372,13 @@
   </div>
 
   <!-- JavaScript Modules -->
-  <script src="/js/api.js?v=17"></script>
-  <script src="/js/gallery.js?v=17"></script>
-  <script src="/js/dedications.js?v=17"></script>
-  <script src="/js/camera.js?v=17"></script>
-  <script src="/js/lightbox.js?v=17"></script>
-  <script src="/js/qrCards.js?v=17"></script>
-  <script src="/js/app.js?v=17"></script>
+  <script src="/js/api.js?v=18"></script>
+  <script src="/js/gallery.js?v=18"></script>
+  <script src="/js/dedications.js?v=18"></script>
+  <script src="/js/camera.js?v=18"></script>
+  <script src="/js/lightbox.js?v=18"></script>
+  <script src="/js/qrCards.js?v=18"></script>
+  <script src="/js/app.js?v=18"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -387,7 +387,7 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=17')
+        navigator.serviceWorker.register('/sw.js?v=18')
           .then(reg => reg.update())
           .catch(err => console.log('SW error:', err));
       });

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'laurea-gallery-v17';
+const CACHE_NAME = 'laurea-gallery-v18';
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();

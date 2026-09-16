@@ -1,17 +1,17 @@
 /* ==========================================================================
    🎓 FESTA DI LAUREA DI CHIARA
-   PALETTE: BLU REALE (VESTITO DI CHIARA) + ROSSO LAUREA + ORO CHAMPAGNE
-   TEMA: LUMINOSO, ELEGANTE, SOLARE E FESTOSO (LIGHT MODE DI LUSSO)
+   PALETTE: BLU REALE CHIARO & ELEGANTE + ROSSO LAUREA + ORO CHAMPAGNE
+   TEMA: TONALITÀ DI BLU CHIARE, ARIOSE ED ELEGANTI
    ========================================================================== */
 
 :root {
   /* Chiara's Royal Blue Palette (Ispirato al vestito blu di Chiara) */
-  --color-blue-deep: #0C1E42;
-  --color-blue-royal: #16366F;
-  --color-blue-soft: #254F96;
-  --color-blue-surface: #EEF3FA;
-  --color-blue-border: rgba(22, 54, 111, 0.15);
-  --color-blue-glass: rgba(255, 255, 255, 0.94);
+  --color-blue-deep: #081736;
+  --color-blue-royal: #143572;
+  --color-blue-soft: #244C91;
+  --color-blue-surface: #E4EEFA;
+  --color-blue-border: rgba(20, 53, 114, 0.16);
+  --color-blue-glass: rgba(228, 238, 250, 0.92);
 
   /* Italian Graduation Red (Rosso Laurea / Bordeaux d'Onore) */
   --color-red-laurea: #8B1528;
@@ -25,12 +25,12 @@
   --color-bordeaux-light: #A81C34;
   --color-bordeaux-dark: #630C1B;
   --color-bordeaux-glow: rgba(139, 21, 40, 0.28);
-  --color-navy-deep: #F6F8FD;
-  --color-navy-dark: #16366F;
-  --color-navy-surface: #FFFFFF;
-  --color-navy-card: #FFFFFF;
-  --color-navy-glass: rgba(255, 255, 255, 0.94);
-  --color-navy-border: rgba(22, 54, 111, 0.14);
+  --color-navy-deep: #DDE8F8;
+  --color-navy-dark: #143572;
+  --color-navy-surface: rgba(255, 255, 255, 0.94);
+  --color-navy-card: rgba(255, 255, 255, 0.92);
+  --color-navy-glass: rgba(228, 238, 250, 0.92);
+  --color-navy-border: rgba(20, 53, 114, 0.15);
 
   /* Gold & Champagne Metallic Accents */
   --color-gold: #C5A059;
@@ -42,18 +42,18 @@
   --color-cyan: #8B1528;
   --color-cyan-glow: rgba(139, 21, 40, 0.25);
 
-  /* Backgrounds & Canvas (Luminosi, caldi e ariosi) */
-  --color-bg-page: #F6F8FD;
-  --color-bg-container: linear-gradient(180deg, #FFFFFF 0%, #F5F8FD 40%, #FAF8F5 100%);
-  --color-card-bg: #FFFFFF;
-  --color-card-border: rgba(22, 54, 111, 0.1);
-  --color-card-shadow: 0 4px 20px rgba(22, 54, 111, 0.07), 0 1px 3px rgba(0, 0, 0, 0.04);
+  /* Backgrounds & Canvas: Tonalità di Blu Chiare, Raffinate e Ariose */
+  --color-bg-page: #DDE8F8;
+  --color-bg-container: linear-gradient(180deg, #E2EDFC 0%, #EDF4FD 30%, #DEECFB 70%, #D4E4F7 100%);
+  --color-card-bg: rgba(255, 255, 255, 0.92);
+  --color-card-border: rgba(20, 53, 114, 0.14);
+  --color-card-shadow: 0 6px 24px rgba(12, 35, 78, 0.08), 0 1px 3px rgba(12, 35, 78, 0.04);
 
-  /* Typography Colors (Massima leggibilità e contrasto) */
-  --color-text-main: #0F172A;
-  --color-text-secondary: #334155;
-  --color-text-muted: #64748B;
-  --color-border-subtle: rgba(22, 54, 111, 0.08);
+  /* Typography Colors (Massima leggibilità e contrasto su fondo blu chiaro) */
+  --color-text-main: #0A1B3B;
+  --color-text-secondary: #2C4673;
+  --color-text-muted: #5C769D;
+  --color-border-subtle: rgba(20, 53, 114, 0.1);
 
   /* Dimensions */
   --header-height: 96px;
@@ -109,7 +109,7 @@ input, textarea, select, button {
   margin: 0 auto;
   position: relative;
   background: var(--color-bg-container);
-  box-shadow: 0 10px 40px rgba(22, 54, 111, 0.12);
+  box-shadow: 0 10px 45px rgba(12, 35, 78, 0.16);
   overflow: hidden;
 }
 
@@ -132,7 +132,7 @@ input, textarea, select, button {
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
   border-bottom: 1px solid var(--color-blue-border);
-  box-shadow: 0 2px 14px rgba(22, 54, 111, 0.05);
+  box-shadow: 0 3px 18px rgba(12, 35, 78, 0.08);
   padding-top: max(env(safe-area-inset-top, 0px), 8px);
 }
 
@@ -376,22 +376,24 @@ input, textarea, select, button {
 
 /* Home Event Hero Banner */
 .home-event-hero {
-  background: linear-gradient(145deg, #ffffff 0%, #fbf8f2 50%, #f4eee2 100%);
-  border: 1.5px solid #d4af37;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.96) 0%, rgba(238, 245, 255, 0.94) 100%);
+  border: 1.5px solid #C5A059;
   border-radius: 20px;
   padding: 16px 14px 14px 14px;
   text-align: center;
   margin: 4px 2px 14px 2px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(12, 35, 78, 0.1), 0 1px 4px rgba(12, 35, 78, 0.05);
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .home-event-hero::before {
   content: '';
   position: absolute;
   inset: 5px;
-  border: 1px solid rgba(122, 27, 40, 0.18);
+  border: 1px solid rgba(139, 21, 40, 0.2);
   border-radius: 15px;
   pointer-events: none;
 }
@@ -416,7 +418,7 @@ input, textarea, select, button {
 
 .hero-event-subtitle {
   font-size: 0.82rem;
-  color: #081026;
+  color: var(--color-blue-royal);
   font-weight: 700;
   margin-top: 3px;
   margin-bottom: 4px;
@@ -425,15 +427,15 @@ input, textarea, select, button {
 
 .hero-hashtag-pill {
   display: inline-block;
-  background: rgba(139, 21, 40, 0.3);
-  border: 1px solid rgba(255, 202, 40, 0.4);
-  color: var(--color-gold);
+  background: rgba(20, 53, 114, 0.08);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  color: var(--color-blue-royal);
   font-size: 0.78rem;
   font-weight: 700;
   padding: 3px 14px;
   border-radius: var(--radius-full);
   letter-spacing: 0.3px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(12, 35, 78, 0.06);
 }
 
 .photos-grid {
@@ -461,10 +463,10 @@ input, textarea, select, button {
   aspect-ratio: 1 / 1;
   border-radius: var(--radius-sm);
   overflow: hidden;
-  background: #EEF3FA;
+  background: #D5E5F7;
   cursor: pointer;
   transition: transform var(--transition-fast), filter var(--transition-fast), box-shadow var(--transition-fast);
-  box-shadow: 0 2px 8px rgba(22, 54, 111, 0.08);
+  box-shadow: 0 3px 10px rgba(12, 35, 78, 0.1);
 }
 
 .grid-2-cols .photo-tile {
@@ -598,14 +600,16 @@ input, textarea, select, button {
 }
 
 .dedications-header-card {
-  background: linear-gradient(135deg, #FFFFFF 0%, #F5F8FC 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(238, 245, 255, 0.94) 100%);
   border: 1px solid var(--color-blue-border);
   border-top: 3.5px solid var(--color-red-laurea);
   border-radius: var(--radius-lg);
   padding: 18px 16px;
   text-align: center;
   margin-bottom: 16px;
-  box-shadow: 0 6px 20px rgba(22, 54, 111, 0.08);
+  box-shadow: 0 8px 24px rgba(12, 35, 78, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .dedications-header-card h2 {
@@ -629,12 +633,14 @@ input, textarea, select, button {
 
 /* Dedication Card */
 .dedication-card {
-  background: #FFFFFF;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--color-blue-border);
   border-radius: var(--radius-md);
   padding: 16px;
   position: relative;
-  box-shadow: 0 4px 16px rgba(22, 54, 111, 0.06);
+  box-shadow: 0 4px 16px rgba(12, 35, 78, 0.06);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
