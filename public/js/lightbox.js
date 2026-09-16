@@ -205,7 +205,7 @@ const Lightbox = {
       try {
         await navigator.share({
           title: 'Festa di Laurea di Chiara',
-          text: item.caption || 'Guarda questo ricordo dalla festa di laurea! 🎓',
+          text: item.caption || 'Guarda questo ricordo speciale! 🎓',
           url: window.location.origin + item.url
         });
       } catch (err) {}
