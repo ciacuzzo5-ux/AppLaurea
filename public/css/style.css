@@ -6,54 +6,54 @@
 
 :root {
   /* Chiara's Royal Blue Palette (Ispirato al vestito blu di Chiara) */
-  --color-blue-deep: #06132D;
-  --color-blue-royal: #12326E;
-  --color-blue-soft: #1E468E;
-  --color-blue-surface: #D8E7F9;
-  --color-blue-border: rgba(18, 50, 110, 0.18);
-  --color-blue-glass: rgba(195, 218, 246, 0.94);
+  --color-blue-deep: #042b80;
+  --color-blue-royal: #4A90D9;
+  --color-blue-soft: #5BA3E8;
+  --color-blue-surface: rgba(255, 255, 255, 0.08);
+  --color-blue-border: rgba(255, 255, 255, 0.15);
+  --color-blue-glass: rgba(7, 36, 99, 0.92);
 
   /* Italian Graduation Red (Rosso Laurea / Bordeaux d'Onore) */
-  --color-red-laurea: #8B1528;
-  --color-red-light: #A81C34;
-  --color-red-dark: #630C1B;
-  --color-red-glow: rgba(139, 21, 40, 0.28);
-  --color-red-surface: #FDF2F4;
+  --color-red-laurea: #E8425A;
+  --color-red-light: #F05570;
+  --color-red-dark: #C42E44;
+  --color-red-glow: rgba(232, 66, 90, 0.35);
+  --color-red-surface: rgba(232, 66, 90, 0.12);
 
   /* Backward Compatibility Aliases */
-  --color-bordeaux: #8B1528;
-  --color-bordeaux-light: #A81C34;
-  --color-bordeaux-dark: #630C1B;
-  --color-bordeaux-glow: rgba(139, 21, 40, 0.28);
-  --color-navy-deep: #A0C4EE;
-  --color-navy-dark: #12326E;
-  --color-navy-surface: rgba(255, 255, 255, 0.96);
-  --color-navy-card: rgba(255, 255, 255, 0.94);
-  --color-navy-glass: rgba(195, 218, 246, 0.94);
-  --color-navy-border: rgba(18, 50, 110, 0.16);
+  --color-bordeaux: #E8425A;
+  --color-bordeaux-light: #F05570;
+  --color-bordeaux-dark: #C42E44;
+  --color-bordeaux-glow: rgba(232, 66, 90, 0.35);
+  --color-navy-deep: rgba(255, 255, 255, 0.9);
+  --color-navy-dark: #4A90D9;
+  --color-navy-surface: rgba(7, 36, 99, 0.95);
+  --color-navy-card: rgba(7, 36, 99, 0.92);
+  --color-navy-glass: rgba(7, 36, 99, 0.88);
+  --color-navy-border: rgba(255, 255, 255, 0.15);
 
   /* Gold & Champagne Metallic Accents */
-  --color-gold: #C5A059;
-  --color-gold-light: #DFBF85;
-  --color-gold-dark: #A3803D;
-  --color-gold-glow: rgba(197, 160, 89, 0.3);
+  --color-gold: #DFBF85;
+  --color-gold-light: #EDD4A0;
+  --color-gold-dark: #C5A059;
+  --color-gold-glow: rgba(223, 191, 133, 0.4);
 
   /* Festive Accent */
-  --color-cyan: #8B1528;
-  --color-cyan-glow: rgba(139, 21, 40, 0.25);
+  --color-cyan: #E8425A;
+  --color-cyan-glow: rgba(232, 66, 90, 0.3);
 
-  /* Backgrounds & Canvas: Tonalità di Blu Più Marcata ed Elegante */
-  --color-bg-page: #7AAAD8;
-  --color-bg-container: linear-gradient(180deg, #8BB8E0 0%, #9EC5E8 30%, #7AAAD8 70%, #6699CC 100%);
-  --color-card-bg: rgba(255, 255, 255, 0.95);
-  --color-card-border: rgba(18, 50, 110, 0.16);
-  --color-card-shadow: 0 8px 28px rgba(12, 35, 78, 0.11), 0 2px 4px rgba(12, 35, 78, 0.05);
+  /* Backgrounds & Canvas: Tema Blu Navy Profondo */
+  --color-bg-page: #042b80;
+  --color-bg-container: linear-gradient(180deg, #042b80 0%, #052e8a 40%, #042b80 70%, #031f60 100%);
+  --color-card-bg: #072463;
+  --color-card-border: rgba(255, 255, 255, 0.12);
+  --color-card-shadow: 0 8px 28px rgba(2, 15, 50, 0.4), 0 2px 4px rgba(2, 15, 50, 0.2);
 
-  /* Typography Colors (Massima leggibilità e contrasto su fondo blu) */
-  --color-text-main: #06132D;
-  --color-text-secondary: #223B64;
-  --color-text-muted: #4B668F;
-  --color-border-subtle: rgba(18, 50, 110, 0.12);
+  /* Typography Colors (Leggibilità su fondo blu scuro) */
+  --color-text-main: #FFFFFF;
+  --color-text-secondary: rgba(255, 255, 255, 0.75);
+  --color-text-muted: rgba(255, 255, 255, 0.5);
+  --color-border-subtle: rgba(255, 255, 255, 0.10);
 
   /* Dimensions */
   --header-height: 96px;
@@ -128,11 +128,11 @@ input, textarea, select, button {
   left: 0;
   right: 0;
   z-index: 40;
-  background: var(--color-blue-glass);
+  background: rgba(4, 25, 80, 0.92);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  border-bottom: 1px solid var(--color-blue-border);
-  box-shadow: 0 3px 18px rgba(12, 35, 78, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 3px 18px rgba(2, 10, 40, 0.4);
   padding-top: max(env(safe-area-inset-top, 0px), 8px);
 }
 
@@ -172,7 +172,7 @@ input, textarea, select, button {
   font-family: var(--font-display);
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--color-blue-deep);
+  color: #FFFFFF;
   letter-spacing: -0.2px;
   white-space: nowrap;
   overflow: hidden;
@@ -199,7 +199,7 @@ input, textarea, select, button {
   align-items: center;
   gap: 6px;
   font-size: 0.75rem;
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .live-dot-pulse {
@@ -217,9 +217,9 @@ input, textarea, select, button {
 }
 
 .guest-pill {
-  color: var(--color-blue-royal);
+  color: rgba(255, 255, 255, 0.8);
   font-weight: 600;
-  background: rgba(22, 54, 111, 0.08);
+  background: rgba(255, 255, 255, 0.1);
   padding: 1px 7px;
   border-radius: 4px;
 }
@@ -231,9 +231,9 @@ input, textarea, select, button {
 }
 
 .icon-btn {
-  background: rgba(22, 54, 111, 0.06);
-  border: 1px solid var(--color-blue-border);
-  color: var(--color-blue-royal);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -247,7 +247,7 @@ input, textarea, select, button {
 
 .icon-btn:active {
   transform: scale(0.92);
-  background: rgba(22, 54, 111, 0.12);
+  background: rgba(255, 255, 255, 0.18);
 }
 
 .icon-btn svg {
@@ -297,15 +297,15 @@ input, textarea, select, button {
   gap: 5px;
   padding: 5px 12px;
   border-radius: var(--radius-full);
-  background: #FFFFFF;
-  border: 1px solid var(--color-blue-border);
-  color: var(--color-text-secondary);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 0.76rem;
   font-weight: 600;
   white-space: nowrap;
   cursor: pointer;
   transition: all var(--transition-fast);
-  box-shadow: 0 1px 4px rgba(22, 54, 111, 0.05);
+  box-shadow: 0 1px 4px rgba(2, 10, 40, 0.2);
 }
 
 .filter-chip svg {
@@ -314,31 +314,31 @@ input, textarea, select, button {
 }
 
 .filter-chip.active {
-  background: linear-gradient(135deg, var(--color-blue-royal), var(--color-blue-soft));
-  border-color: var(--color-blue-royal);
-  color: #fff;
-  font-weight: 600;
-  box-shadow: 0 3px 12px rgba(22, 54, 111, 0.25);
+  background: linear-gradient(135deg, var(--color-gold-dark), var(--color-gold));
+  border-color: var(--color-gold);
+  color: #042b80;
+  font-weight: 700;
+  box-shadow: 0 3px 12px rgba(197, 160, 89, 0.4);
 }
 
 .grid-layout-toggle {
   width: 32px;
   height: 32px;
   border-radius: var(--radius-sm);
-  background: #FFFFFF;
-  border: 1px solid var(--color-blue-border);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   flex-shrink: 0;
-  box-shadow: 0 1px 4px rgba(22, 54, 111, 0.05);
+  box-shadow: 0 1px 4px rgba(2, 10, 40, 0.2);
 }
 
 .grid-layout-toggle svg {
   width: 16px;
   height: 16px;
-  color: var(--color-blue-royal);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 /* ==========================================================================
@@ -376,13 +376,13 @@ input, textarea, select, button {
 
 /* Home Event Hero Banner */
 .home-event-hero {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.96) 0%, rgba(238, 245, 255, 0.94) 100%);
-  border: 1.5px solid #C5A059;
+  background: linear-gradient(145deg, rgba(7, 36, 99, 0.95) 0%, rgba(4, 25, 80, 0.92) 100%);
+  border: 1.5px solid var(--color-gold);
   border-radius: 20px;
   padding: 16px 14px 14px 14px;
   text-align: center;
   margin: 4px 2px 14px 2px;
-  box-shadow: 0 10px 30px rgba(12, 35, 78, 0.1), 0 1px 4px rgba(12, 35, 78, 0.05);
+  box-shadow: 0 10px 30px rgba(2, 10, 40, 0.5), 0 1px 4px rgba(2, 10, 40, 0.2);
   position: relative;
   overflow: hidden;
   backdrop-filter: blur(12px);
@@ -401,7 +401,7 @@ input, textarea, select, button {
 .hero-laurel-badge {
   font-size: 1.15rem;
   letter-spacing: 4px;
-  color: #7a1b28;
+  color: var(--color-gold);
   margin-bottom: 2px;
 }
 
@@ -410,15 +410,15 @@ input, textarea, select, button {
   font-size: 2.35rem;
   font-weight: 400;
   line-height: 1.15;
-  color: #7a1b28;
+  color: var(--color-gold-light);
   margin: 4px 0 6px 0;
   letter-spacing: 0.4px;
-  text-shadow: 0 1px 1px rgba(122, 27, 40, 0.1);
+  text-shadow: 0 2px 8px rgba(2, 10, 40, 0.4);
 }
 
 .hero-event-subtitle {
   font-size: 0.82rem;
-  color: var(--color-blue-royal);
+  color: rgba(255, 255, 255, 0.8);
   font-weight: 700;
   margin-top: 3px;
   margin-bottom: 4px;
@@ -427,15 +427,15 @@ input, textarea, select, button {
 
 .hero-hashtag-pill {
   display: inline-block;
-  background: rgba(20, 53, 114, 0.08);
-  border: 1px solid rgba(197, 160, 89, 0.4);
-  color: var(--color-blue-royal);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(223, 191, 133, 0.5);
+  color: var(--color-gold-light);
   font-size: 0.78rem;
   font-weight: 700;
   padding: 3px 14px;
   border-radius: var(--radius-full);
   letter-spacing: 0.3px;
-  box-shadow: 0 2px 8px rgba(12, 35, 78, 0.06);
+  box-shadow: 0 2px 8px rgba(2, 10, 40, 0.3);
 }
 
 .photos-grid {
@@ -566,11 +566,11 @@ input, textarea, select, button {
 .empty-state {
   text-align: center;
   padding: 60px 20px;
-  background: #FFFFFF;
+  background: var(--color-card-bg);
   border-radius: var(--radius-lg);
-  border: 1.5px dashed var(--color-blue-border);
+  border: 1.5px dashed rgba(255, 255, 255, 0.2);
   margin: 20px 10px;
-  box-shadow: 0 4px 20px rgba(22, 54, 111, 0.05);
+  box-shadow: 0 4px 20px rgba(2, 10, 40, 0.3);
 }
 
 .empty-icon {
@@ -581,13 +581,13 @@ input, textarea, select, button {
 .empty-state h3 {
   font-size: 1.15rem;
   margin-bottom: 6px;
-  color: var(--color-blue-royal);
+  color: #FFFFFF;
   font-weight: 700;
 }
 
 .empty-state p {
   font-size: 0.82rem;
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.65);
   max-width: 280px;
   margin: 0 auto 16px auto;
 }
@@ -600,14 +600,14 @@ input, textarea, select, button {
 }
 
 .dedications-header-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(238, 245, 255, 0.94) 100%);
-  border: 1px solid var(--color-blue-border);
-  border-top: 3.5px solid var(--color-red-laurea);
+  background: linear-gradient(135deg, rgba(7, 36, 99, 0.95) 0%, rgba(4, 25, 80, 0.92) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 3.5px solid var(--color-gold);
   border-radius: var(--radius-lg);
   padding: 18px 16px;
   text-align: center;
   margin-bottom: 16px;
-  box-shadow: 0 8px 24px rgba(12, 35, 78, 0.08);
+  box-shadow: 0 8px 24px rgba(2, 10, 40, 0.4);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -615,13 +615,13 @@ input, textarea, select, button {
 .dedications-header-card h2 {
   font-family: var(--font-serif);
   font-size: 1.35rem;
-  color: var(--color-blue-deep);
+  color: #FFFFFF;
   margin-bottom: 4px;
 }
 
 .dedications-header-card p {
   font-size: 0.82rem;
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.7);
   margin-bottom: 14px;
 }
 
@@ -633,14 +633,14 @@ input, textarea, select, button {
 
 /* Dedication Card */
 .dedication-card {
-  background: rgba(255, 255, 255, 0.94);
+  background: var(--color-card-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid var(--color-blue-border);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-md);
   padding: 16px;
   position: relative;
-  box-shadow: 0 4px 16px rgba(12, 35, 78, 0.06);
+  box-shadow: 0 4px 16px rgba(2, 10, 40, 0.35);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
@@ -666,13 +666,13 @@ input, textarea, select, button {
 
 .dedication-author-info h4 {
   font-size: 0.92rem;
-  color: var(--color-blue-royal);
+  color: #FFFFFF;
   font-weight: 700;
 }
 
 .dedication-time {
   font-size: 0.72rem;
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .dedication-delete-btn {
@@ -718,7 +718,7 @@ input, textarea, select, button {
 
 .dedication-text {
   font-size: 0.92rem;
-  color: var(--color-text-main);
+  color: rgba(255, 255, 255, 0.88);
   line-height: 1.45;
   white-space: pre-wrap;
   word-break: break-word;
@@ -728,7 +728,7 @@ input, textarea, select, button {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  border-top: 1px solid rgba(22, 54, 111, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-top: 8px;
 }
 
@@ -738,9 +738,9 @@ input, textarea, select, button {
 }
 
 .dedication-react-btn {
-  background: #F4F7FB;
-  border: 1px solid var(--color-blue-border);
-  color: var(--color-blue-royal);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.8);
   padding: 4px 10px;
   border-radius: var(--radius-full);
   font-size: 0.75rem;
@@ -772,11 +772,11 @@ input, textarea, select, button {
   left: 0;
   right: 0;
   height: var(--bottom-bar-height);
-  background: var(--color-blue-glass);
+  background: rgba(4, 25, 80, 0.94);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  border-top: 1px solid var(--color-blue-border);
-  box-shadow: 0 -3px 18px rgba(22, 54, 111, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 -3px 18px rgba(2, 10, 40, 0.4);
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -792,7 +792,7 @@ input, textarea, select, button {
   gap: 3px;
   background: transparent;
   border: none;
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.45);
   font-size: 0.72rem;
   font-weight: 500;
   cursor: pointer;
@@ -813,13 +813,13 @@ input, textarea, select, button {
 }
 
 .tab-nav-item.active {
-  color: var(--color-blue-royal);
+  color: var(--color-gold);
   font-weight: 700;
 }
 
 .tab-nav-item.active svg {
-  color: var(--color-blue-royal);
-  filter: drop-shadow(0 2px 4px rgba(22, 54, 111, 0.25));
+  color: var(--color-gold);
+  filter: drop-shadow(0 2px 6px rgba(223, 191, 133, 0.5));
 }
 
 .tab-badge {
@@ -867,13 +867,13 @@ input, textarea, select, button {
 
 /* Action Sheet Picker (Photo vs Video) */
 .action-sheet-dialog {
-  background: #FFFFFF;
-  border: 1px solid var(--color-blue-border);
+  background: var(--color-card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-lg);
   padding: 16px;
   max-width: 320px;
   text-align: center;
-  box-shadow: 0 16px 45px rgba(22, 54, 111, 0.2);
+  box-shadow: 0 16px 45px rgba(2, 10, 40, 0.5);
 }
 
 .action-sheet-options {
@@ -890,17 +890,17 @@ input, textarea, select, button {
   width: 100%;
   padding: 12px 14px;
   border-radius: var(--radius-md);
-  background: #F8FAFD;
-  border: 1px solid var(--color-blue-border);
-  color: var(--color-text-main);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.88);
   cursor: pointer;
   text-align: left;
   transition: all var(--transition-fast);
 }
 
 .sheet-option-btn:active {
-  background: var(--color-blue-surface);
-  border-color: var(--color-blue-royal);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
   transform: scale(0.98);
 }
 
@@ -918,22 +918,22 @@ input, textarea, select, button {
 
 .sheet-btn-text strong {
   font-size: 0.86rem;
-  color: var(--color-blue-royal);
+  color: #FFFFFF;
   font-weight: 700;
 }
 
 .sheet-btn-text small {
   font-size: 0.72rem;
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .sheet-quality-tip {
-  background: rgba(22, 54, 111, 0.06);
-  border: 1px dashed rgba(22, 54, 111, 0.25);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
   border-radius: var(--radius-sm);
   padding: 8px 10px;
   font-size: 0.73rem;
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.6);
   line-height: 1.35;
   text-align: left;
 }
@@ -973,14 +973,14 @@ input, textarea, select, button {
 }
 
 .btn-outline {
-  background: #FFFFFF;
-  border: 1.5px solid var(--color-blue-royal);
-  color: var(--color-blue-royal);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
   font-weight: 600;
 }
 
 .btn-outline:active {
-  background: #F0F4FA;
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .btn-block {
@@ -1008,15 +1008,15 @@ input, textarea, select, button {
 }
 
 .modal-dialog {
-  background: #FFFFFF;
-  border: 1px solid var(--color-blue-border);
-  border-top: 3.5px solid var(--color-red-laurea);
+  background: var(--color-card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 3.5px solid var(--color-gold);
   border-radius: var(--radius-lg);
   width: 100%;
   max-width: 420px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(12, 30, 66, 0.25);
+  box-shadow: 0 20px 60px rgba(2, 10, 40, 0.6);
   animation: scaleUpModal 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1065,20 +1065,20 @@ input, textarea, select, button {
   align-items: center;
   justify-content: space-between;
   padding: 16px 20px;
-  border-bottom: 1px solid rgba(22, 54, 111, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .modal-header h3 {
   font-family: var(--font-display);
   font-size: 1.15rem;
-  color: var(--color-blue-royal);
+  color: #FFFFFF;
   font-weight: 700;
 }
 
 .close-modal-btn {
-  background: #F0F4FA;
+  background: rgba(255, 255, 255, 0.08);
   border: none;
-  color: var(--color-blue-royal);
+  color: rgba(255, 255, 255, 0.7);
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -1090,7 +1090,7 @@ input, textarea, select, button {
 }
 
 .close-modal-btn:hover {
-  background: #E2EBF8;
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .modal-body {
@@ -1105,9 +1105,9 @@ input, textarea, select, button {
   max-height: 360px;
   border-radius: var(--radius-md);
   overflow: hidden;
-  background: #F0F4FA;
+  background: rgba(255, 255, 255, 0.05);
   margin-bottom: 14px;
-  border: 1px solid var(--color-blue-border);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1125,12 +1125,12 @@ input, textarea, select, button {
 }
 
 .upload-hint-box {
-  background: #FFF9ED;
-  border: 1px solid rgba(197, 160, 89, 0.35);
+  background: rgba(223, 191, 133, 0.12);
+  border: 1px solid rgba(223, 191, 133, 0.3);
   border-radius: var(--radius-sm);
   padding: 8px 12px;
   font-size: 0.74rem;
-  color: #8A6D3B;
+  color: var(--color-gold-light);
   line-height: 1.35;
   margin-bottom: 14px;
   text-align: left;
@@ -1138,8 +1138,8 @@ input, textarea, select, button {
 
 .upload-progress-container {
   margin-bottom: 14px;
-  background: #F8FAFD;
-  border: 1px solid var(--color-blue-border);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-sm);
   padding: 10px 12px;
 }
@@ -1149,14 +1149,14 @@ input, textarea, select, button {
   justify-content: space-between;
   font-size: 0.76rem;
   font-weight: 600;
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.7);
   margin-bottom: 6px;
 }
 
 .upload-progress-track {
   width: 100%;
   height: 8px;
-  background: rgba(22, 54, 111, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-full);
   overflow: hidden;
 }
@@ -1179,7 +1179,7 @@ input, textarea, select, button {
   gap: 6px;
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.7);
   margin-bottom: 5px;
 }
 
@@ -1191,20 +1191,24 @@ input, textarea, select, button {
 
 .form-input {
   width: 100%;
-  background: #F8FAFD;
-  border: 1px solid #CBD8ED;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--radius-sm);
   padding: 11px 14px;
-  color: #0F172A;
+  color: #FFFFFF;
   font-size: 0.88rem;
   transition: all var(--transition-fast);
 }
 
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
 .form-input:focus {
   outline: none;
-  border-color: var(--color-blue-royal);
-  background: #FFFFFF;
-  box-shadow: 0 0 0 3px rgba(22, 54, 111, 0.14);
+  border-color: var(--color-gold);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(223, 191, 133, 0.2);
 }
 
 .form-input-lg {
@@ -1403,9 +1407,9 @@ input, textarea, select, button {
 }
 
 .react-btn {
-  background: #F4F7FB;
-  border: 1px solid var(--color-blue-border);
-  color: var(--color-blue-royal);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.85);
   padding: 6px 14px;
   border-radius: var(--radius-full);
   display: flex;
@@ -1553,10 +1557,10 @@ input, textarea, select, button {
 }
 
 .toast {
-  background: #FFFFFF;
-  border: 1px solid var(--color-blue-border);
-  border-left: 4.5px solid var(--color-red-laurea);
-  color: var(--color-blue-deep);
+  background: var(--color-card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-left: 4.5px solid var(--color-gold);
+  color: #FFFFFF;
   padding: 11px 18px;
   border-radius: var(--radius-md);
   font-size: 0.84rem;
@@ -1564,7 +1568,7 @@ input, textarea, select, button {
   display: flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 10px 30px rgba(12, 30, 66, 0.16);
+  box-shadow: 0 10px 30px rgba(2, 10, 40, 0.5);
   animation: toastSlideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1), toastFadeOut 0.4s ease 2.6s forwards;
 }
 
