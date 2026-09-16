@@ -332,7 +332,7 @@
     <div class="modal-overlay hidden" id="qr-print-modal">
       <div class="modal-dialog">
         <div class="modal-header">
-          <h3>QR Code per i Tavoli 🎫</h3>
+          <h3>QR Code per i Tavoli</h3>
           <button class="close-modal-btn" id="close-qr-modal-btn"><i data-lucide="x"></i></button>
         </div>
         <div class="modal-body">
@@ -376,13 +376,13 @@
   </div>
 
   <!-- JavaScript Modules -->
-  <script src="/js/api.js?v=22"></script>
-  <script src="/js/gallery.js?v=22"></script>
-  <script src="/js/dedications.js?v=22"></script>
-  <script src="/js/camera.js?v=22"></script>
-  <script src="/js/lightbox.js?v=22"></script>
-  <script src="/js/qrCards.js?v=22"></script>
-  <script src="/js/app.js?v=22"></script>
+  <script src="/js/api.js?v=23"></script>
+  <script src="/js/gallery.js?v=23"></script>
+  <script src="/js/dedications.js?v=23"></script>
+  <script src="/js/camera.js?v=23"></script>
+  <script src="/js/lightbox.js?v=23"></script>
+  <script src="/js/qrCards.js?v=23"></script>
+  <script src="/js/app.js?v=23"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -391,7 +391,7 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=22')
+        navigator.serviceWorker.register('/sw.js?v=23')
           .then(reg => reg.update())
           .catch(err => console.log('SW error:', err));
       });

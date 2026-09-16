@@ -118,8 +118,8 @@ const QrCards = {
       overflow: hidden;
     }
     .card-top-laurel {
-      font-size: 1.25rem;
-      letter-spacing: 4px;
+      font-size: 1.65rem;
+      letter-spacing: 5px;
       color: #8B1A2E;
       margin-bottom: 4px;
     }
@@ -334,9 +334,9 @@ const QrCards = {
     /* ── 4. DECORAZIONE SUPERIORE: • 🎓 • ── */
     ctx.textAlign = 'center';
     ctx.textBaseline = 'alphabetic';
-    ctx.font = '40px sans-serif';
+    ctx.font = '58px sans-serif';
     ctx.fillStyle = COLOR_BORDEAUX;
-    ctx.fillText('• 🎓 •', W / 2, inY + 95);
+    ctx.fillText('• 🎓 •', W / 2, inY + 102);
 
     /* ── 5. TITOLO CALLIGRAFICO (Pinyon Script bordeaux come da immagine) ── */
     ctx.fillStyle = COLOR_BORDEAUX;
