@@ -1,5 +1,6 @@
 /**
  * QR Cards Module: Generates printable QR table cards with the live URL for smartphones
+ * Styled in the website's elegant ivory-cream / bordeaux / gold theme.
  */
 
 const QrCards = {
@@ -57,7 +58,7 @@ const QrCards = {
           text: targetUrl,
           width: 260,
           height: 260,
-          colorDark: "#081026",
+          colorDark: "#1C0B10",
           colorLight: "#ffffff",
           correctLevel: QRCode.CorrectLevel ? QRCode.CorrectLevel.H : 2
         });
@@ -74,7 +75,6 @@ const QrCards = {
       return;
     }
 
-    // Try opening clean print window first (optimal on both desktop and mobile browsers)
     try {
       const cardHtml = cardEl.outerHTML;
       const printWindow = window.open('', '_blank');
@@ -89,7 +89,7 @@ const QrCards = {
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: #ffffff;
+      background: #F8F0E8;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -99,21 +99,22 @@ const QrCards = {
     }
     .table-card-preview {
       background: #ffffff;
-      color: #081026;
+      color: #1C0B10;
       border-radius: 20px;
       padding: 16px;
       margin: 0 auto;
       max-width: 340px;
       width: 100%;
-      box-shadow: 0 16px 48px rgba(0,0,0,0.18);
+      box-shadow: 0 16px 40px rgba(80, 20, 35, 0.12);
+      border: 1px solid rgba(139, 26, 46, 0.10);
     }
     .card-inner-border {
-      border: 2.5px solid #081026;
+      border: 2px solid #8B1A2E;
       border-radius: 14px;
       padding: 20px 16px 18px 16px;
       text-align: center;
       position: relative;
-      background: radial-gradient(ellipse at 50% 0%, #fff8f0 0%, #ffffff 60%);
+      background: radial-gradient(ellipse at 50% 0%, #fff9f2 0%, #ffffff 60%);
       overflow: hidden;
     }
     .card-inner-border::after {
@@ -133,7 +134,7 @@ const QrCards = {
       font-family: 'Pinyon Script', cursive, serif;
       font-size: 2.4rem;
       line-height: 1.1;
-      color: #081026;
+      color: #1C0B10;
       font-weight: 400;
       margin: 4px 0 2px 0;
       letter-spacing: 0.5px;
@@ -148,7 +149,7 @@ const QrCards = {
     }
     .card-party-subtitle {
       font-size: 0.72rem;
-      color: #555;
+      color: #9A7A82;
       font-weight: 500;
       margin-bottom: 14px;
       letter-spacing: 0.8px;
@@ -161,7 +162,7 @@ const QrCards = {
       background: #fff;
       padding: 10px;
       border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.12), 0 0 0 1.5px rgba(139,26,46,0.2);
+      box-shadow: 0 4px 20px rgba(80, 20, 35, 0.08), 0 0 0 1.5px rgba(139,26,46,0.2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -176,8 +177,8 @@ const QrCards = {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: #081026;
-      color: #ffd700;
+      background: #640D1F;
+      color: #C5A059;
       width: 36px;
       height: 36px;
       border-radius: 50%;
@@ -190,14 +191,14 @@ const QrCards = {
     .card-instruction-text {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 0.82rem;
-      color: #333;
+      color: #5C3340;
       margin-top: 6px;
       font-weight: 400;
       font-style: italic;
       line-height: 1.5;
     }
     @media print {
-      body { min-height: auto; padding: 0; }
+      body { min-height: auto; padding: 0; background: #ffffff; }
       @page { margin: 1cm; size: auto; }
       .table-card-preview { box-shadow: none; }
     }
@@ -229,32 +230,46 @@ const QrCards = {
     const cardEl = document.getElementById('printable-table-card');
     if (!cardEl) return;
 
-    App.showToast('⏳ Creazione immagine in alta definizione...');
+    App.showToast('⏳ Creazione immagine...');
 
-    // Assicura che i font personalizzati siano pronti prima del rendering su canvas
-    if (document.fonts && document.fonts.ready) {
+    // Attendi caricamento dei font web per una resa impeccabile
+    if (document.fonts) {
       try {
-        await document.fonts.ready;
+        await Promise.all([
+          document.fonts.load('140px "Pinyon Script"'),
+          document.fonts.load('bold 46px "Outfit"'),
+          document.fonts.load('italic 38px "Playfair Display"'),
+          document.fonts.ready
+        ]);
       } catch (e) {
-        console.warn('Font loading check:', e);
+        console.warn('Font load note:', e);
       }
     }
 
     const targetUrl = this.mobileUrl || window.location.origin;
 
-    // Dimensioni HD — proporzioni carta da visita/segnaposto (verticale)
-    const width = 1200;
-    const height = 1700;
+    // Dimensioni canvas HD (1200 x 1800 — rapporto 2:3 ideale per stampa e smartphone)
+    const W = 1200;
+    const H = 1800;
     const canvas = document.createElement('canvas');
-    canvas.width = width;
-    canvas.height = height;
+    canvas.width = W;
+    canvas.height = H;
     const ctx = canvas.getContext('2d');
-
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = 'high';
 
-    // Helper per rettangoli arrotondati
-    const roundRect = (x, y, w, h, r) => {
+    // Palette ufficiale del sito (Crema / Bordeaux / Oro)
+    const COLOR_BG_PAGE   = '#F8F0E8'; // Crema avorio dello sfondo
+    const COLOR_CARD_BG   = '#FFFFFF'; // Bianco puro della card
+    const COLOR_BORDEAUX  = '#8B1A2E'; // Bordeaux nobile
+    const COLOR_BORD_DARK = '#640D1F'; // Bordeaux profondo
+    const COLOR_GOLD      = '#C5A059'; // Oro champagne
+    const COLOR_TEXT_MAIN = '#1C0B10'; // Scuro caldo elegante
+    const COLOR_TEXT_MED  = '#5C3340'; // Bordeaux medio secondario
+    const COLOR_TEXT_MUTE = '#9A7A82'; // Grigio-rosato per la data
+
+    // Helper per disegnare rettangoli arrotondati
+    const drawRoundRect = (x, y, w, h, r) => {
       ctx.beginPath();
       ctx.moveTo(x + r, y);
       ctx.lineTo(x + w - r, y);
@@ -268,118 +283,159 @@ const QrCards = {
       ctx.closePath();
     };
 
-    // 1. Sfondo pagina crema avorio (come il tema web)
-    ctx.fillStyle = '#F8F0E8';
-    ctx.fillRect(0, 0, width, height);
+    /* ── 1. SFONDO COMPLETO (Crema Avorio) ── */
+    ctx.fillStyle = COLOR_BG_PAGE;
+    ctx.fillRect(0, 0, W, H);
 
-    // 2. Card — sfondo crema caldo con gradiente avorio
-    const cardX = 60, cardY = 60;
-    const cardW = width - 120, cardH = height - 120;
-    const cardR = 40;
-
-    const cardGrad = ctx.createRadialGradient(width / 2, cardY + 200, 50, width / 2, cardY + 300, cardH);
-    cardGrad.addColorStop(0, '#FDF8F2');
-    cardGrad.addColorStop(0.4, '#FFFFFF');
-    cardGrad.addColorStop(1, '#FBF5EE');
-    roundRect(cardX, cardY, cardW, cardH, cardR);
-    ctx.fillStyle = cardGrad;
-    ctx.fill();
-
-    // 3. Bordo card — bordeaux scuro elegante
-    roundRect(cardX, cardY, cardW, cardH, cardR);
-    ctx.strokeStyle = '#3D0A14';
-    ctx.lineWidth = 4;
-    ctx.stroke();
-
-    // 4. Banda colorata in cima (bordeaux → oro → bordeaux)
-    const topBarGrad = ctx.createLinearGradient(cardX, 0, cardX + cardW, 0);
-    topBarGrad.addColorStop(0, '#8B1A2E');
-    topBarGrad.addColorStop(0.5, '#C5A059');
-    topBarGrad.addColorStop(1, '#8B1A2E');
-    roundRect(cardX, cardY, cardW, 12, cardR);
-    ctx.fillStyle = topBarGrad;
-    ctx.fill();
-
-    // 5. Decorazione • 🎓 •
-    ctx.textAlign = 'center';
-    ctx.font = '48px sans-serif';
-    ctx.fillStyle = '#8B1A2E';
-    ctx.fillText('• 🎓 •', width / 2, cardY + 120);
-
-    // 6. Nome "Chiara Iacuzzo" in Pinyon Script — colore nero/navy
-    ctx.font = '148px "Pinyon Script", cursive, serif';
-    ctx.fillStyle = '#081026';
-    ctx.fillText('Chiara Iacuzzo', width / 2, cardY + 290);
-
-    // 7. "GRADUATION PARTY" — bordeaux uppercase
-    ctx.font = 'bold 52px "Outfit", "Plus Jakarta Sans", sans-serif';
-    ctx.fillStyle = '#8B1A2E';
-    ctx.letterSpacing = '6px';
-    ctx.fillText('GRADUATION PARTY', width / 2, cardY + 380);
-
-    // 8. Data — tono grigio caldo
-    ctx.font = '38px "Outfit", sans-serif';
-    ctx.fillStyle = '#9A7A82';
-    ctx.fillText('16 Settembre 2026', width / 2, cardY + 448);
-
-    // 9. Riquadro QR — bianco con anello bordeaux sottile
-    const qrSize = 700;
-    const qrX = (width - qrSize) / 2;
-    const qrY = cardY + 510;
-    const qrBoxW = qrSize + 56;
-    const qrBoxH = qrSize + 56;
-    const qrBoxX = qrX - 28;
-    const qrBoxY = qrY - 28;
+    /* ── 2. CARD CENTRALE FLUTTUANTE (Bianco con ombra calda e morbida) ── */
+    const cardX = 64;
+    const cardY = 64;
+    const cardW = W - 128; // 1072
+    const cardH = H - 128; // 1672
+    const cardRadius = 40;
 
     // Ombra calda bordeaux
-    ctx.shadowColor = 'rgba(80, 20, 35, 0.10)';
-    ctx.shadowBlur = 28;
-    ctx.shadowOffsetY = 8;
-    roundRect(qrBoxX, qrBoxY, qrBoxW, qrBoxH, 28);
-    ctx.fillStyle = '#FFFFFF';
+    ctx.shadowColor = 'rgba(80, 20, 35, 0.12)';
+    ctx.shadowBlur = 40;
+    ctx.shadowOffsetY = 16;
+    drawRoundRect(cardX, cardY, cardW, cardH, cardRadius);
+    ctx.fillStyle = COLOR_CARD_BG;
     ctx.fill();
+
+    // Reset ombra
     ctx.shadowColor = 'transparent';
     ctx.shadowBlur = 0;
     ctx.shadowOffsetY = 0;
 
-    // Anello bordeaux
-    roundRect(qrBoxX, qrBoxY, qrBoxW, qrBoxH, 28);
-    ctx.strokeStyle = 'rgba(139, 26, 46, 0.25)';
-    ctx.lineWidth = 3;
+    // Sottilissimo bordo esterno card
+    drawRoundRect(cardX, cardY, cardW, cardH, cardRadius);
+    ctx.strokeStyle = 'rgba(139, 26, 46, 0.10)';
+    ctx.lineWidth = 2;
     ctx.stroke();
 
+    /* ── 3. CORNICE INTERNA (.card-inner-border dello stile web) ── */
+    const inPad = 28;
+    const inX = cardX + inPad;
+    const inY = cardY + inPad;
+    const inW = cardW - (inPad * 2);
+    const inH = cardH - (inPad * 2);
+    const inRadius = 24;
+
+    // Sfondo radiale avorio sfumato interno
+    const inGrad = ctx.createRadialGradient(W / 2, inY + 50, 40, W / 2, inY + 300, inW * 0.75);
+    inGrad.addColorStop(0, '#FFF9F2');
+    inGrad.addColorStop(0.7, '#FFFFFF');
+    inGrad.addColorStop(1, '#FFFFFF');
+    drawRoundRect(inX, inY, inW, inH, inRadius);
+    ctx.fillStyle = inGrad;
+    ctx.fill();
+
+    // Bordo bordeaux nobile
+    drawRoundRect(inX, inY, inW, inH, inRadius);
+    ctx.strokeStyle = COLOR_BORDEAUX;
+    ctx.lineWidth = 3.5;
+    ctx.stroke();
+
+    /* ── 4. NASTRO ACCENTO SUPERIORE (Bordeaux - Oro - Bordeaux) ── */
+    ctx.save();
+    // Clip per seguire la curva superiore della cornice interna
+    drawRoundRect(inX, inY, inW, inH, inRadius);
+    ctx.clip();
+    const stripeGrad = ctx.createLinearGradient(inX, 0, inX + inW, 0);
+    stripeGrad.addColorStop(0,   COLOR_BORDEAUX);
+    stripeGrad.addColorStop(0.5, COLOR_GOLD);
+    stripeGrad.addColorStop(1,   COLOR_BORDEAUX);
+    ctx.fillStyle = stripeGrad;
+    ctx.fillRect(inX, inY, inW, 9);
+    ctx.restore();
+
+    /* ── 5. DECORAZIONE SUPERIORE: • 🎓 • ── */
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'alphabetic';
+    ctx.font = '44px sans-serif';
+    ctx.fillStyle = COLOR_BORDEAUX;
+    ctx.fillText('• 🎓 •', W / 2, inY + 110);
+
+    /* ── 6. NOME: "Chiara Iacuzzo" in Pinyon Script ── */
+    ctx.font = '148px "Pinyon Script", cursive, serif';
+    ctx.fillStyle = COLOR_TEXT_MAIN;
+    ctx.fillText('Chiara Iacuzzo', W / 2, inY + 265);
+
+    /* ── 7. TITOLO: "GRADUATION PARTY" ── */
+    ctx.font = 'bold 44px "Outfit", sans-serif';
+    ctx.fillStyle = COLOR_BORDEAUX;
+    ctx.fillText('GRADUATION PARTY', W / 2, inY + 345);
+
+    /* ── 8. DATA: "16 Settembre 2026" ── */
+    ctx.font = '500 32px "Outfit", sans-serif';
+    ctx.fillStyle = COLOR_TEXT_MUTE;
+    ctx.fillText('16 Settembre 2026', W / 2, inY + 404);
+
+    /* ── 9. RIQUADRO QR CODE (.qr-canvas-wrapper) ── */
+    const qrSize = 640;
+    const qrPad = 26;
+    const qrBoxW = qrSize + (qrPad * 2);
+    const qrBoxH = qrSize + (qrPad * 2);
+    const qrBoxX = (W - qrBoxW) / 2;
+    const qrBoxY = inY + 448;
+    const qrX = qrBoxX + qrPad;
+    const qrY = qrBoxY + qrPad;
+
+    // Ombra morbida per il riquadro QR
+    ctx.shadowColor = 'rgba(80, 20, 35, 0.08)';
+    ctx.shadowBlur = 24;
+    ctx.shadowOffsetY = 8;
+    drawRoundRect(qrBoxX, qrBoxY, qrBoxW, qrBoxH, 22);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fill();
+
+    // Reset ombra
+    ctx.shadowColor = 'transparent';
+    ctx.shadowBlur = 0;
+    ctx.shadowOffsetY = 0;
+
+    // Bordo sottile dorato/bordeaux attorno al QR
+    drawRoundRect(qrBoxX, qrBoxY, qrBoxW, qrBoxH, 22);
+    ctx.strokeStyle = 'rgba(139, 26, 46, 0.20)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    /* ── FUNZIONE DI COMPLETAMENTO E DOWNLOAD ── */
     const renderAndExport = (qrSource) => {
+      // Disegna il QR Code
       if (qrSource) {
         ctx.drawImage(qrSource, qrX, qrY, qrSize, qrSize);
       }
 
-      // Logo 🎓 centrale sul QR
-      const logoR = 58;
-      const logoX = width / 2;
-      const logoY = qrY + qrSize / 2;
+      // Badge circolare centrale sul QR (🎓)
+      const logoRadius = 54;
+      const logoCenterX = W / 2;
+      const logoCenterY = qrY + (qrSize / 2);
+
       ctx.beginPath();
-      ctx.arc(logoX, logoY, logoR, 0, Math.PI * 2);
-      ctx.fillStyle = '#081026';
+      ctx.arc(logoCenterX, logoCenterY, logoRadius, 0, Math.PI * 2);
+      ctx.fillStyle = COLOR_BORD_DARK;
       ctx.fill();
-      ctx.lineWidth = 6;
-      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = '#FFFFFF';
       ctx.stroke();
 
-      ctx.font = '56px sans-serif';
-      ctx.fillStyle = '#ffd700';
+      // Emoji tocco di laurea al centro
+      ctx.font = '52px sans-serif';
+      ctx.fillStyle = COLOR_GOLD;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText('🎓', logoX, logoY + 3);
+      ctx.fillText('🎓', logoCenterX, logoCenterY + 2);
 
-      // 10. Istruzione in corsivo serif sotto il QR
+      // ── Testo Istruzione sotto al QR ──
       ctx.textBaseline = 'alphabetic';
-      ctx.font = 'italic 42px "Playfair Display", Georgia, serif';
-      ctx.fillStyle = '#333333';
-      const instrY = qrBoxY + qrBoxH + 80;
-      ctx.fillText('Inquadra il codice per condividere', width / 2, instrY);
-      ctx.fillText('foto, video e dediche speciali', width / 2, instrY + 62);
+      ctx.font = 'italic 38px "Playfair Display", Georgia, serif';
+      ctx.fillStyle = COLOR_TEXT_MED;
+      const textBaseY = qrBoxY + qrBoxH + 74;
+      ctx.fillText('Inquadra il codice per condividere', W / 2, textBaseY);
+      ctx.fillText('foto, video e dediche speciali', W / 2, textBaseY + 54);
 
-      // 11. Salva PNG
+      // Esporta l'immagine PNG
       canvas.toBlob((blob) => {
         if (!blob) {
           App.showToast('Errore durante la creazione dell\'immagine');
@@ -393,39 +449,37 @@ const QrCards = {
         a.click();
         document.body.removeChild(a);
         setTimeout(() => URL.revokeObjectURL(fileUrl), 2500);
-        App.showToast('✨ Immagine segnaposto in alta qualità salvata!');
+        App.showToast('✨ Immagine segnaposto salvata!');
       }, 'image/png');
     };
 
-    // Generazione del QR Code nativo ad alta risoluzione in un elemento virtuale
+    // Generazione del QR ad alta risoluzione in elemento temporaneo
     try {
       const tempDiv = document.createElement('div');
       new QRCode(tempDiv, {
         text: targetUrl,
         width: qrSize,
         height: qrSize,
-        colorDark: "#081026",
-        colorLight: "#ffffff",
+        colorDark: COLOR_TEXT_MAIN,
+        colorLight: '#FFFFFF',
         correctLevel: QRCode.CorrectLevel ? QRCode.CorrectLevel.H : 2
       });
 
-      const highResCanvas = tempDiv.querySelector('canvas');
-      const highResImg = tempDiv.querySelector('img');
+      const hiCanvas = tempDiv.querySelector('canvas');
+      const hiImg = tempDiv.querySelector('img');
 
-      if (highResCanvas) {
-        renderAndExport(highResCanvas);
-      } else if (highResImg && highResImg.complete && highResImg.naturalWidth > 0) {
-        renderAndExport(highResImg);
-      } else if (highResImg) {
-        highResImg.onload = () => renderAndExport(highResImg);
+      if (hiCanvas) {
+        renderAndExport(hiCanvas);
+      } else if (hiImg && hiImg.complete && hiImg.naturalWidth > 0) {
+        renderAndExport(hiImg);
+      } else if (hiImg) {
+        hiImg.onload = () => renderAndExport(hiImg);
       } else {
-        const fallbackCanvas = this.qrTarget ? this.qrTarget.querySelector('canvas') : null;
-        renderAndExport(fallbackCanvas);
+        renderAndExport(this.qrTarget ? this.qrTarget.querySelector('canvas') : null);
       }
     } catch (err) {
       console.warn('Fallback al canvas a schermo:', err);
-      const fallbackCanvas = this.qrTarget ? this.qrTarget.querySelector('canvas') : null;
-      renderAndExport(fallbackCanvas);
+      renderAndExport(this.qrTarget ? this.qrTarget.querySelector('canvas') : null);
     }
   }
 };
