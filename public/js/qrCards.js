@@ -85,7 +85,7 @@ const QrCards = {
   <meta charset="UTF-8">
   <title>Stampa Segnaposto - Chiara Iacuzzo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Outfit:wght@500;600;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -121,16 +121,27 @@ const QrCards = {
       font-size: 1.25rem;
       letter-spacing: 4px;
       color: #8B1A2E;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
-    .card-event-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #1C0B10;
-      margin: 4px 0 2px 0;
-      letter-spacing: -0.2px;
-      line-height: 1.25;
+    .card-script-title {
+      font-family: 'Pinyon Script', cursive, serif;
+      color: #8B1A2E;
+      font-weight: 400;
+      text-align: center;
+      margin: 2px 0 4px 0;
+      line-height: 1.05;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .card-script-title .script-line-1 {
+      font-size: 2.15rem;
+      letter-spacing: 0.5px;
+    }
+    .card-script-title .script-line-2 {
+      font-size: 2.3rem;
+      letter-spacing: 0.5px;
+      margin-top: -4px;
     }
     .card-party-subtitle {
       font-size: 0.72rem;
@@ -221,7 +232,7 @@ const QrCards = {
     if (document.fonts) {
       try {
         await Promise.all([
-          document.fonts.load('bold 50px "Outfit"'),
+          document.fonts.load('120px "Pinyon Script"'),
           document.fonts.load('500 32px "Outfit"'),
           document.fonts.load('italic 38px "Playfair Display"'),
           document.fonts.ready
@@ -233,9 +244,9 @@ const QrCards = {
 
     const targetUrl = this.mobileUrl || window.location.origin;
 
-    // Dimensioni canvas HD vertical flyer (1200 x 1480 — proporzioni armoniose ed eleganti)
+    // Dimensioni canvas HD vertical flyer (1200 x 1520 — proporzioni armoniose ed eleganti)
     const W = 1200;
-    const H = 1480;
+    const H = 1520;
     const canvas = document.createElement('canvas');
     canvas.width = W;
     canvas.height = H;
@@ -246,10 +257,9 @@ const QrCards = {
     // Palette ufficiale del sito (Crema / Bordeaux / Oro)
     const COLOR_BG_PAGE   = '#F8F0E8'; // Crema avorio dello sfondo
     const COLOR_CARD_BG   = '#FFFFFF'; // Bianco puro della card
-    const COLOR_BORDEAUX  = '#8B1A2E'; // Bordeaux nobile
+    const COLOR_BORDEAUX  = '#8B1A2E'; // Bordeaux nobile (colore della scritta calligrafica)
     const COLOR_BORD_DARK = '#640D1F'; // Bordeaux profondo
     const COLOR_GOLD      = '#C5A059'; // Oro champagne
-    const COLOR_TEXT_MAIN = '#1C0B10'; // Scuro caldo elegante (stesso colore del titolo principale)
     const COLOR_TEXT_MED  = '#5C3340'; // Bordeaux medio secondario
     const COLOR_TEXT_MUTE = '#9A7A82'; // Grigio-rosato per la data
 
@@ -276,7 +286,7 @@ const QrCards = {
     const cardX = 64;
     const cardY = 64;
     const cardW = W - 128; // 1072
-    const cardH = H - 128; // 1352
+    const cardH = H - 128; // 1392
     const cardRadius = 36;
 
     // Ombra calda bordeaux
@@ -315,7 +325,7 @@ const QrCards = {
     ctx.fillStyle = inGrad;
     ctx.fill();
 
-    // Bordo bordeaux nobile (senza linea multi-colore!)
+    // Bordo bordeaux nobile (pulito, semplice ed elegante)
     drawRoundRect(inX, inY, inW, inH, inRadius);
     ctx.strokeStyle = COLOR_BORDEAUX;
     ctx.lineWidth = 3;
@@ -324,26 +334,25 @@ const QrCards = {
     /* ── 4. DECORAZIONE SUPERIORE: • 🎓 • ── */
     ctx.textAlign = 'center';
     ctx.textBaseline = 'alphabetic';
-    ctx.font = '44px sans-serif';
+    ctx.font = '40px sans-serif';
     ctx.fillStyle = COLOR_BORDEAUX;
-    ctx.fillText('• 🎓 •', W / 2, inY + 112);
+    ctx.fillText('• 🎓 •', W / 2, inY + 95);
 
-    /* ── 5. TITOLO: "Chiara Iacuzzo's Graduation Party" (stesso font e colore della pagina principale) ── */
-    const titleText = "Chiara Iacuzzo's Graduation Party";
-    let titleSize = 48;
-    ctx.font = `bold ${titleSize}px "Outfit", sans-serif`;
-    const maxTitleWidth = inW - 80;
-    while (ctx.measureText(titleText).width > maxTitleWidth && titleSize > 32) {
-      titleSize -= 2;
-      ctx.font = `bold ${titleSize}px "Outfit", sans-serif`;
-    }
-    ctx.fillStyle = COLOR_TEXT_MAIN;
-    ctx.fillText(titleText, W / 2, inY + 195);
+    /* ── 5. TITOLO CALLIGRAFICO (Pinyon Script bordeaux come da immagine) ── */
+    ctx.fillStyle = COLOR_BORDEAUX;
+
+    // Prima riga: Chiara Iacuzzo's
+    ctx.font = '116px "Pinyon Script", cursive, serif';
+    ctx.fillText("Chiara Iacuzzo's", W / 2, inY + 205);
+
+    // Seconda riga: Graduation Party
+    ctx.font = '122px "Pinyon Script", cursive, serif';
+    ctx.fillText("Graduation Party", W / 2, inY + 308);
 
     /* ── 6. DATA: "16 Settembre 2026" ── */
     ctx.font = '500 32px "Outfit", sans-serif';
     ctx.fillStyle = COLOR_TEXT_MUTE;
-    ctx.fillText('16 Settembre 2026', W / 2, inY + 252);
+    ctx.fillText('16 Settembre 2026', W / 2, inY + 368);
 
     /* ── 7. RIQUADRO QR CODE (.qr-canvas-wrapper) ── */
     const qrSize = 620;
@@ -351,7 +360,7 @@ const QrCards = {
     const qrBoxW = qrSize + (qrPad * 2);
     const qrBoxH = qrSize + (qrPad * 2);
     const qrBoxX = (W - qrBoxW) / 2;
-    const qrBoxY = inY + 295;
+    const qrBoxY = inY + 410;
     const qrX = qrBoxX + qrPad;
     const qrY = qrBoxY + qrPad;
 
@@ -434,7 +443,7 @@ const QrCards = {
         text: targetUrl,
         width: qrSize,
         height: qrSize,
-        colorDark: COLOR_TEXT_MAIN,
+        colorDark: "#1C0B10",
         colorLight: '#FFFFFF',
         correctLevel: QRCode.CorrectLevel ? QRCode.CorrectLevel.H : 2
       });
