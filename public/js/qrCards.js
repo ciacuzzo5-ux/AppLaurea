@@ -55,8 +55,8 @@ const QrCards = {
       try {
         new QRCode(this.qrTarget, {
           text: targetUrl,
-          width: 240,
-          height: 240,
+          width: 260,
+          height: 260,
           colorDark: "#081026",
           colorLight: "#ffffff",
           correctLevel: QRCode.CorrectLevel ? QRCode.CorrectLevel.H : 2
@@ -85,7 +85,7 @@ const QrCards = {
   <meta charset="UTF-8">
   <title>Stampa Segnaposto - Chiara Iacuzzo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Outfit:wght@500;600;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -100,44 +100,68 @@ const QrCards = {
     .table-card-preview {
       background: #ffffff;
       color: #081026;
-      border-radius: 18px;
-      padding: 14px;
+      border-radius: 20px;
+      padding: 16px;
       margin: 0 auto;
-      max-width: 320px;
+      max-width: 340px;
       width: 100%;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.18);
     }
     .card-inner-border {
-      border: 2px solid #081026;
+      border: 2.5px solid #081026;
       border-radius: 14px;
-      padding: 18px 12px;
+      padding: 20px 16px 18px 16px;
       text-align: center;
       position: relative;
-      background: radial-gradient(circle at 50% 50%, #ffffff 0%, #faf6f0 100%);
+      background: radial-gradient(ellipse at 50% 0%, #fff8f0 0%, #ffffff 60%);
+      overflow: hidden;
+    }
+    .card-inner-border::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #8B1A2E, #C5A059, #8B1A2E);
     }
     .card-top-laurel {
-      font-size: 1.15rem;
-      letter-spacing: 4px;
-      color: #7a1b28;
-      margin-bottom: 2px;
+      font-size: 1.25rem;
+      letter-spacing: 6px;
+      color: #8B1A2E;
+      margin-bottom: 4px;
     }
     .card-pinyon-title {
       font-family: 'Pinyon Script', cursive, serif;
-      font-size: 2.1rem;
-      line-height: 1.15;
-      color: #7a1b28;
+      font-size: 2.4rem;
+      line-height: 1.1;
+      color: #081026;
       font-weight: 400;
-      margin: 4px 0 16px 0;
+      margin: 4px 0 2px 0;
       letter-spacing: 0.5px;
+    }
+    .card-party-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #8B1A2E;
+      margin-bottom: 2px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .card-party-subtitle {
+      font-size: 0.72rem;
+      color: #555;
+      font-weight: 500;
+      margin-bottom: 14px;
+      letter-spacing: 0.8px;
     }
     .qr-canvas-wrapper {
       position: relative;
-      width: 180px;
-      height: 180px;
-      margin: 0 auto 12px auto;
+      width: 220px;
+      height: 220px;
+      margin: 0 auto 14px auto;
       background: #fff;
-      padding: 8px;
-      border-radius: 12px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12), 0 0 0 1.5px rgba(139,26,46,0.2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -154,21 +178,45 @@ const QrCards = {
       transform: translate(-50%, -50%);
       background: #081026;
       color: #ffd700;
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
-      border: 2px solid #ffffff;
+      font-size: 18px;
+      border: 2.5px solid #ffffff;
+    }
+    .card-divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 4px 16px 8px 16px;
+      color: #C5A059;
+      font-size: 0.8rem;
+      letter-spacing: 4px;
+    }
+    .card-divider::before, .card-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #C5A059, transparent);
     }
     .card-instruction-text {
+      font-family: 'Playfair Display', Georgia, serif;
       font-size: 0.82rem;
-      line-height: 1.4;
-      color: #222;
+      color: #333;
+      margin-top: 2px;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.5;
+    }
+    .card-hashtag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #8B1A2E;
       margin-top: 6px;
-      font-weight: 600;
+      letter-spacing: 0.5px;
     }
     @media print {
       body { min-height: auto; padding: 0; }
@@ -293,14 +341,31 @@ const QrCards = {
       ctx.textBaseline = 'middle';
       ctx.fillText('🎓', logoX, logoY + 4);
 
-      // 7. Istruzioni in basso (NESSUN link stampato)
+      // 7. Istruzioni eleganti in basso
       ctx.textBaseline = 'alphabetic';
-      ctx.font = 'bold 50px "Outfit", -apple-system, sans-serif';
-      ctx.fillStyle = '#1a1a1a';
-      ctx.fillText('Inquadra per caricare foto, video', width / 2, 1610);
-      ctx.fillText('o lasciare una dedica!', width / 2, 1690);
+      ctx.font = 'italic 54px "Playfair Display", Georgia, serif';
+      ctx.fillStyle = '#333333';
+      ctx.fillText('Inquadra il codice per condividere', width / 2, 1600);
+      ctx.fillText('foto, video e dediche speciali', width / 2, 1680);
 
-      // 8. Download PNG ad altissima fedeltà
+      // 8. Hashtag
+      ctx.font = 'bold 44px "Outfit", sans-serif';
+      ctx.fillStyle = '#8B1A2E';
+      ctx.fillText('#ChiaraLaurea2026', width / 2, 1760);
+
+      // 9. Linea separatore dorata
+      const grad = ctx.createLinearGradient(200, 0, width - 200, 0);
+      grad.addColorStop(0, 'transparent');
+      grad.addColorStop(0.5, '#C5A059');
+      grad.addColorStop(1, 'transparent');
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(200, 1560);
+      ctx.lineTo(width - 200, 1560);
+      ctx.stroke();
+
+      // 10. Download PNG
       canvas.toBlob((blob) => {
         if (!blob) {
           App.showToast('Errore durante la creazione dell\'immagine');
