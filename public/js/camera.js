@@ -143,13 +143,24 @@ const Camera = {
     if (modal) modal.classList.remove('hidden');
   },
 
+  pausePreviewVideo() {
+    const video = document.querySelector('#upload-preview-container video');
+    if (video) {
+      try {
+        video.pause();
+      } catch (e) {}
+    }
+  },
+
   resetInputs() {
+    this.pausePreviewVideo();
     if (this.photoInput) this.photoInput.value = '';
     if (this.galleryInput) this.galleryInput.value = '';
     this.capturedFile = null;
   },
 
   closeUploadModal() {
+    this.pausePreviewVideo();
     const modal = document.getElementById('photo-upload-modal');
     if (modal) modal.classList.add('hidden');
     this.resetInputs();

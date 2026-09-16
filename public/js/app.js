@@ -190,19 +190,33 @@ const App = {
             }
           }
 
+          Camera.pausePreviewVideo();
+
           if (progressLabel) progressLabel.innerText = Camera.capturedType === 'video' ? 'Invio video in corso...' : 'Invio foto in corso...';
 
-          const origName = fileToUpload.name || (Camera.capturedType === 'video' ? 'video.mp4' : 'foto.jpg');
+          let origName = fileToUpload.name;
+          if (!origName) {
+            origName = Camera.capturedType === 'video' ? 'video.mp4' : 'foto.jpg';
+          }
 
           const formData = new FormData();
           formData.append('author', author);
           formData.append('caption', caption);
           formData.append('photos', fileToUpload, origName);
 
-          const res = await API.uploadPhoto(formData, (percent) => {
+          const res = await API.uploadPhoto(formData, (percent, loaded, total) => {
             if (progressBar) progressBar.style.width = `${percent}%`;
             if (progressPercent) progressPercent.innerText = `${percent}%`;
-            submitBtn.innerHTML = `<i data-lucide="loader"></i> Caricamento: ${percent}%`;
+            if (loaded && total) {
+              const mbLoaded = (loaded / (1024 * 1024)).toFixed(1);
+              const mbTotal = (total / (1024 * 1024)).toFixed(1);
+              if (progressLabel) {
+                progressLabel.innerText = Camera.capturedType === 'video'
+                  ? `Invio video: ${mbLoaded}MB / ${mbTotal}MB (${percent}%)`
+                  : `Invio foto: ${mbLoaded}MB / ${mbTotal}MB (${percent}%)`;
+              }
+            }
+            submitBtn.innerHTML = `<i data-lucide="loader"></i> ${percent}%`;
           });
 
           Camera.closeUploadModal();

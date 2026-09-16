@@ -50,14 +50,13 @@ const API = {
     try {
       return await this._sendUpload(formData, onProgress);
     } catch (err) {
-      // Automatic 1-time retry for mobile network fluctuations or transient stream breaks
-      const isRetryable = err && err.message && (
-        err.message.toLowerCase().includes('interrotto') || 
-        err.message.toLowerCase().includes('connessione') ||
-        err.message.toLowerCase().includes('riprova')
+      // Automatic 1-time retry only for transient network socket drops
+      const isTransientNetworkError = err && err.message && (
+        err.message.toLowerCase().includes('connessione interrotta') ||
+        err.message.toLowerCase().includes('network')
       );
-      if (isRetryable) {
-        console.warn('Upload interrupted, retrying automatically in 600ms...', err);
+      if (isTransientNetworkError) {
+        console.warn('Network glitch, retrying in 600ms...', err);
         await new Promise(res => setTimeout(res, 600));
         return await this._sendUpload(formData, onProgress);
       }

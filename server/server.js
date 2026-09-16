@@ -196,6 +196,10 @@ app.post('/api/photos', (req, res) => {
   // Prevent socket timeouts on Render and mobile networks
   if (req.setTimeout) req.setTimeout(300000);
   if (res.setTimeout) res.setTimeout(300000);
+  if (req.socket) {
+    if (req.socket.setTimeout) req.socket.setTimeout(300000);
+    if (req.socket.setKeepAlive) req.socket.setKeepAlive(true, 10000);
+  }
 
   upload.array('photos', 25)(req, res, (err) => {
     if (err) {
