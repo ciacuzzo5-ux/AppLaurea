@@ -125,7 +125,7 @@ const QrCards = {
     }
     .card-top-laurel {
       font-size: 1.25rem;
-      letter-spacing: 6px;
+      letter-spacing: 4px;
       color: #8B1A2E;
       margin-bottom: 4px;
     }
@@ -143,7 +143,7 @@ const QrCards = {
       font-weight: 700;
       color: #8B1A2E;
       margin-bottom: 2px;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
       text-transform: uppercase;
     }
     .card-party-subtitle {
@@ -187,36 +187,14 @@ const QrCards = {
       font-size: 18px;
       border: 2.5px solid #ffffff;
     }
-    .card-divider {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 4px 16px 8px 16px;
-      color: #C5A059;
-      font-size: 0.8rem;
-      letter-spacing: 4px;
-    }
-    .card-divider::before, .card-divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #C5A059, transparent);
-    }
     .card-instruction-text {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 0.82rem;
       color: #333;
-      margin-top: 2px;
+      margin-top: 6px;
       font-weight: 400;
       font-style: italic;
       line-height: 1.5;
-    }
-    .card-hashtag {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: #8B1A2E;
-      margin-top: 6px;
-      letter-spacing: 0.5px;
     }
     @media print {
       body { min-height: auto; padding: 0; }
@@ -345,27 +323,10 @@ const QrCards = {
       ctx.textBaseline = 'alphabetic';
       ctx.font = 'italic 54px "Playfair Display", Georgia, serif';
       ctx.fillStyle = '#333333';
-      ctx.fillText('Inquadra il codice per condividere', width / 2, 1600);
-      ctx.fillText('foto, video e dediche speciali', width / 2, 1680);
+      ctx.fillText('Inquadra il codice per condividere', width / 2, 1610);
+      ctx.fillText('foto, video e dediche speciali', width / 2, 1690);
 
-      // 8. Hashtag
-      ctx.font = 'bold 44px "Outfit", sans-serif';
-      ctx.fillStyle = '#8B1A2E';
-      ctx.fillText('#ChiaraLaurea2026', width / 2, 1760);
-
-      // 9. Linea separatore dorata
-      const grad = ctx.createLinearGradient(200, 0, width - 200, 0);
-      grad.addColorStop(0, 'transparent');
-      grad.addColorStop(0.5, '#C5A059');
-      grad.addColorStop(1, 'transparent');
-      ctx.strokeStyle = grad;
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(200, 1560);
-      ctx.lineTo(width - 200, 1560);
-      ctx.stroke();
-
-      // 10. Download PNG
+      // 8. Download PNG
       canvas.toBlob((blob) => {
         if (!blob) {
           App.showToast('Errore durante la creazione dell\'immagine');
