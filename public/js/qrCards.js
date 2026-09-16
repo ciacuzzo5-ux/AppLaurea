@@ -268,27 +268,27 @@ const QrCards = {
       ctx.closePath();
     };
 
-    // 1. Sfondo pagina bianco puro
-    ctx.fillStyle = '#ffffff';
+    // 1. Sfondo pagina crema avorio (come il tema web)
+    ctx.fillStyle = '#F8F0E8';
     ctx.fillRect(0, 0, width, height);
 
-    // 2. Card principale — sfondo bianco con sfumatura calda in alto
+    // 2. Card — sfondo crema caldo con gradiente avorio
     const cardX = 60, cardY = 60;
     const cardW = width - 120, cardH = height - 120;
     const cardR = 40;
 
     const cardGrad = ctx.createRadialGradient(width / 2, cardY + 200, 50, width / 2, cardY + 300, cardH);
-    cardGrad.addColorStop(0, '#fff8f0');
-    cardGrad.addColorStop(0.5, '#ffffff');
-    cardGrad.addColorStop(1, '#ffffff');
+    cardGrad.addColorStop(0, '#FDF8F2');
+    cardGrad.addColorStop(0.4, '#FFFFFF');
+    cardGrad.addColorStop(1, '#FBF5EE');
     roundRect(cardX, cardY, cardW, cardH, cardR);
     ctx.fillStyle = cardGrad;
     ctx.fill();
 
-    // 3. Bordo card navy scuro
+    // 3. Bordo card — bordeaux scuro elegante
     roundRect(cardX, cardY, cardW, cardH, cardR);
-    ctx.strokeStyle = '#081026';
-    ctx.lineWidth = 5;
+    ctx.strokeStyle = '#3D0A14';
+    ctx.lineWidth = 4;
     ctx.stroke();
 
     // 4. Banda colorata in cima (bordeaux → oro → bordeaux)
@@ -317,9 +317,9 @@ const QrCards = {
     ctx.letterSpacing = '6px';
     ctx.fillText('GRADUATION PARTY', width / 2, cardY + 380);
 
-    // 8. Data — grigio sottile
+    // 8. Data — tono grigio caldo
     ctx.font = '38px "Outfit", sans-serif';
-    ctx.fillStyle = '#777777';
+    ctx.fillStyle = '#9A7A82';
     ctx.fillText('16 Settembre 2026', width / 2, cardY + 448);
 
     // 9. Riquadro QR — bianco con anello bordeaux sottile
@@ -331,12 +331,12 @@ const QrCards = {
     const qrBoxX = qrX - 28;
     const qrBoxY = qrY - 28;
 
-    // Ombra sottile
-    ctx.shadowColor = 'rgba(0,0,0,0.10)';
-    ctx.shadowBlur = 30;
+    // Ombra calda bordeaux
+    ctx.shadowColor = 'rgba(80, 20, 35, 0.10)';
+    ctx.shadowBlur = 28;
     ctx.shadowOffsetY = 8;
     roundRect(qrBoxX, qrBoxY, qrBoxW, qrBoxH, 28);
-    ctx.fillStyle = '#ffffff';
+    ctx.fillStyle = '#FFFFFF';
     ctx.fill();
     ctx.shadowColor = 'transparent';
     ctx.shadowBlur = 0;
