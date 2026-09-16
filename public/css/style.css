@@ -6,12 +6,12 @@
 
 :root {
   /* Chiara's Royal Blue Palette (Ispirato al vestito blu di Chiara) */
-  --color-blue-deep: #081736;
-  --color-blue-royal: #143572;
-  --color-blue-soft: #244C91;
-  --color-blue-surface: #E4EEFA;
-  --color-blue-border: rgba(20, 53, 114, 0.16);
-  --color-blue-glass: rgba(228, 238, 250, 0.92);
+  --color-blue-deep: #06132D;
+  --color-blue-royal: #12326E;
+  --color-blue-soft: #1E468E;
+  --color-blue-surface: #D8E7F9;
+  --color-blue-border: rgba(18, 50, 110, 0.18);
+  --color-blue-glass: rgba(195, 218, 246, 0.94);
 
   /* Italian Graduation Red (Rosso Laurea / Bordeaux d'Onore) */
   --color-red-laurea: #8B1528;
@@ -25,12 +25,12 @@
   --color-bordeaux-light: #A81C34;
   --color-bordeaux-dark: #630C1B;
   --color-bordeaux-glow: rgba(139, 21, 40, 0.28);
-  --color-navy-deep: #DDE8F8;
-  --color-navy-dark: #143572;
-  --color-navy-surface: rgba(255, 255, 255, 0.94);
-  --color-navy-card: rgba(255, 255, 255, 0.92);
-  --color-navy-glass: rgba(228, 238, 250, 0.92);
-  --color-navy-border: rgba(20, 53, 114, 0.15);
+  --color-navy-deep: #A0C4EE;
+  --color-navy-dark: #12326E;
+  --color-navy-surface: rgba(255, 255, 255, 0.96);
+  --color-navy-card: rgba(255, 255, 255, 0.94);
+  --color-navy-glass: rgba(195, 218, 246, 0.94);
+  --color-navy-border: rgba(18, 50, 110, 0.16);
 
   /* Gold & Champagne Metallic Accents */
   --color-gold: #C5A059;
@@ -42,18 +42,18 @@
   --color-cyan: #8B1528;
   --color-cyan-glow: rgba(139, 21, 40, 0.25);
 
-  /* Backgrounds & Canvas: Tonalità di Blu Chiare, Raffinate e Ariose */
-  --color-bg-page: #DDE8F8;
-  --color-bg-container: linear-gradient(180deg, #E2EDFC 0%, #EDF4FD 30%, #DEECFB 70%, #D4E4F7 100%);
-  --color-card-bg: rgba(255, 255, 255, 0.92);
-  --color-card-border: rgba(20, 53, 114, 0.14);
-  --color-card-shadow: 0 6px 24px rgba(12, 35, 78, 0.08), 0 1px 3px rgba(12, 35, 78, 0.04);
+  /* Backgrounds & Canvas: Tonalità di Blu Più Marcata ed Elegante */
+  --color-bg-page: #7AAAD8;
+  --color-bg-container: linear-gradient(180deg, #8BB8E0 0%, #9EC5E8 30%, #7AAAD8 70%, #6699CC 100%);
+  --color-card-bg: rgba(255, 255, 255, 0.95);
+  --color-card-border: rgba(18, 50, 110, 0.16);
+  --color-card-shadow: 0 8px 28px rgba(12, 35, 78, 0.11), 0 2px 4px rgba(12, 35, 78, 0.05);
 
-  /* Typography Colors (Massima leggibilità e contrasto su fondo blu chiaro) */
-  --color-text-main: #0A1B3B;
-  --color-text-secondary: #2C4673;
-  --color-text-muted: #5C769D;
-  --color-border-subtle: rgba(20, 53, 114, 0.1);
+  /* Typography Colors (Massima leggibilità e contrasto su fondo blu) */
+  --color-text-main: #06132D;
+  --color-text-secondary: #223B64;
+  --color-text-muted: #4B668F;
+  --color-border-subtle: rgba(18, 50, 110, 0.12);
 
   /* Dimensions */
   --header-height: 96px;
