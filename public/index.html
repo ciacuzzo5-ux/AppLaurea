@@ -226,6 +226,10 @@
             <!-- Dynamic img or video tag -->
           </div>
 
+          <div id="upload-video-hint" class="upload-hint-box hidden">
+            💡 <strong>Qualità massima:</strong> per video in 4K/Full HD ultra nitidi, registrali prima con l'app <strong>Fotocamera</strong> dell'iPhone e seleziona <em>Libreria foto</em>!
+          </div>
+
           <form id="photo-details-form" class="photo-form">
             <div class="input-group">
               <label for="author-input"><i data-lucide="user"></i> Nome</label>
@@ -379,13 +383,13 @@
   </div>
 
   <!-- JavaScript Modules -->
-  <script src="/js/api.js?v=32"></script>
-  <script src="/js/gallery.js?v=32"></script>
-  <script src="/js/dedications.js?v=32"></script>
-  <script src="/js/camera.js?v=32"></script>
-  <script src="/js/lightbox.js?v=32"></script>
-  <script src="/js/qrCards.js?v=32"></script>
-  <script src="/js/app.js?v=32"></script>
+  <script src="/js/api.js?v=33"></script>
+  <script src="/js/gallery.js?v=33"></script>
+  <script src="/js/dedications.js?v=33"></script>
+  <script src="/js/camera.js?v=33"></script>
+  <script src="/js/lightbox.js?v=33"></script>
+  <script src="/js/qrCards.js?v=33"></script>
+  <script src="/js/app.js?v=33"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -394,7 +398,7 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=32')
+        navigator.serviceWorker.register('/sw.js?v=33')
           .then(reg => reg.update())
           .catch(err => console.log('SW error:', err));
       });
