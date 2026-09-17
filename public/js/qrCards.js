@@ -90,7 +90,7 @@ const QrCards = {
   <meta charset="UTF-8">
   <title>Stampa Segnaposto - Chiara Iacuzzo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Outfit:wght@500;600;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600;1,700&family=Pinyon+Script&family=Outfit:wght@500;600;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -190,13 +190,18 @@ const QrCards = {
       border: 2.5px solid #ffffff;
     }
     .card-instruction-text {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.94rem;
+      font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+      font-size: 1.08rem;
       color: #5C2836;
       margin-top: 10px;
       font-weight: 600;
-      line-height: 1.5;
-      letter-spacing: 0.3px;
+      font-style: italic;
+      line-height: 1.45;
+      letter-spacing: 0.2px;
+    }
+    .card-instruction-text .instruction-line {
+      display: block;
+      white-space: nowrap;
     }
     @media print {
       body { min-height: auto; padding: 0; background: #ffffff; }
@@ -240,7 +245,7 @@ const QrCards = {
           document.fonts.load('104px "Pinyon Script"'),
           document.fonts.load('110px "Pinyon Script"'),
           document.fonts.load('600 30px "Outfit"'),
-          document.fonts.load('600 38px "Outfit"'),
+          document.fonts.load('italic 600 42px "Cormorant Garamond"'),
           document.fonts.ready
         ]);
       } catch (e) {
@@ -421,12 +426,12 @@ const QrCards = {
 
       // ── Testo Istruzione sotto al QR ──
       ctx.textBaseline = 'alphabetic';
-      ctx.font = '600 38px "Outfit", sans-serif';
+      ctx.font = 'italic 600 42px "Cormorant Garamond", "Playfair Display", Georgia, serif';
       ctx.fillStyle = '#5C2836';
-      if ('letterSpacing' in ctx) ctx.letterSpacing = '0.5px';
+      if ('letterSpacing' in ctx) ctx.letterSpacing = '0.3px';
       const textBaseY = qrBoxY + qrBoxH + 68;
-      ctx.fillText('Scansiona il QR Code e condividi con me', W / 2, textBaseY);
-      ctx.fillText('foto, video e dediche ❤️', W / 2, textBaseY + 54);
+      ctx.fillText('Scansiona il qr code e condividi', W / 2, textBaseY);
+      ctx.fillText('con me foto, video e dediche ❤️', W / 2, textBaseY + 54);
       if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
 
       // Esporta l'immagine PNG

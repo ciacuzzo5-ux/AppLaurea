@@ -1558,13 +1558,19 @@ input, textarea, select, button {
 
 
 .card-instruction-text {
-  font-family: var(--font-display);
-  font-size: 0.94rem;
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  font-size: 1.08rem;
   color: #5C2836;
   margin-top: 10px;
   font-weight: 600;
-  line-height: 1.5;
-  letter-spacing: 0.3px;
+  font-style: italic;
+  line-height: 1.45;
+  letter-spacing: 0.2px;
+}
+
+.card-instruction-text .instruction-line {
+  display: block;
+  white-space: nowrap;
 }
 
 

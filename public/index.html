@@ -17,7 +17,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600;1,700&family=Pinyon+Script&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
 
   <!-- Lucide Icons & Libraries -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -25,7 +25,7 @@
   <script src="/js/qrcode.min.js?v=18"></script>
 
   <!-- App Stylesheet -->
-  <link rel="stylesheet" href="/css/style.css?v=26">
+  <link rel="stylesheet" href="/css/style.css?v=27">
 </head>
 <body class="theme-light">
   <div id="app" class="app-container">
@@ -350,7 +350,10 @@
                 <div class="qr-center-logo">🎓</div>
               </div>
 
-              <p class="card-instruction-text">Scansiona il QR Code e condividi con me<br>foto, video e dediche ❤️</p>
+              <p class="card-instruction-text">
+                <span class="instruction-line">Scansiona il qr code e condividi</span>
+                <span class="instruction-line">con me foto, video e dediche ❤️</span>
+              </p>
             </div>
           </div>
 
@@ -376,13 +379,13 @@
   </div>
 
   <!-- JavaScript Modules -->
-  <script src="/js/api.js?v=26"></script>
-  <script src="/js/gallery.js?v=26"></script>
-  <script src="/js/dedications.js?v=26"></script>
-  <script src="/js/camera.js?v=26"></script>
-  <script src="/js/lightbox.js?v=26"></script>
-  <script src="/js/qrCards.js?v=26"></script>
-  <script src="/js/app.js?v=26"></script>
+  <script src="/js/api.js?v=27"></script>
+  <script src="/js/gallery.js?v=27"></script>
+  <script src="/js/dedications.js?v=27"></script>
+  <script src="/js/camera.js?v=27"></script>
+  <script src="/js/lightbox.js?v=27"></script>
+  <script src="/js/qrCards.js?v=27"></script>
+  <script src="/js/app.js?v=27"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -391,7 +394,7 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=26')
+        navigator.serviceWorker.register('/sw.js?v=27')
           .then(reg => reg.update())
           .catch(err => console.log('SW error:', err));
       });
