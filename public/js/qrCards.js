@@ -128,8 +128,8 @@ const QrCards = {
       color: #8B1A2E;
       font-weight: 400;
       text-align: center;
-      margin: 2px 0 4px 0;
-      line-height: 1.05;
+      margin: 4px 0 6px 0;
+      line-height: 1.25;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -139,9 +139,9 @@ const QrCards = {
       letter-spacing: 0.5px;
     }
     .card-script-title .script-line-2 {
-      font-size: 2.3rem;
+      font-size: 2.25rem;
       letter-spacing: 0.5px;
-      margin-top: -4px;
+      margin-top: 6px;
     }
     .card-party-subtitle {
       font-size: 0.72rem;
@@ -232,9 +232,10 @@ const QrCards = {
     if (document.fonts) {
       try {
         await Promise.all([
-          document.fonts.load('120px "Pinyon Script"'),
-          document.fonts.load('500 32px "Outfit"'),
-          document.fonts.load('italic 38px "Playfair Display"'),
+          document.fonts.load('104px "Pinyon Script"'),
+          document.fonts.load('110px "Pinyon Script"'),
+          document.fonts.load('600 30px "Outfit"'),
+          document.fonts.load('italic 36px "Playfair Display"'),
           document.fonts.ready
         ]);
       } catch (e) {
@@ -244,9 +245,9 @@ const QrCards = {
 
     const targetUrl = this.mobileUrl || window.location.origin;
 
-    // Dimensioni canvas HD vertical flyer (1200 x 1520 — proporzioni armoniose ed eleganti)
+    // Dimensioni canvas HD vertical flyer (1200 x 1600 — proporzioni armoniose ed eleganti 3:4)
     const W = 1200;
-    const H = 1520;
+    const H = 1600;
     const canvas = document.createElement('canvas');
     canvas.width = W;
     canvas.height = H;
@@ -286,7 +287,7 @@ const QrCards = {
     const cardX = 64;
     const cardY = 64;
     const cardW = W - 128; // 1072
-    const cardH = H - 128; // 1392
+    const cardH = H - 128; // 1472
     const cardRadius = 36;
 
     // Ombra calda bordeaux
@@ -334,33 +335,35 @@ const QrCards = {
     /* ── 4. DECORAZIONE SUPERIORE: • 🎓 • ── */
     ctx.textAlign = 'center';
     ctx.textBaseline = 'alphabetic';
-    ctx.font = '58px sans-serif';
+    ctx.font = '52px sans-serif';
     ctx.fillStyle = COLOR_BORDEAUX;
-    ctx.fillText('• 🎓 •', W / 2, inY + 102);
+    ctx.fillText('• 🎓 •', W / 2, inY + 84);
 
-    /* ── 5. TITOLO CALLIGRAFICO (Pinyon Script bordeaux come da immagine) ── */
+    /* ── 5. TITOLO CALLIGRAFICO (Pinyon Script bordeaux distanziato ed armonioso) ── */
     ctx.fillStyle = COLOR_BORDEAUX;
 
     // Prima riga: Chiara Iacuzzo's
-    ctx.font = '116px "Pinyon Script", cursive, serif';
-    ctx.fillText("Chiara Iacuzzo's", W / 2, inY + 205);
+    ctx.font = '104px "Pinyon Script", cursive, serif';
+    ctx.fillText("Chiara Iacuzzo's", W / 2, inY + 200);
 
-    // Seconda riga: Graduation Party
-    ctx.font = '122px "Pinyon Script", cursive, serif';
-    ctx.fillText("Graduation Party", W / 2, inY + 308);
+    // Seconda riga: Graduation Party (spaziatura generosa per evitare collisioni con i tratti discendenti)
+    ctx.font = '110px "Pinyon Script", cursive, serif';
+    ctx.fillText("Graduation Party", W / 2, inY + 355);
 
     /* ── 6. DATA: "16 Settembre 2026" ── */
-    ctx.font = '500 32px "Outfit", sans-serif';
+    ctx.font = '600 30px "Outfit", sans-serif';
     ctx.fillStyle = COLOR_TEXT_MUTE;
-    ctx.fillText('16 Settembre 2026', W / 2, inY + 368);
+    if ('letterSpacing' in ctx) ctx.letterSpacing = '2px';
+    ctx.fillText('16 Settembre 2026', W / 2, inY + 452);
+    if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
 
     /* ── 7. RIQUADRO QR CODE (.qr-canvas-wrapper) ── */
-    const qrSize = 620;
+    const qrSize = 560;
     const qrPad = 26;
     const qrBoxW = qrSize + (qrPad * 2);
     const qrBoxH = qrSize + (qrPad * 2);
     const qrBoxX = (W - qrBoxW) / 2;
-    const qrBoxY = inY + 410;
+    const qrBoxY = inY + 498;
     const qrX = qrBoxX + qrPad;
     const qrY = qrBoxY + qrPad;
 
@@ -391,7 +394,7 @@ const QrCards = {
       }
 
       // Badge circolare centrale sul QR (🎓)
-      const logoRadius = 52;
+      const logoRadius = 48;
       const logoCenterX = W / 2;
       const logoCenterY = qrY + (qrSize / 2);
 
@@ -404,7 +407,7 @@ const QrCards = {
       ctx.stroke();
 
       // Emoji tocco di laurea al centro
-      ctx.font = '50px sans-serif';
+      ctx.font = '46px sans-serif';
       ctx.fillStyle = COLOR_GOLD;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
@@ -412,11 +415,11 @@ const QrCards = {
 
       // ── Testo Istruzione sotto al QR ──
       ctx.textBaseline = 'alphabetic';
-      ctx.font = 'italic 38px "Playfair Display", Georgia, serif';
+      ctx.font = 'italic 36px "Playfair Display", Georgia, serif';
       ctx.fillStyle = COLOR_TEXT_MED;
-      const textBaseY = qrBoxY + qrBoxH + 74;
+      const textBaseY = qrBoxY + qrBoxH + 72;
       ctx.fillText('Inquadra il codice per condividere', W / 2, textBaseY);
-      ctx.fillText('foto, video e dediche speciali', W / 2, textBaseY + 54);
+      ctx.fillText('foto, video e dediche speciali', W / 2, textBaseY + 50);
 
       // Esporta l'immagine PNG
       canvas.toBlob((blob) => {
