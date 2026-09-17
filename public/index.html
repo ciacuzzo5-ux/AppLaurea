@@ -138,9 +138,9 @@
 
     </main>
 
-    <!-- HIDDEN NATIVE CAMERA & FILE INPUTS -->
-    <input type="file" id="camera-photo-input" accept="image/*" capture="environment" class="hidden">
-    <input type="file" id="native-file-input" accept="image/*,video/*" multiple class="hidden">
+    <!-- HIDDEN NATIVE CAMERA & FILE INPUTS (CENTERED ANCHOR FOR IOS SAFARI POPOVER) -->
+    <input type="file" id="camera-photo-input" accept="image/*" capture="environment" class="native-picker-centered">
+    <input type="file" id="native-file-input" accept="image/*,video/*" multiple class="native-picker-centered">
 
     <!-- BOTTOM TAB NAVIGATION (3 TABS: Galleria, Scatta/Carica, Dediche) -->
     <nav class="bottom-tab-bar">
@@ -176,19 +176,13 @@
             <div class="sheet-option-icon" style="background: rgba(139, 26, 46, 0.1); color: var(--color-bordeaux);">
               <i data-lucide="camera"></i>
             </div>
-            <div class="sheet-btn-text">
-              <strong>Scatta una Foto 📸</strong>
-              <small>Fotocamera nitida in alta risoluzione</small>
-            </div>
+            <span class="sheet-btn-label">Scatta una Foto 📸</span>
           </button>
           <button class="sheet-option-btn sheet-option-featured" id="sheet-btn-gallery">
             <div class="sheet-option-icon" style="background: rgba(197, 160, 89, 0.18); color: var(--color-gold-dark);">
               <i data-lucide="images"></i>
             </div>
-            <div class="sheet-btn-text">
-              <strong>Carica dalla Galleria 🖼️</strong>
-              <small>Carica Foto o Video (in 4K / Full HD)</small>
-            </div>
+            <span class="sheet-btn-label">Carica dalla Galleria 🖼️</span>
           </button>
           <button class="btn btn-outline btn-block" id="close-sheet-btn" style="margin-top: 4px;">
             Annulla
@@ -393,13 +387,13 @@
   </div>
 
   <!-- JavaScript Modules -->
-  <script src="/js/api.js?v=34"></script>
-  <script src="/js/gallery.js?v=34"></script>
-  <script src="/js/dedications.js?v=34"></script>
-  <script src="/js/camera.js?v=34"></script>
-  <script src="/js/lightbox.js?v=34"></script>
-  <script src="/js/qrCards.js?v=34"></script>
-  <script src="/js/app.js?v=34"></script>
+  <script src="/js/api.js?v=35"></script>
+  <script src="/js/gallery.js?v=35"></script>
+  <script src="/js/dedications.js?v=35"></script>
+  <script src="/js/camera.js?v=35"></script>
+  <script src="/js/lightbox.js?v=35"></script>
+  <script src="/js/qrCards.js?v=35"></script>
+  <script src="/js/app.js?v=35"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -408,7 +402,7 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=34')
+        navigator.serviceWorker.register('/sw.js?v=35')
           .then(reg => reg.update())
           .catch(err => console.log('SW error:', err));
       });

@@ -925,10 +925,28 @@ input, textarea, select, button {
   gap: 2px;
 }
 
-.sheet-btn-text strong {
-  font-size: 0.86rem;
+.sheet-btn-text strong,
+.sheet-btn-label {
+  font-size: 0.94rem;
   color: var(--color-bordeaux);
   font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+.native-picker-centered {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 10px !important;
+  height: 10px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  outline: none !important;
+  z-index: -10 !important;
 }
 
 .sheet-option-icon {
