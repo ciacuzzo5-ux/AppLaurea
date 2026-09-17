@@ -933,6 +933,14 @@ input, textarea, select, button {
   letter-spacing: -0.2px;
 }
 
+.sheet-btn-text small,
+.sheet-btn-sub {
+  font-size: 0.74rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
 .native-picker-centered {
   position: fixed !important;
   top: 50% !important;
