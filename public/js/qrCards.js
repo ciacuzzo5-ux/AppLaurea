@@ -245,7 +245,8 @@ const QrCards = {
           document.fonts.load('104px "Pinyon Script"'),
           document.fonts.load('110px "Pinyon Script"'),
           document.fonts.load('600 30px "Outfit"'),
-          document.fonts.load('italic 600 42px "Cormorant Garamond"'),
+          document.fonts.load('italic 600 50px "Cormorant Garamond"'),
+          document.fonts.load('italic 700 50px "Cormorant Garamond"'),
           document.fonts.ready
         ]);
       } catch (e) {
@@ -426,12 +427,12 @@ const QrCards = {
 
       // ── Testo Istruzione sotto al QR ──
       ctx.textBaseline = 'alphabetic';
-      ctx.font = 'italic 600 42px "Cormorant Garamond", "Playfair Display", Georgia, serif';
-      ctx.fillStyle = '#5C2836';
+      ctx.font = 'italic 700 50px "Cormorant Garamond", "Playfair Display", Georgia, serif';
+      ctx.fillStyle = '#541926';
       if ('letterSpacing' in ctx) ctx.letterSpacing = '0.3px';
-      const textBaseY = qrBoxY + qrBoxH + 68;
+      const textBaseY = qrBoxY + qrBoxH + 78;
       ctx.fillText('Scansiona il qr code e condividi', W / 2, textBaseY);
-      ctx.fillText('con me foto, video e dediche ❤️', W / 2, textBaseY + 54);
+      ctx.fillText('con me foto, video e dediche ❤️', W / 2, textBaseY + 64);
       if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
 
       // Esporta l'immagine PNG
