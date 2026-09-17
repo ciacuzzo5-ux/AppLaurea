@@ -39,6 +39,11 @@ const QrCards = {
   updateEventInfo(event) {
     if (!event) return;
     this.mobileUrl = event.mobileUrl || window.location.origin;
+    if (event.date) {
+      this.eventDate = event.date;
+      const cardDateEl = document.querySelector('.card-party-subtitle');
+      if (cardDateEl) cardDateEl.innerText = event.date;
+    }
     const realUrlEl = document.getElementById('qr-modal-real-url');
     if (realUrlEl) {
       realUrlEl.innerText = `Link attivo: ${this.mobileUrl}`;
@@ -350,11 +355,12 @@ const QrCards = {
     ctx.font = '110px "Pinyon Script", cursive, serif';
     ctx.fillText("Graduation Party", W / 2, inY + 355);
 
-    /* ── 6. DATA: "16 Settembre 2026" ── */
+    /* ── 6. DATA: "26 Settembre 2026" ── */
     ctx.font = '600 30px "Outfit", sans-serif';
     ctx.fillStyle = COLOR_TEXT_MUTE;
     if ('letterSpacing' in ctx) ctx.letterSpacing = '2px';
-    ctx.fillText('16 Settembre 2026', W / 2, inY + 452);
+    const displayDate = this.eventDate || '26 Settembre 2026';
+    ctx.fillText(displayDate, W / 2, inY + 452);
     if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
 
     /* ── 7. RIQUADRO QR CODE (.qr-canvas-wrapper) ── */
