@@ -25,7 +25,7 @@
   <script src="/js/qrcode.min.js?v=18"></script>
 
   <!-- App Stylesheet -->
-  <link rel="stylesheet" href="/css/style.css?v=31">
+  <link rel="stylesheet" href="/css/style.css?v=32">
 </head>
 <body class="theme-light">
   <div id="app" class="app-container">
@@ -139,7 +139,7 @@
     </main>
 
     <!-- HIDDEN NATIVE CAMERA & FILE INPUTS -->
-    <input type="file" id="camera-photo-input" accept="image/*" class="hidden">
+    <input type="file" id="camera-photo-input" accept="image/*" capture="environment" class="hidden">
     <input type="file" id="native-file-input" accept="image/*,video/*" multiple class="hidden">
 
     <!-- BOTTOM TAB NAVIGATION (3 TABS: Galleria, Scatta/Carica, Dediche) -->
@@ -155,7 +155,7 @@
         <div class="camera-fab-glow">
           <i data-lucide="camera"></i>
         </div>
-        <span>Scatta</span>
+        <span>Scatta o Carica</span>
       </button>
 
       <!-- 3. Dediche (Guestbook) -->
@@ -379,13 +379,13 @@
   </div>
 
   <!-- JavaScript Modules -->
-  <script src="/js/api.js?v=31"></script>
-  <script src="/js/gallery.js?v=31"></script>
-  <script src="/js/dedications.js?v=31"></script>
-  <script src="/js/camera.js?v=31"></script>
-  <script src="/js/lightbox.js?v=31"></script>
-  <script src="/js/qrCards.js?v=31"></script>
-  <script src="/js/app.js?v=31"></script>
+  <script src="/js/api.js?v=32"></script>
+  <script src="/js/gallery.js?v=32"></script>
+  <script src="/js/dedications.js?v=32"></script>
+  <script src="/js/camera.js?v=32"></script>
+  <script src="/js/lightbox.js?v=32"></script>
+  <script src="/js/qrCards.js?v=32"></script>
+  <script src="/js/app.js?v=32"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -394,7 +394,7 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=31')
+        navigator.serviceWorker.register('/sw.js?v=32')
           .then(reg => reg.update())
           .catch(err => console.log('SW error:', err));
       });

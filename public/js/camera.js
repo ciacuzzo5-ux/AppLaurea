@@ -24,12 +24,16 @@ const Camera = {
   },
 
   bindEvents() {
-    // Open action sheet
+    // Direct native picker (1 tap to Scatta o Carica)
     if (this.openCamBtn) {
-      this.openCamBtn.addEventListener('click', () => this.openActionSheet());
+      this.openCamBtn.addEventListener('click', () => {
+        if (this.galleryInput) this.galleryInput.click();
+      });
     }
     if (this.emptyCaptureBtn) {
-      this.emptyCaptureBtn.addEventListener('click', () => this.openActionSheet());
+      this.emptyCaptureBtn.addEventListener('click', () => {
+        if (this.galleryInput) this.galleryInput.click();
+      });
     }
 
     // Direct Gallery button

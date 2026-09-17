@@ -843,6 +843,13 @@ input, textarea, select, button {
   top: -12px;
 }
 
+.tab-camera-center span {
+  white-space: nowrap;
+  font-size: 0.68rem;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
 .camera-fab-glow {
   width: 54px;
   height: 54px;
