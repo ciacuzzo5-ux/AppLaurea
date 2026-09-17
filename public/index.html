@@ -379,13 +379,13 @@
   </div>
 
   <!-- JavaScript Modules -->
-  <script src="/js/api.js?v=28"></script>
-  <script src="/js/gallery.js?v=28"></script>
-  <script src="/js/dedications.js?v=28"></script>
-  <script src="/js/camera.js?v=28"></script>
-  <script src="/js/lightbox.js?v=28"></script>
-  <script src="/js/qrCards.js?v=28"></script>
-  <script src="/js/app.js?v=28"></script>
+  <script src="/js/api.js?v=29"></script>
+  <script src="/js/gallery.js?v=29"></script>
+  <script src="/js/dedications.js?v=29"></script>
+  <script src="/js/camera.js?v=29"></script>
+  <script src="/js/lightbox.js?v=29"></script>
+  <script src="/js/qrCards.js?v=29"></script>
+  <script src="/js/app.js?v=29"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -394,7 +394,7 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=28')
+        navigator.serviceWorker.register('/sw.js?v=29')
           .then(reg => reg.update())
           .catch(err => console.log('SW error:', err));
       });
