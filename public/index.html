@@ -25,7 +25,7 @@
   <script src="/js/qrcode.min.js?v=18"></script>
 
   <!-- App Stylesheet -->
-  <link rel="stylesheet" href="/css/style.css?v=28">
+  <link rel="stylesheet" href="/css/style.css?v=31">
 </head>
 <body class="theme-light">
   <div id="app" class="app-container">
@@ -311,7 +311,7 @@
       <div class="modal-dialog welcome-modal">
         <div class="welcome-header">
           <div class="welcome-badge">• 🎓 •</div>
-          <h2 class="welcome-title" id="onboarding-event-title"><b>Chiara Iacuzzo’s<br>Graduation Party</b></h2>
+          <h2 class="welcome-title" id="onboarding-event-title">Chiara Iacuzzo’s<br>Graduation Party</h2>
           <p id="onboarding-party-name">Ingegneria Informatica 💻</p>
         </div>
         <div class="modal-body">
@@ -379,13 +379,13 @@
   </div>
 
   <!-- JavaScript Modules -->
-  <script src="/js/api.js?v=30"></script>
-  <script src="/js/gallery.js?v=30"></script>
-  <script src="/js/dedications.js?v=30"></script>
-  <script src="/js/camera.js?v=30"></script>
-  <script src="/js/lightbox.js?v=30"></script>
-  <script src="/js/qrCards.js?v=30"></script>
-  <script src="/js/app.js?v=30"></script>
+  <script src="/js/api.js?v=31"></script>
+  <script src="/js/gallery.js?v=31"></script>
+  <script src="/js/dedications.js?v=31"></script>
+  <script src="/js/camera.js?v=31"></script>
+  <script src="/js/lightbox.js?v=31"></script>
+  <script src="/js/qrCards.js?v=31"></script>
+  <script src="/js/app.js?v=31"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -394,7 +394,7 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=30')
+        navigator.serviceWorker.register('/sw.js?v=31')
           .then(reg => reg.update())
           .catch(err => console.log('SW error:', err));
       });

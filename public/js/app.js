@@ -289,7 +289,7 @@ const App = {
 
     const onboardingTitle = document.getElementById('onboarding-event-title');
     if (onboardingTitle) {
-      onboardingTitle.innerHTML = "<b>Chiara Iacuzzo’s<br>Graduation Party</b>";
+      onboardingTitle.innerHTML = "Chiara Iacuzzo’s<br>Graduation Party";
     }
 
     const onboardingName = document.getElementById('onboarding-party-name');
