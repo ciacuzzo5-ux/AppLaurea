@@ -36,8 +36,8 @@ app.use((req, res, next) => {
 app.use('/uploads', express.static(UPLOADS_DIR));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-// Public URL (Cloudflare, Ngrok, or Render Cloud)
-let currentPublicUrl = process.env.RENDER_EXTERNAL_URL || '';
+// Public URL (Render Cloud permanent URL or dynamic host)
+let currentPublicUrl = process.env.RENDER_EXTERNAL_URL || 'https://app-laurea-chiara.onrender.com';
 
 // Dynamic Host Detection (when running on Render or custom domain)
 app.use((req, res, next) => {

@@ -38,7 +38,15 @@ const QrCards = {
 
   updateEventInfo(event) {
     if (!event) return;
-    this.mobileUrl = event.mobileUrl || window.location.origin;
+    let bestUrl = event.mobileUrl || '';
+    if (!bestUrl || bestUrl.includes('localhost') || bestUrl.includes('127.0.0.1') || bestUrl.includes('192.168.')) {
+      if (window.location.origin && !window.location.origin.includes('localhost') && !window.location.origin.includes('127.0.0.1') && !window.location.origin.includes('192.168.')) {
+        bestUrl = window.location.origin;
+      } else {
+        bestUrl = 'https://app-laurea-chiara.onrender.com';
+      }
+    }
+    this.mobileUrl = bestUrl;
     if (event.date) {
       this.eventDate = event.date;
       const cardDateEl = document.querySelector('.card-party-subtitle');
@@ -46,7 +54,7 @@ const QrCards = {
     }
     const realUrlEl = document.getElementById('qr-modal-real-url');
     if (realUrlEl) {
-      realUrlEl.innerText = `Link attivo: ${this.mobileUrl}`;
+      realUrlEl.innerHTML = `<span style="color:#1b7f3b; font-weight:600;">✓ Link definitivo Cloud permanente (NON scade mai):</span><br><code style="background:rgba(139,26,46,0.06); color:#8B1A2E; padding:3px 8px; border-radius:6px; font-weight:600; font-size:0.75rem; display:inline-block; margin-top:4px;">${this.mobileUrl}</code>`;
     }
     this.generateQRCode(this.mobileUrl);
   },
@@ -55,7 +63,10 @@ const QrCards = {
     if (!this.qrTarget) return;
     this.qrTarget.innerHTML = '';
 
-    const targetUrl = url || this.mobileUrl || window.location.origin;
+    let targetUrl = url || this.mobileUrl || 'https://app-laurea-chiara.onrender.com';
+    if (targetUrl.includes('localhost') || targetUrl.includes('127.0.0.1') || targetUrl.includes('192.168.')) {
+      targetUrl = 'https://app-laurea-chiara.onrender.com';
+    }
 
     if (window.QRCode) {
       try {
@@ -254,7 +265,10 @@ const QrCards = {
       }
     }
 
-    const targetUrl = this.mobileUrl || window.location.origin;
+    let targetUrl = this.mobileUrl || window.location.origin || 'https://app-laurea-chiara.onrender.com';
+    if (targetUrl.includes('localhost') || targetUrl.includes('127.0.0.1') || targetUrl.includes('192.168.')) {
+      targetUrl = 'https://app-laurea-chiara.onrender.com';
+    }
 
     // Dimensioni canvas HD vertical flyer (1200 x 1600 — proporzioni armoniose ed eleganti 3:4)
     const W = 1200;
