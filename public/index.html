@@ -169,18 +169,28 @@
     <!-- CAMERA ACTION SHEET MODAL (Photo vs Gallery) -->
     <div class="modal-overlay hidden" id="camera-sheet-modal">
       <div class="action-sheet-dialog">
-        <h4 style="color: var(--color-gold-light); font-size: 1.05rem; margin-bottom: 4px;">Aggiungi un Ricordo 🎓</h4>
-        <p style="font-size: 0.8rem; color: var(--color-text-secondary); margin-bottom: 12px;">Scegli come partecipare</p>
+        <h4 style="color: var(--color-bordeaux); font-size: 1.12rem; margin-bottom: 3px; font-weight: 700;">Aggiungi un Ricordo 🎓</h4>
+        <p style="font-size: 0.8rem; color: var(--color-text-secondary); margin-bottom: 14px;">Scegli come partecipare</p>
         <div class="action-sheet-options">
           <button class="sheet-option-btn" id="sheet-btn-photo">
-            <i data-lucide="camera" style="color: #ffca28; width: 22px; height: 22px;"></i>
-            <span>Scatta una Foto 📸</span>
+            <div class="sheet-option-icon" style="background: rgba(139, 26, 46, 0.1); color: var(--color-bordeaux);">
+              <i data-lucide="camera"></i>
+            </div>
+            <div class="sheet-btn-text">
+              <strong>Scatta una Foto 📸</strong>
+              <small>Fotocamera nitida in alta risoluzione</small>
+            </div>
           </button>
-          <button class="sheet-option-btn" id="sheet-btn-gallery">
-            <i data-lucide="images" style="color: #00e5ff; width: 22px; height: 22px;"></i>
-            <span>Carica dalla Galleria (Foto e Video) 🖼️</span>
+          <button class="sheet-option-btn sheet-option-featured" id="sheet-btn-gallery">
+            <div class="sheet-option-icon" style="background: rgba(197, 160, 89, 0.18); color: var(--color-gold-dark);">
+              <i data-lucide="images"></i>
+            </div>
+            <div class="sheet-btn-text">
+              <strong>Carica dalla Galleria 🖼️</strong>
+              <small>Carica Foto o Video (in 4K / Full HD)</small>
+            </div>
           </button>
-          <button class="btn btn-outline btn-block" id="close-sheet-btn" style="margin-top: 6px;">
+          <button class="btn btn-outline btn-block" id="close-sheet-btn" style="margin-top: 4px;">
             Annulla
           </button>
         </div>
@@ -383,13 +393,13 @@
   </div>
 
   <!-- JavaScript Modules -->
-  <script src="/js/api.js?v=33"></script>
-  <script src="/js/gallery.js?v=33"></script>
-  <script src="/js/dedications.js?v=33"></script>
-  <script src="/js/camera.js?v=33"></script>
-  <script src="/js/lightbox.js?v=33"></script>
-  <script src="/js/qrCards.js?v=33"></script>
-  <script src="/js/app.js?v=33"></script>
+  <script src="/js/api.js?v=34"></script>
+  <script src="/js/gallery.js?v=34"></script>
+  <script src="/js/dedications.js?v=34"></script>
+  <script src="/js/camera.js?v=34"></script>
+  <script src="/js/lightbox.js?v=34"></script>
+  <script src="/js/qrCards.js?v=34"></script>
+  <script src="/js/app.js?v=34"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -398,7 +408,7 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=33')
+        navigator.serviceWorker.register('/sw.js?v=34')
           .then(reg => reg.update())
           .catch(err => console.log('SW error:', err));
       });

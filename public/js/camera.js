@@ -24,15 +24,15 @@ const Camera = {
   },
 
   bindEvents() {
-    // Direct native picker (1 tap to Scatta o Carica)
+    // Open action sheet when tapping "Scatta o Carica"
     if (this.openCamBtn) {
       this.openCamBtn.addEventListener('click', () => {
-        if (this.galleryInput) this.galleryInput.click();
+        this.openActionSheet();
       });
     }
     if (this.emptyCaptureBtn) {
       this.emptyCaptureBtn.addEventListener('click', () => {
-        if (this.galleryInput) this.galleryInput.click();
+        this.openActionSheet();
       });
     }
 
@@ -43,7 +43,7 @@ const Camera = {
       });
     }
 
-    // Action Sheet options
+    // Action Sheet option 1: Scatta solo foto ad alta risoluzione (diretto, no video sgranati)
     if (this.sheetBtnPhoto) {
       this.sheetBtnPhoto.addEventListener('click', () => {
         this.closeActionSheet();
@@ -51,6 +51,7 @@ const Camera = {
       });
     }
 
+    // Action Sheet option 2: Carica dalla Galleria (foto e video ad alta definizione 4K/HD)
     if (this.sheetBtnGallery) {
       this.sheetBtnGallery.addEventListener('click', () => {
         this.closeActionSheet();
@@ -60,6 +61,12 @@ const Camera = {
 
     if (this.closeSheetBtn) {
       this.closeSheetBtn.addEventListener('click', () => this.closeActionSheet());
+    }
+
+    if (this.sheetModal) {
+      this.sheetModal.addEventListener('click', (e) => {
+        if (e.target === this.sheetModal) this.closeActionSheet();
+      });
     }
 
     // File Input Listeners
@@ -87,7 +94,10 @@ const Camera = {
   },
 
   openActionSheet() {
-    if (this.sheetModal) this.sheetModal.classList.remove('hidden');
+    if (this.sheetModal) {
+      this.sheetModal.classList.remove('hidden');
+      if (window.lucide) lucide.createIcons();
+    }
   },
 
   closeActionSheet() {
