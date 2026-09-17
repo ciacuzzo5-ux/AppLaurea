@@ -191,12 +191,13 @@ const QrCards = {
     }
     .card-instruction-text {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 0.82rem;
-      color: #5C3340;
-      margin-top: 6px;
-      font-weight: 400;
+      font-size: 0.96rem;
+      color: #5C2836;
+      margin-top: 10px;
+      font-weight: 600;
       font-style: italic;
-      line-height: 1.5;
+      line-height: 1.55;
+      letter-spacing: 0.2px;
     }
     @media print {
       body { min-height: auto; padding: 0; background: #ffffff; }
@@ -240,7 +241,7 @@ const QrCards = {
           document.fonts.load('104px "Pinyon Script"'),
           document.fonts.load('110px "Pinyon Script"'),
           document.fonts.load('600 30px "Outfit"'),
-          document.fonts.load('italic 36px "Playfair Display"'),
+          document.fonts.load('italic 600 42px "Playfair Display"'),
           document.fonts.ready
         ]);
       } catch (e) {
@@ -421,11 +422,11 @@ const QrCards = {
 
       // ── Testo Istruzione sotto al QR ──
       ctx.textBaseline = 'alphabetic';
-      ctx.font = 'italic 36px "Playfair Display", Georgia, serif';
-      ctx.fillStyle = COLOR_TEXT_MED;
-      const textBaseY = qrBoxY + qrBoxH + 72;
-      ctx.fillText('Inquadra il codice per condividere', W / 2, textBaseY);
-      ctx.fillText('foto, video e dediche speciali', W / 2, textBaseY + 50);
+      ctx.font = 'italic 600 42px "Playfair Display", Georgia, serif';
+      ctx.fillStyle = '#5C2836';
+      const textBaseY = qrBoxY + qrBoxH + 68;
+      ctx.fillText('Scansiona il QR Code e condividi con me', W / 2, textBaseY);
+      ctx.fillText('foto, video e dediche ❤️', W / 2, textBaseY + 58);
 
       // Esporta l'immagine PNG
       canvas.toBlob((blob) => {

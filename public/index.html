@@ -25,7 +25,7 @@
   <script src="/js/qrcode.min.js?v=18"></script>
 
   <!-- App Stylesheet -->
-  <link rel="stylesheet" href="/css/style.css?v=24">
+  <link rel="stylesheet" href="/css/style.css?v=25">
 </head>
 <body class="theme-light">
   <div id="app" class="app-container">
@@ -350,7 +350,7 @@
                 <div class="qr-center-logo">🎓</div>
               </div>
 
-              <p class="card-instruction-text">Inquadra il codice per condividere<br>foto, video e dediche speciali</p>
+              <p class="card-instruction-text">Scansiona il QR Code e condividi con me<br>foto, video e dediche ❤️</p>
             </div>
           </div>
 
@@ -376,13 +376,13 @@
   </div>
 
   <!-- JavaScript Modules -->
-  <script src="/js/api.js?v=24"></script>
-  <script src="/js/gallery.js?v=24"></script>
-  <script src="/js/dedications.js?v=24"></script>
-  <script src="/js/camera.js?v=24"></script>
-  <script src="/js/lightbox.js?v=24"></script>
-  <script src="/js/qrCards.js?v=24"></script>
-  <script src="/js/app.js?v=24"></script>
+  <script src="/js/api.js?v=25"></script>
+  <script src="/js/gallery.js?v=25"></script>
+  <script src="/js/dedications.js?v=25"></script>
+  <script src="/js/camera.js?v=25"></script>
+  <script src="/js/lightbox.js?v=25"></script>
+  <script src="/js/qrCards.js?v=25"></script>
+  <script src="/js/app.js?v=25"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -391,7 +391,7 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=24')
+        navigator.serviceWorker.register('/sw.js?v=25')
           .then(reg => reg.update())
           .catch(err => console.log('SW error:', err));
       });

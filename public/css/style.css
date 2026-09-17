@@ -1559,12 +1559,13 @@ input, textarea, select, button {
 
 .card-instruction-text {
   font-family: var(--font-serif);
-  font-size: 0.82rem;
-  color: var(--color-text-secondary);
-  margin-top: 6px;
-  font-weight: 400;
+  font-size: 0.96rem;
+  color: #5C2836;
+  margin-top: 10px;
+  font-weight: 600;
   font-style: italic;
-  line-height: 1.5;
+  line-height: 1.55;
+  letter-spacing: 0.2px;
 }
 
 
