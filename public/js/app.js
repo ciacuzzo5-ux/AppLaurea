@@ -11,10 +11,8 @@ const App = {
     Dedications.init();
     Camera.init();
     Lightbox.init();
-    QrCards.init();
 
-    // 2. Setup modals and listeners
-    this.setupModals();
+    // 2. Setup onboarding and listeners
     this.setupOnboarding();
     this.setupNavigation();
     this.setupPhotoUploadForm();
@@ -29,25 +27,6 @@ const App = {
     this.updateGuestBadge();
   },
 
-  setupModals() {
-    // QR Modal open/close for Chiara
-    const qrBtn = document.getElementById('header-qr-btn');
-    const qrModal = document.getElementById('qr-print-modal');
-    const closeQrBtn = document.getElementById('close-qr-modal-btn');
-
-    if (qrBtn) {
-      qrBtn.addEventListener('click', () => {
-        if (this.eventData) QrCards.updateEventInfo(this.eventData);
-        if (qrModal) qrModal.classList.remove('hidden');
-      });
-    }
-
-    if (closeQrBtn) {
-      closeQrBtn.addEventListener('click', () => {
-        if (qrModal) qrModal.classList.add('hidden');
-      });
-    }
-  },
 
   switchTab(targetId) {
     if (!targetId) return;
@@ -294,8 +273,6 @@ const App = {
 
     const onboardingName = document.getElementById('onboarding-party-name');
     if (onboardingName) onboardingName.innerText = 'Ingegneria Informatica 💻';
-
-    QrCards.updateEventInfo(event);
   },
 
   setupLiveSync() {

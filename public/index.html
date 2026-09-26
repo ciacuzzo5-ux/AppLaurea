@@ -22,7 +22,6 @@
   <!-- Lucide Icons & Libraries -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-  <script src="/js/qrcode.min.js?v=18"></script>
 
   <!-- App Stylesheet -->
   <link rel="stylesheet" href="/css/style.css?v=32">
@@ -47,10 +46,6 @@
         </div>
 
         <div class="header-actions">
-          <!-- QR Code Modal Button for Chiara -->
-          <button class="icon-btn" id="header-qr-btn" title="Visualizza e Stampa QR Code">
-            <i data-lucide="qr-code"></i>
-          </button>
           <!-- Download ZIP Button -->
           <a href="/api/download-all" class="icon-btn zip-download-btn" title="Scarica tutto (foto, video e dediche) in formato ZIP" download id="download-zip-btn">
             <i data-lucide="download"></i>
@@ -339,50 +334,6 @@
       </div>
     </div>
 
-    <!-- PRINTABLE QR CODE MODAL FOR CHIARA -->
-    <div class="modal-overlay hidden" id="qr-print-modal">
-      <div class="modal-dialog">
-        <div class="modal-header">
-          <h3>QR Code per i Tavoli</h3>
-          <button class="close-modal-btn" id="close-qr-modal-btn"><i data-lucide="x"></i></button>
-        </div>
-        <div class="modal-body">
-          <div class="table-card-preview" id="printable-table-card">
-            <div class="card-inner-border">
-              <div class="card-top-laurel">• 🎓 •</div>
-              <h2 class="card-script-title">
-                <span class="script-line-1">Chiara Iacuzzo's</span>
-                <span class="script-line-2">Graduation Party</span>
-              </h2>
-              <p class="card-party-subtitle">26 Settembre 2026</p>
-
-              <div class="qr-canvas-wrapper">
-                <div id="qrcode-target"></div>
-                <div class="qr-center-logo">🎓</div>
-              </div>
-
-              <p class="card-instruction-text">
-                <span class="instruction-line">Scansiona il qr code e condividi</span>
-                <span class="instruction-line">con me foto, video e dediche ❤️</span>
-              </p>
-            </div>
-          </div>
-
-          <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-            <button class="btn btn-primary btn-block" id="print-qr-btn">
-              <i data-lucide="printer"></i> Stampa
-            </button>
-            <button class="btn btn-primary btn-block" id="download-card-img-btn" style="background: linear-gradient(135deg, #7a1b28, #a81028); border-color: var(--color-gold);">
-              <i data-lucide="image"></i> Salva Immagine
-            </button>
-          </div>
-          <button class="btn btn-outline btn-block" id="copy-qr-link-btn" style="padding: 9px; font-size: 0.82rem;">
-            <i data-lucide="link"></i> Copia Link per Smartphone
-          </button>
-          <p id="qr-modal-real-url" style="font-size: 0.72rem; color: var(--color-text-muted); text-align: center; margin-top: 10px; word-break: break-all; opacity: 0.8;"></p>
-        </div>
-      </div>
-    </div>
 
     <!-- Toast Notification Container -->
     <div id="toast-container" class="toast-container"></div>
@@ -395,8 +346,7 @@
   <script src="/js/dedications.js?v=37"></script>
   <script src="/js/camera.js?v=37"></script>
   <script src="/js/lightbox.js?v=37"></script>
-  <script src="/js/qrCards.js?v=37"></script>
-  <script src="/js/app.js?v=37"></script>
+  <script src="/js/app.js?v=38"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -405,7 +355,7 @@
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js?v=36')
+        navigator.serviceWorker.register('/sw.js?v=38')
           .then(reg => reg.update())
           .catch(err => console.log('SW error:', err));
       });
